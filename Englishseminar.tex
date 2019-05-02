@@ -1,0 +1,188 @@
+\documentclass[17pt]{extarticle}
+%Some packages I commonly use.
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{framed}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{enumerate}
+\usepackage{physics}
+\usepackage[utf8]{inputenc}
+\usepackage[top=1 in,bottom=1in, left=1 in, right=1 in]{geometry}
+
+%A bunch of definitions that make my life easier\
+\newcommand{\dt}{\partial_t}
+\newcommand{\Tl}{\frac{T}{\lambda}}
+\setlength{\columnseprule}{1 pt}
+
+
+\title{M2 English Seminar Written Report on the works of Yves D'Angelo, Remi Catellier and Laurent Monasse on Branching Dynamical Networks.}
+\author{Liam Toran} 
+
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\section{The Fisher or KPP equation}
+\subsection{Preliminary}
+Our starting point is the diffusion equation:\begin{equation}\dt u = \Delta u  \end{equation}
+In addition to diffusion, let's consider models where the growth rate of $u$ also depends on density $u$.\\
+We obtain the following equation:
+\begin{equation}\dt u = \Delta u + F(u) \label{eq:ReaDi} \end{equation} 
+where F is sufficiently smooth.
+It is often natural in models to consider $F(u)$ proportional to $u$ for small $u$ ("growth"), and as $u$ becomes close to 1, the growth $F(v)$ ceases: $F(1)=0$ ("saturation").\\
+These kinds of models were first introduced and examined closely by the works of Fisher[1] and Kolmogorov, Petrovsky and Piscounuv[2].\\
+An exemple of such an equation is:
+
+\begin{equation}
+	\dt u = \Delta u +u(1-u) \label{eq:KPP}
+\end{equation}
+that is worked with in the 1 dimensional (scalar) case $u=u(x,t)$.
+
+\subsection{Reaction}
+When looking at space independent solutions $u(x,t)=v(t)$ in \eqref{eq:KPP}, the one-dimensional ordinary differential equation (ODE) \begin{equation}
+	\dt v = v - v^2 = F(v)
+\end{equation}
+is obtained. There are two equilibriums ($F(v)=0)$) for $v=0$ and $v=1$. $F'(0)>0$ shows that $v=0$ is unstable and $F'(1)<0$ shows that $v=1$ is asymptotically stable.
+
+\subsection{Reaction-Diffusion}
+In the space $X=C^0_{b,unif}(\mathbb{R},\mathbb{R})$ of bounded and uniformly continuous functions, there is local existence and uniqueness of the solutions for the Fisher-KPP equation. Due to maximum principle, there is also global existence and uniqueness of solutions.
+\newtheorem{theorem}{Theorem}
+\begin{theorem}:\\ Existence and Unicity of the solution in X: Let $U_0 \in X$. There exists a unique solution of the Fisher KPP eqution $U \in C([0,\infty[,X)$ with initial condition $U_0$. \end{theorem}
+\begin{theorem}:\\ Maximum principle: Let $u_1$ and $u_2$ be two solutions of \eqref{eq:ReaDi}. If there exists a $t_0$ such that $u_1(x,t_0)<u_2(x,t_0)$ for all $x$ then $u_1(x,t)<u_2(x,t)$ for all $x$ and $t>t_0$ \end{theorem}
+
+\subsection{Front solutions}
+We look for front solutions of \eqref{eq:ReaDi} (or propagation waves) linking the equilibrium states $u=1$ (at $-\infty$) and $u=0$ (at $+\infty$)\\
+Let $u(x,t) = h(x-ct)=h(y)$  with $y=x-ct$ in \eqref{eq:ReaDi}. \\
+The obtained equations on $h$ are \begin{equation} \label{eq:FWS} \left\{
+                \begin{array}{ll}
+                h''(y)+ ch'(y)+F(h(y))=0 \\
+                h(-\infty)= 1 \\  h(+\infty) =0 
+                   \end{array}
+              \right.
+\end{equation} 
+which is an elliptic non linear equation. Thus, the problem is to find $c$ and $h \in C^2$ such as \eqref{eq:FWS} is verified.
+
+
+
+\newpage
+
+\begin{theorem}:\\
+Suppose $F \in C^1([0,1])$ such as $F(0)=F(1)=0$ and $F$ is non negative. There exists a critical speed $c_*$ such as $c_*^2 \geq 4F'(0)$ and: \\ \\
+\vspace{5px} i) For all $c \geq c_*$, the equation \eqref{eq:FWS} has a solution $h_c:\mathbb{R} \rightarrow ]0,1[$ of class $C^3$ 
+This solution is unique modulo translations. \\ \\ \vspace{5px}
+ii) For all $c<c_*$ the equation \eqref{eq:FWS} has no solutions $h:\mathbb{R} \rightarrow [0,1]$
+\end{theorem}
+Remark : in the second case there are soltions but not confined in [0,1], which do not make sense in population studies / densities.
+
+\newpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Branching Dynamical Network Growth}
+In this section we will study the following model on the growth of a dynamical branching nework, for exemple a fungus, proposed by Rémi Catellier, Yves D'Angelo and Cristiano Ricci, with adequate rescaling:
+\begin{equation}\label{eq:BDNG}  \left\{
+                \begin{array}{ll}
+                \dt\mu + \nabla(\mu v) = f(C)(\mu + \rho) -\mu\rho \\
+                   \dt(\mu v)+\nabla(\mu v\times v) +T\nabla\mu=-\lambda\mu v+\mu\nabla C-\mu v \rho \\
+                 \dt\rho=  F(v) \mu \\
+                  \dt C = -b\rho C
+                \end{array}
+              \right.
+\end{equation} 
+The unkownn $\mu$ represents the density of the apices of the fungus.\\ The unknown $\rho$ represents the density of the network.\\
+The unknown $v$ represents the speed of the apices.\\
+The unknown $C$ represents the concentration of nutrient.\\
+The parameters $T$, $\lambda$ and $b$ are scalar constants that represent temperature, fluid damping on the speed of the apexes, and the rate of consumption of the nutrients by the network.\\
+The function $f$ indicates the influence of the concentration of nutrient on the growth of the fungus. Usualy, to have a stationary state on the growth of the fungus, we need $f(0)=0$ and $f(x)/x$ in $L^1$ near 0.\\
+The function $F$ represents the inverse of the average time spent by apexes in a given point, and is given by the expression:
+\begin{equation}
+	F(V)=(\frac{1}{2\pi T})^\frac{d}{2}\int_{\mathbb{R}^d} |v|\exp(-\frac{|v-V|^2}{2T})dv\end{equation}
+where d is the dimension of the problem. This model is often simplified by substituting $F(V)$ with a constant: $F(V)= F_0$ .\\
+\newpage
+\subsection{Explanation of the terms in equation \eqref{eq:BDNG}}
+The fungus is a branching dynamical network that can be studied in two parts: the apexes (tips of the newtwork) and the hyphen (branches of the network).\\
+Looking at each line of equation \eqref{eq:BDNG} seperately, the model has:\\
+i) The first line is the mass balance equation on the apexes with classical left term $ \dt\mu + \nabla(\mu v)  $. The right term is composed of $f(C)(\mu + \rho)$ corresponding to a growth of the number of apexes depending on the concentration of nutrient and the existing mass of apexes and hyphen, and a term $-\mu\rho$ which corresponds to anastomosis : a tip that encounters a branch will merge with it and be destroyed. There is a growth term and a saturation term like the KPP model.
+\\ ii)  The second line is the momentum balance equation of the apexes with classical left term $ \dt(\mu v)+\nabla(\mu v\times v) $. The term $T\nabla\mu$ represents a brownian motion followed by the apexes. The term $-\lambda\mu v$ represents a fluid damping in the physics of the problem. The term $+\mu\nabla C$ represents of proponency of the apexes to go where the nutrient concentation is dense. The term $-\mu v \rho $ represents the loss of momentum due to anastomosis.\\
+iii) The third line describes the relationship between apexes and hyphen: the trail of the apexes are the branches.\\
+iv) The fourth line describes the evolution of the nutrient concentration: it is eaten by the hyphen with rate $bC$. \newpage
+\subsection{Front wave equations}
+
+Looking for front wave solutions, let $c$ be the wave's speed and let $\xi = x - ct$. \\
+In the limit $T \rightarrow \infty$, $\lambda \rightarrow \infty$, $\frac{T}{\lambda}$ constant, the following equations for front waves are obtained:
+\begin{equation} \left\{ \begin{array}{ll} -c \mu'-\Tl\mu''=f(C)(\mu+\rho)-\mu\rho \\ -c\rho' = F_0\mu  \\C'=\frac{b\rho C}{c} \end{array}\right.
+\end{equation}
+The stationary states here are: $(\mu,\rho,C) = \left\{ \begin{array}{ll} (0,0,C_0) \\
+ (0,\rho_\infty,0) \end{array} \right.$ 
+\subsection{Near $(0,0,C_0)$}
+Near $(0,0,C_0)$ let $f(C_0)=f_0$, the result is :
+\begin{equation} \left\{ \begin{array}{ll} -c \mu'-\Tl\mu''=f_0(\mu+\rho) \\ -c\rho' = F_0\mu   \end{array}\right.
+\end{equation} which becomes:  \begin{equation} \rho''' +\frac{c\lambda}{T}\rho''+\frac{f_0\lambda}{T}\rho'-\frac{\lambda F_0f_0}{Tc}\rho =0 \end{equation} of characteristic polynomial: \begin{equation} P(X)= X^3 +\frac{c\lambda}{T}X^2+\frac{f_0\lambda}{T}X-\frac{\lambda F_0f_0}{Tc} \end{equation}
+For $c<0$,   $P(0)>0$. Thus P has a negative root $r_1$ .\\
+In order that P has two other real roots $r_3>r_2>r_1$ we need (equivalent proposition) that P' has two roots and that the  discriminant $\Delta$ of P be positive.
+\subsubsection{First condition: P' has two real roots:}
+$P'(X)= 3X^2+ 2\frac{c\lambda}{T}X+ \frac{f_0\lambda}{T}$ has for discriminent: $\Delta'=4(\frac{\lambda}{T})^2(c^2-3 \Tl f_0)$ which gives the condition: \begin{equation} \label{eq:condition_P'}
+	\boxed{c^2 >3\Tl f_0
+	}
+\end{equation}
+\subsubsection{Second condition: $\Delta>0$:}
+For a general 3 order polynomial of the form $P=aX^3 +bX^2 + cX + d$ we have $\Delta= b^2c^2 +18abcd-27a^2d^2 -4ac^3 -4b^3d$ which in our case gives:
+\begin{align*}
+	\Delta=\frac{\lambda^4}{T^4}f_0^2c^2 -18 \frac{\lambda^3f_0^2F_0}{T^3}-27 \frac{\lambda^2 F_0^2 f_0^2}{T^2c^2} - 4 \frac{f_0^3\lambda^3}{T^3}+4 \frac{\lambda^4F_0f_0c^2}{T^4} \\ = c^2 \frac{\lambda^4f_0(f_0+4F_0)}{T^4}- \frac{\lambda^3f_0^2(18F_0+4)}{T^3} -\frac{27\lambda^2F_0^2f_0^2}{T^2}* \frac{1}{c^2}\\ 
+=	\frac{\lambda^4f_0}{T^4c^2}[(f_0+4F_0)c^4-\frac{Tf_0(18F_0+4)}{\lambda} c^2 - 27 \frac{T^2F_0^2f_0}{\lambda^2}] \end{align*}
+It's sign is the same as the sign of the 2 order polynomial in $c^2$ \begin{equation}
+	D(c^2)=(f_0+4F_0)c^4-\frac{Tf_0(18F_0+4)}{\lambda} c^2 - 27 \frac{T^2F_0^2f_0}{\lambda^2}
+\end{equation} 
+of discriminent $d$:
+\begin{align*}
+	d=\Big(\frac{Tf_0(18F_0+4)}{\lambda} \Big)^2 +108(f_0+4F_0)\frac{T^2F_0^2f_0}{\lambda^2} \\ 
+	= \frac{T^2f_0}{\lambda^2}(f_0(18F_0+4)^2+108(f_0+4F_0)F_0^2) >0
+\end{align*}
+Thus we obtain the condition on the positivity of $\Delta$: 
+\begin{equation}\boxed{
+	c^2> \frac{Tf_0(18F_0+4)+T\sqrt{f_0(f_0(18F_0+4)^2+108(f_0+4F_0)F_0^2)}}{2\lambda(f_0+4F_0)}
+	}\label{eq:condition_Delta}
+\end{equation}
+\subsubsection{Sign of the roots}
+We have $r_3<0$. As $r_1r_2r_3<0$,  $r_2$ and $r_1$ have the same sign.\\
+Moreover $P'$ has a symetry of axis $X=-\frac{c\lambda}{3T}>0$. Because $c<0$, $P$ has a local minimum (of negative value) in a positive point. Thus $P$ has a positive root.\\
+Thus $r_1>r_2>0$: \\ 
+Under the conditions \eqref{eq:condition_P'} and \eqref{eq:condition_Delta}, $P$ has two positive roots and one negative root.
+\subsection{Near $(0,\rho_\infty,0)$} 
+Near $(0,\rho_\infty,0)$:
+\begin{equation} \left\{ \begin{array}{ll} -c \mu'-\Tl\mu''=f(C)\rho_\infty-\mu\rho_\infty\\C'=\frac{b\rho_\infty C}{c} \end{array}\right.
+\end{equation}
+the second lign gives \begin{equation}
+C = K\exp(\frac{b\rho_\infty}{c}t )
+\end{equation}
+and the first lign is a second order ODE in $\mu$ with source $f(C)\rho_\infty$ and of homogeneous polynômial: \begin{equation}
+	Q(X)=X^2+\frac{c\lambda}{T}X-\frac{\rho_\infty\lambda}{T}
+\end{equation} 
+which posseses always two real roots of opposite sign.
+\newpage
+\section{References}
+-R.A. Fisher : The Advance of Advantageous Genes, Ann. of Eugenics 7 (1937),355.\\
+-Th.Gallay:Local Stability of Critical Fronts in Nonlinear ParabolicPartial DifferentialEquations, Nonlinearity7(1994)\\
+-A.N.Kolmogorov, I.G.Petrovskii and  N.S.Piskunov : Etude de la diffusion avec croissance de la quantite de matiere et son application a un probleme biologique,Moscow Univ.Math.Bull.1(1937).\\
+-Laurent Monasse : Recherche d’une solution onde plane stationnaire pour le modele de croissance de champignons\\
+-Works of the DENA team: https://workshopdena17.sciencesconf.org/
+\end{document}
+
