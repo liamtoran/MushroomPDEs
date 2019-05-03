@@ -118,8 +118,7 @@ def speed(X,Rho):
     for i in range(n_t):
         argmed[i]= X[(n_x//2)+np.min(np.where(np.append(Rho[i,(n_x//2):],[0])<rho_inf/2))]
     #Vitesse du front
-    S = (argmed[(n_t//2)+1:]-argmed[(n_t//2):-1])*((n_t-1)/tf)
-    s= np.average(S)
+    s = ((n_t-1)/tf)*(argmed[-1]-argmed[(n_t//2)])/(n_t//2)
     return s
 s=0
 s = speed(X,Rho)
@@ -153,7 +152,7 @@ def animate(i):
     line.set_data(X, C[i])
     line2.set_data(X, Rho[i])
     line3.set_data(X, Mu[i])
-    #line4.set_data(50+((i*s)*tf/(n_t-1)),np.linspace(0,rho_inf+1,10))
+    line4.set_data(50+((i*s)*tf/(n_t-1)),np.linspace(0,rho_inf+1,10))
     time_text.set_text('time = {0:.1f}\n K={1}, b={2}, F0={3} '.format(T[i],K,b,F0))
     legend_text.set_text('Rho=Orange \nMu=Green \nC=Blue\ns={0:.3f}'.format(s))
     return line,line2, line3,line4, time_text, legend_text
