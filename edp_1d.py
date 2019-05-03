@@ -23,83 +23,83 @@ mu0[(n_x//2):(n_x//2 +10)]=.01
 c0=np.zeros(n_x)+1 #concentration initiale
 
 def edp_1d_explicite(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x):
-	dt=tf/(n_t-1)
-	dx=xf/(n_x-1)
-	X=np.linspace(0,xf,n_x)
-	T=np.linspace(0,tf,n_t)
-	Mu=np.zeros((n_t,n_x))
-	Rho=np.zeros((n_t,n_x))
-	C=np.zeros((n_t,n_x))
-	Mu[0]=mu0
-	Rho[0]=rho0
-	C[0]=c0
-	#Résolution	du schema éxplicite
-	for n in range(0,n_t-1):
-		RHS=np.zeros(n_x)
-		alpha=-C[n]*dt*(1+dt*F0)+dt*Rho[n]+1
-		RHS[1:-1]= dt*((K/(dx**2))*(Mu[n,:-2]-2*Mu[n,1:-1]+Mu[n,2:])+C[n,1:-1]*Rho[n,1:-1])
-		RHS[0]= dt*((K/(dx**2))*(-2*Mu[n,0]+Mu[n,1])+C[n,0]*Rho[n,0])
-		RHS[-1]=dt*((K/(dx**2))*(-2*Mu[n,-1]+Mu[n,-2])+C[n,-1]*Rho[n,-1])
-		Mu[n+1]=(1/alpha)*(Mu[n]+RHS)
-		Rho[n+1]=Rho[n]+dt*F0*Mu[n+1]
-		C[n+1]=C[n]/(1 + b*dt*Rho[n])
-	return X,T,Mu,Rho,C
+    dt=tf/(n_t-1)
+    dx=xf/(n_x-1)
+    X=np.linspace(0,xf,n_x)
+    T=np.linspace(0,tf,n_t)
+    Mu=np.zeros((n_t,n_x))
+    Rho=np.zeros((n_t,n_x))
+    C=np.zeros((n_t,n_x))
+    Mu[0]=mu0
+    Rho[0]=rho0
+    C[0]=c0
+    #Résolution	du schema éxplicite
+    for n in range(0,n_t-1):
+        RHS=np.zeros(n_x)
+        alpha=-C[n]*dt*(1+dt*F0)+dt*Rho[n]+1
+        RHS[1:-1]= dt*((K/(dx**2))*(Mu[n,:-2]-2*Mu[n,1:-1]+Mu[n,2:])+C[n,1:-1]*Rho[n,1:-1])
+        RHS[0]= dt*((K/(dx**2))*(-2*Mu[n,0]+Mu[n,1])+C[n,0]*Rho[n,0])
+        RHS[-1]=dt*((K/(dx**2))*(-2*Mu[n,-1]+Mu[n,-2])+C[n,-1]*Rho[n,-1])
+        Mu[n+1]=(1/alpha)*(Mu[n]+RHS)
+        Rho[n+1]=Rho[n]+dt*F0*Mu[n+1]
+        C[n+1]=C[n]/(1 + b*dt*Rho[n])
+    return X,T,Mu,Rho,C
 
 def edp_1d_semi_implicite_I(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x):
-	#Détermination des paramêtres numeriques deltat et deltax
-	dt=tf/(n_t-1)
-	dx=xf/(n_x-1)
-	#Représentation de l'éspace et du temps
-	X=np.linspace(0,xf,n_x)
-	T=np.linspace(0,tf,n_t)
-	#Initialisation
-	Mu=np.zeros((n_t,n_x))
-	Rho=np.zeros((n_t,n_x))
-	C=np.zeros((n_t,n_x))
-	Mu[0]=mu0
-	Rho[0]=rho0
-	C[0]=c0
-	#Résolution	du schéma implicite-explicite I
-	for n in range(0,n_t-1):
-		alpha=-C[n]*dt*(1+dt*F0)+dt*Rho[n]+1
-		A=np.diag(-np.ones(n_x-1),-1)+np.diag(2*np.ones(n_x),0)+np.diag(-np.ones(n_x-1),1)
-		A=A*K*dt/(dx**2)
-		A+=np.diag(alpha,0)
-        A= csc_matrix(A)
-		Mu[n+1]= spsolve(A, Mu[n]+dt*C[n]*Rho[n])
-		Rho[n+1]=Rho[n]+dt*F0*Mu[n+1]
-		C[n+1]=C[n]/(1 + b*dt*Rho[n])
-	return X,T,Mu,Rho,C
+    #Détermination des paramêtres numeriques deltat et deltax
+    dt=tf/(n_t-1)
+    dx=xf/(n_x-1)
+    #Représentation de l'éspace et du temps
+    X=np.linspace(0,xf,n_x)
+    T=np.linspace(0,tf,n_t)
+    #Initialisation
+    Mu=np.zeros((n_t,n_x))
+    Rho=np.zeros((n_t,n_x))
+    C=np.zeros((n_t,n_x))
+    Mu[0]=mu0
+    Rho[0]=rho0
+    C[0]=c0
+    #Résolution	du schéma implicite-explicite I
+    for n in range(0,n_t-1):
+        alpha=-C[n]*dt*(1+dt*F0)+dt*Rho[n]+1
+        A=np.diag(-np.ones(n_x-1),-1)+np.diag(2*np.ones(n_x),0)+np.diag(-np.ones(n_x-1),1)
+        A=A*K*dt/(dx**2)
+        A+=np.diag(alpha,0)
+        A=sp.csc_matrix(A)
+        Mu[n+1]= spsolve(A, Mu[n]+dt*C[n]*Rho[n])
+        Rho[n+1]=Rho[n]+dt*F0*Mu[n+1]
+        C[n+1]=C[n]/(1 + b*dt*Rho[n])
+    return X,T,Mu,Rho,C
 
 def edp_1d_semi_implicite_II(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x):
-	#Détermination des paramêtres numériques deltat et deltax
-	dt=tf/(n_t-1)
-	dx=xf/(n_x-1)
-	#Représentation de l'éspace et du temps
-	X=np.linspace(0,xf,n_x)
-	T=np.linspace(0,tf,n_t)
-	#Initialisation
-	Mu=np.zeros((n_t,n_x))
-	Rho=np.zeros((n_t,n_x))
-	C=np.zeros((n_t,n_x))
-	Mu[0]=mu0
-	Rho[0]=rho0
-	C[0]=c0
-	#Résolution	du schéma implicite-explicite II
-	for n in range(0,n_t-1):
-		#Matrice du Laplacien
-		A=np.diag(-np.ones(n_x-1),-1)+np.diag(2*np.ones(n_x),0)+np.diag(-np.ones(n_x-1),1)		
-		A=A*K*dt/(dx**2) #Laplacien Numerique
-		#Ajout des termes implicites
-		alpha=-C[n]*dt*(1+dt*F0)+1
-		A+=np.diag(alpha,0)
+    #Détermination des paramêtres numériques deltat et deltax
+    dt=tf/(n_t-1)
+    dx=xf/(n_x-1)
+    #Représentation de l'éspace et du temps
+    X=np.linspace(0,xf,n_x)
+    T=np.linspace(0,tf,n_t)
+    #Initialisation
+    Mu=np.zeros((n_t,n_x))
+    Rho=np.zeros((n_t,n_x))
+    C=np.zeros((n_t,n_x))
+    Mu[0]=mu0
+    Rho[0]=rho0
+    C[0]=c0
+    #Résolution	du schéma implicite-explicite II
+    for n in range(0,n_t-1):
+        #Matrice du Laplacien
+        A=np.diag(-np.ones(n_x-1),-1)+np.diag(2*np.ones(n_x),0)+np.diag(-np.ones(n_x-1),1)		
+        A=A*K*dt/(dx**2) #Laplacien Numerique
+        #Ajout des termes implicites
+        alpha=-C[n]*dt*(1+dt*F0)+1
+        A+=np.diag(alpha,0)
         A= csc_matrix(A)
-		#Résolution du systême implicite
-		Mu[n+1]= spsolve(A, Mu[n]+dt*C[n]*Rho[n]-dt*Mu[n]*Rho[n])
-		Rho[n+1]=Rho[n]+dt*F0*Mu[n+1]
-		C[n+1]=C[n]/(1 + b*dt*Rho[n])
-	return X,T,Mu,Rho,C
-		
+        #Résolution du systême implicite
+        Mu[n+1]= spsolve(A, Mu[n]+dt*C[n]*Rho[n]-dt*Mu[n]*Rho[n])
+        Rho[n+1]=Rho[n]+dt*F0*Mu[n+1]
+        C[n+1]=C[n]/(1 + b*dt*Rho[n])
+    return X,T,Mu,Rho,C
+    
 X,T,Mu,Rho,C= edp_1d_semi_implicite_I(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x)
 
 #Valeur de rho a l'infini
@@ -109,13 +109,13 @@ print(rho_inf)
 
 def speed(X,Rho):
     #Position du front
-	argmed=np.zeros(n_t)
-	for i in range(n_t):
-		argmed[i]= X[(n_x//2)+np.min(np.where(np.append(Rho[i,(n_x//2):],[0])<rho_inf/2))]
-	#Vitesse du front
-	S = (argmed[(n_t//2)+1:]-argmed[(n_t//2):-1])*((n_t-1)/tf)
-	s= np.average(S)
-	return s
+    argmed=np.zeros(n_t)
+    for i in range(n_t):
+        argmed[i]= X[(n_x//2)+np.min(np.where(np.append(Rho[i,(n_x//2):],[0])<rho_inf/2))]
+    #Vitesse du front
+    S = (argmed[(n_t//2)+1:]-argmed[(n_t//2):-1])*((n_t-1)/tf)
+    s= np.average(S)
+    return s
 s=0
 s = speed(X,Rho)
 print('La vitesse de propagation de la simulation est s=',s)
