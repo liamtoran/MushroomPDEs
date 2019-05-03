@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from scipy.integrate import ode
 import numpy as np
 
-b=.1 # dtC=-b*rho*C
+b=.5 # dtC=-b*rho*C
 F0=1 # dtRho = Fo*Mu
 tf=50 # temps final de la simulation
 rho0=0 #rho initial	
@@ -185,7 +185,7 @@ plt.ylabel('C')
 plt.subplot(224)
 plt.plot(T,A)
 plt.plot(T,B)
-plt.ylabel('log(rho_inf-rho)+b*rho_inf*t')
+plt.ylabel('log(rho_inf-rho), -b*rho_inf*t')
 plt.show()
 
 

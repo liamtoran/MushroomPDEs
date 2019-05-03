@@ -7,11 +7,11 @@ import matplotlib.animation as animation
 
 #Coéfficients physiques
 K=.4 #coefficient diffusion
-b=.2 # dtC=-b*rho*C
+b=.5 # dtC=-b*rho*C
 F0=1 # dtRho = Fo*Mu
 
 #Paramêtres numériques 
-n_t=5001 #nombre de pas de temps
+n_t=1001 #nombre de pas de temps
 tf=25 # temps final de la simulation
 xf = 100 #longeur de la simulation
 n_x =500 #nombres de points de la simulation
@@ -61,16 +61,21 @@ def edp_1d_semi_implicite_I(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x):
     C[0]=c0
     #Résolution	du schéma implicite-explicite I
     for n in range(0,n_t-1):
-        alpha=-C[n]*dt*(1+dt*F0)+dt*Rho[n]+1
+        #Matrice du Laplacien
         A=np.diag(-np.ones(n_x-1),-1)+np.diag(2*np.ones(n_x),0)+np.diag(-np.ones(n_x-1),1)
+        #Laplacien Numerique
         A=A*K*dt/(dx**2)
+        #Ajout des termes implicites
+        alpha=-C[n]*dt*(1+dt*F0)+dt*Rho[n]+1
         A+=np.diag(alpha,0)
         A=sp.csc_matrix(A)
+        #Résolution du systême implicite
         Mu[n+1]= spsolve(A, Mu[n]+dt*C[n]*Rho[n])
         Rho[n+1]=Rho[n]+dt*F0*Mu[n+1]
         C[n+1]=C[n]/(1 + b*dt*Rho[n])
     return X,T,Mu,Rho,C
-
+    
+    
 def edp_1d_semi_implicite_II(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x):
     #Détermination des paramêtres numériques deltat et deltax
     dt=tf/(n_t-1)
@@ -93,7 +98,7 @@ def edp_1d_semi_implicite_II(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x):
         #Ajout des termes implicites
         alpha=-C[n]*dt*(1+dt*F0)+1
         A+=np.diag(alpha,0)
-        A= csc_matrix(A)
+        A= sp.csc_matrix(A)
         #Résolution du systême implicite
         Mu[n+1]= spsolve(A, Mu[n]+dt*C[n]*Rho[n]-dt*Mu[n]*Rho[n])
         Rho[n+1]=Rho[n]+dt*F0*Mu[n+1]
