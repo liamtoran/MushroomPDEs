@@ -144,9 +144,9 @@ On obtient une condition de plus que le schéma semi-implicite I.
 Soit le schéma semi-implicite I pour l'EDP:
 \begin{equation} \boxed{\left\{
                 \begin{array}{ll}
-                   \mu^{n+1} = \mu^{n}+ K\Dt \frac{\mu^{n+1}-2\mu^{n+1}+\mu^{n-1}}{\Dx ^2} + \Dt( C^{n}(\mu^{n+1} + \rho^{n+1}) -\mu^{n+1}\rho^{n})\\
-                \rho^{n+1}=  \rho^{n}+ \Dt (F_0 \mu^{n+1}) \\
-                 C^{n+1} =C^{n}- \Dt(b\rho^{n+1}C^{n+1})
+                   \mu^{n+1}_i = \mu^{n}_i+ K\Dt \frac{\mu^{n+1}_{i+1}-2\mu^{n+1}_i+\mu^{n+1}_{i-1}}{\Dx ^2} + \Dt( C^{n}_i(\mu^{n+1}_i + \rho^{n+1}_i) -\mu^{n+1}_i\rho^{n}_i)\\
+                \rho^{n+1}_i=  \rho^{n}_i+ \Dt (F_0 \mu^{n+1}_i) \\
+                 C^{n+1}_i =C^{n}_i- \Dt(b\rho^{n+1}_iC^{n+1}_i)
                 \end{array}
               \right.}
 \end{equation}
@@ -155,7 +155,7 @@ Ce schéma donne:
                 \begin{array}{ll}
                    (1+\frac{K\Dt}{\Dx^2}A-\Dt(C^{n}(1+\Dt F_0)) + \rho^{n})\mu^{n+1} = \mu^{n}+  \Dt C^{n}\rho^{n} \\
                 \rho^{n+1}=  \rho^{n}+ \Dt (F_0 \mu^{n+1}) \\
-                 C^{n+1} =C^{n}\frac{1}{1+ \Dt b\rho^{n+1}}
+                 C^{n+1} = C^{n}\frac{1}{1+ \Dt b\rho^{n+1}}
                 \end{array}
               \right.
 \end{equation*}
@@ -173,7 +173,7 @@ $A$ étant symétrique définie positive, afin de préserver la positivité, on 
 \subsubsection{Résultat de la simulation de l'EDO}
 \begin{figure}[hbt!]
 \centering
-\includegraphics{edo_euler_implicite.png}
+\includegraphics[width=.9\textwidth]{edo_euler_implicite.png}
 \caption{Résolution du schéma implicite pour l'EDO}
 \end{figure}
 

@@ -1,3 +1,4 @@
+# %load edp_1d.py
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.sparse as sp
@@ -5,15 +6,15 @@ from scipy.sparse.linalg.dsolve import spsolve
 import matplotlib.animation as animation
 
 #Coéfficients physiques
-K=.2 #coefficient diffusion
+K=.4 #coefficient diffusion
 b=.2 # dtC=-b*rho*C
 F0=1 # dtRho = Fo*Mu
 
 #Paramêtres numériques 
-n_t=501 #nombre de pas de temps
-tf=30 # temps final de la simulation
-xf = 100 #longeur de lasimulation
-n_x =600 #nombres de points de la simulation
+n_t=5001 #nombre de pas de temps
+tf=25 # temps final de la simulation
+xf = 100 #longeur de la simulation
+n_x =500 #nombres de points de la simulation
 
 #Données initiales 
 rho0=np.zeros(n_x) #rho initial	
@@ -64,6 +65,7 @@ def edp_1d_semi_implicite_I(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x):
 		A=np.diag(-np.ones(n_x-1),-1)+np.diag(2*np.ones(n_x),0)+np.diag(-np.ones(n_x-1),1)
 		A=A*K*dt/(dx**2)
 		A+=np.diag(alpha,0)
+        A= csc_matrix(A)
 		Mu[n+1]= spsolve(A, Mu[n]+dt*C[n]*Rho[n])
 		Rho[n+1]=Rho[n]+dt*F0*Mu[n+1]
 		C[n+1]=C[n]/(1 + b*dt*Rho[n])
@@ -91,6 +93,7 @@ def edp_1d_semi_implicite_II(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x):
 		#Ajout des termes implicites
 		alpha=-C[n]*dt*(1+dt*F0)+1
 		A+=np.diag(alpha,0)
+        A= csc_matrix(A)
 		#Résolution du systême implicite
 		Mu[n+1]= spsolve(A, Mu[n]+dt*C[n]*Rho[n]-dt*Mu[n]*Rho[n])
 		Rho[n+1]=Rho[n]+dt*F0*Mu[n+1]
@@ -115,8 +118,10 @@ def speed(X,Rho):
 	return s
 s=0
 s = speed(X,Rho)
-print(s)
-
+print('La vitesse de propagation de la simulation est s=',s)
+s_theorique = np.sqrt(K*((18*F0+4)+np.sqrt(((18*F0+4)**2)+108*(1+4*F0)*(F0**2)))/(2*(1+4*F0)))
+#Attention, ceci est pour C0=1
+print('La vitesse théorique de propagation est s_theorique=', s_theorique)
 
 #Animation
 fig = plt.figure()
