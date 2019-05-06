@@ -1,0 +1,62 @@
+\section{Equation KPP avec Memoire}
+On a le modele suivant: 
+\begin{equation} \left\{
+                \begin{array}{ll}
+                   \dt\mu -\frac{T}{\lambda}\Delta\mu = f(C)(\mu + \rho) -\mu\rho\\
+                 \dt\rho=  F_0 \mu \\
+                  \dt C = -b\rho C
+                \end{array}
+              \right.
+\end{equation} 
+où $f(0)=0$ et $f$ est positive. Typiquement, $f(C)=C$:\\
+Dans la suite on pose $K= \frac{T}{\lambda}$\\
+On recherche des solutions en onde plane, on pose $c$ la vitesse d'onde et $\xi = x - ct$. \\
+\begin{equation} \left\{ \begin{array}{ll} -c \mu'-K\mu''=f(C)(\mu+\rho)-\mu\rho \\ -c\rho' = F_0\mu  \\C'=\frac{b\rho C}{c} \end{array}\right.
+\end{equation}
+Nos etats stationaires sont $(\mu,\rho,C) = \left\{ \begin{array}{ll} (0,0,C_0) \\
+ (0,\rho_\infty,0) \end{array} \right.$ 
+\subsection{Au voisinage de $(0,0,C_0)$}
+Au voisinage de $(0,0,C_0)$ on a, en posant $f(C_0)=f_0$:
+\begin{equation} \left\{ \begin{array}{ll} -c \mu'-K\mu''=f_0(\mu+\rho) \\ -c\rho' = F_0\mu   \end{array}\right.
+\end{equation} ce qui devient  \begin{equation} \rho''' +\frac{c}{K}\rho''+\frac{f_0}{K}\rho'-\frac{F_0f_0}{Kc}\rho =0 \end{equation} de polynôme caracteristique \begin{equation} P(X)= X^3 +\frac{c}{K}X^2+\frac{f_0}{K}X-\frac{F_0f_0}{Kc} \end{equation}
+Pour $c<0$,   $P(0)>0$ donc P a une racine negative $r_1$ .\\
+Pour que P ait deux autres racines reelles $r_3>r_2>r_1$ il faut (condition necessaire et suffisante) que P' s'annule deux fois et que le discriminant $\Delta$ de P soit positif.
+\subsubsection{Première condition: P' a deux annulations:}
+$P'(X)= 3X^2+ 2\frac{c}{K}X+ \frac{f_0}{K}$ a pour discriminant $\Delta'=4\frac{1}{K^2}(c^2-3Kf_0)$ ce qui donne la condition \begin{equation} \label{eq:condition_P'}
+	\boxed{c^2 >3K f_0
+	}
+\end{equation}
+\subsubsection{Deuxième condition: $\Delta>0$:}
+Pour $P=aX^3 +bX^2 + cX + d$ on a $\Delta= b^2c^2 +18abcd-27a^2d^2 -4ac^3 -4b^3d$ ce qui dans notre cas donne
+\begin{align*}
+	\Delta=\frac{1}{K^4}f_0^2c^2 -18 \frac{f_0^2F_0}{K^3}-27 \frac{F_0^2 f_0^2}{K^2c^2} - 4 \frac{f_0^3}{K^3}+4 \frac{F_0f_0c^2}{K^4} \\ = c^2 \frac{f_0(f_0+4F_0)}{K^4}- \frac{f_0^2(18F_0+4)}{K^3} -\frac{27F_0^2f_0^2}{K^2}* \frac{1}{c^2}\\ 
+=	\frac{f_0}{K^4c^2}[(f_0+4F_0)c^4-Kf_0(18F_0+4) c^2 - 27 K^2F_0^2f_0] \end{align*}
+On est revenu à étudier le signe du polynôme en $c^2$ \begin{equation}
+	D(c^2)=(f_0+4F_0)c^4-Kf_0(18F_0+4)c^2 - 27 K^2F_0^2f_0
+\end{equation} 
+de discriminant $d$:
+\begin{align*}
+	d=\Big(Kf_0(18F_0+4) \Big)^2 +108(f_0+4F_0)K^2F_0^2f_0 \\ 
+	= K^2f_0(f_0(18F_0+4)^2+108(f_0+4F_0)F_0^2) >0
+\end{align*}
+On obtient donc la condition sur la positivite de $\Delta$: 
+\begin{equation}\boxed{
+	c^2> K\frac{f_0(18F_0+4)+\sqrt{f_0(f_0(18F_0+4)^2+108(f_0+4F_0)F_0^2)}}{2(f_0+4F_0)}
+	}\label{eq:condition_Delta}
+\end{equation}
+\subsubsection{Signe des racines}
+On sait déjà que $r_3<0$. Comme $r_1r_2r_3<0$, on remarque que $r_2$ et $r_1$ sont du meme signe.\\
+De plus $P'$ a un axe de symetrie $X=-\frac{c}{3K}>0$ car $c<0$ donc $P$ atteint un minimum local (forcement négatif) en un point positif donc $P$ a une racine positive.\\
+On en deduit $r_1>r_2>0$: \\ 
+Sous les conditions \eqref{eq:condition_P'} et \eqref{eq:condition_Delta}, $P$ a deux racines positives et une négative.
+\subsection{Au voisinage de $(0,\rho_\infty,0)$} 
+Autour de $(0,\rho_\infty,0)$:
+\begin{equation} \left\{ \begin{array}{ll} -c \mu'-K\mu''=f(C)\rho_\infty-\mu\rho_\infty\\C'=\frac{b\rho_\infty C}{c} \end{array}\right.
+\end{equation}
+la deuxième ligne donne \begin{equation}
+C = K\exp(\frac{b\rho_\infty}{c}t )
+\end{equation}
+et la première est une EDO d'ordre deux  en $\mu$ avec terme source $f(C)\rho_\infty$ de polynôme caracteristique: \begin{equation}
+	Q(X)=X^2+\frac{c}{K}X-\frac{\rho_\infty}{K}
+\end{equation} 
+qui possède toujours deux racines: une négative et une positive. 
