@@ -1,5 +1,5 @@
-\section{Equation KPP avec Memoire}
-On a le modele suivant: 
+\section{Recherche de la vitesse d'onde des solutions progressives de l’Équation KPP avec Mémoire}
+On a le modèle suivant: 
 \begin{equation} \left\{
                 \begin{array}{ll}
                    \dt\mu -\frac{T}{\lambda}\Delta\mu = f(C)(\mu + \rho) -\mu\rho\\
@@ -13,14 +13,14 @@ Dans la suite on pose $K= \frac{T}{\lambda}$\\
 On recherche des solutions en onde plane, on pose $s$ la vitesse d'onde et $\xi = x - st$. \\
 \begin{equation} \left\{ \begin{array}{ll} -s \mu'-K\mu''=f(C)(\mu+\rho)-\mu\rho \\ -s\rho' = F_0\mu  \\C'=\frac{b\rho C}{s} \end{array}\right.
 \end{equation}
-Nos etats stationaires sont $(\mu,\rho,C) = \left\{ \begin{array}{ll} (0,0,C_0) \\
- (0,\rho_\infty,0) avec \rho_infty > 0 \end{array} \right.$ 
+Nos états stationnaires sont $(\mu,\rho,C) = \left\{ \begin{array}{ll} (0,0,C_0) \\
+ (0,\rho_\infty,0) , \rho_infty > 0 \end{array} \right.$ 
 \subsection{Au voisinage de $(0,0,C_0)$}
 Au voisinage de $(0,0,C_0)$ on a, en posant $f(C_0)=f_0$:
 \begin{equation} \left\{ \begin{array}{ll} -s \mu'-K\mu''=f_0(\mu+\rho) \\ -s\rho' = F_0\mu   \end{array}\right.
-\end{equation} ce qui devient  \begin{equation} \rho''' +\frac{s}{K}\rho''+\frac{f_0}{K}\rho'-\frac{F_0f_0}{Ks}\rho =0 \end{equation} de polynôme caracteristique \begin{equation} P(X)= X^3 +\frac{s}{K}X^2+\frac{f_0}{K}X-\frac{F_0f_0}{Ks} \end{equation}
-Pour $s<0$,   $P(0)>0$ donc P a une racine negative $r_1$ .\\
-Pour que P ait deux autres racines reelles $r_3>r_2>r_1$ il faut (condition necessaire et suffisante) que P' s'annule deux fois et que le discriminant $\Delta$ de P soit positif.
+\end{equation} ce qui devient  \begin{equation} \rho''' +\frac{s}{K}\rho''+\frac{f_0}{K}\rho'-\frac{F_0f_0}{Ks}\rho =0 \end{equation} de polynôme caractéristique \begin{equation} P(X)= X^3 +\frac{s}{K}X^2+\frac{f_0}{K}X-\frac{F_0f_0}{Ks} \end{equation}
+Pour $s<0$,   $P(0)>0$ donc P a une racine négative $r_1$ .\\
+Pour que P ait deux autres racines réelles $r_3>r_2>r_1$ il faut (condition nécessaire et suffisante) que P' s'annule deux fois et que le discriminant $\Delta$ de P soit positif.
 \subsubsection{Première condition: P' a deux annulations:}
 $P'(X)= 3X^2+ 2\frac{s}{K}X+ \frac{f_0}{K}$ a pour discriminant $\Delta'=4\frac{1}{K^2}(s^2-3Kf_0)$ ce qui donne la condition \begin{equation} \label{eq:condition_P'}
 	\boxed{s^2 >3K f_0
@@ -39,15 +39,15 @@ de discriminant $d$:
 	d=\Big(Kf_0(18F_0+4) \Big)^2 +108(f_0+4F_0)K^2F_0^2f_0 \\ 
 	= K^2f_0(f_0(18F_0+4)^2+108(f_0+4F_0)F_0^2) >0
 \end{align*}
-On obtient donc la condition sur la positivite de $\Delta$: 
+On obtient donc la condition sur la positivité de $\Delta$: 
 \begin{equation}\boxed{
 	s^2> K\frac{f_0(18F_0+4)+\sqrt{f_0(f_0(18F_0+4)^2+108(f_0+4F_0)F_0^2)}}{2(f_0+4F_0)}
 	}\label{eq:condition_Delta}
 \end{equation}
 \subsubsection{Signe des racines au voisinage de $(0,0,C_0)$}
-On sait déjà que $r_3<0$. Comme $r_1r_2r_3<0$, on remarque que $r_2$ et $r_1$ sont du meme signe.\\
-De plus $P'$ a un axe de symetrie $X=-\frac{s}{3K}>0$ car $s<0$ donc $P$ atteint un minimum local (forcement négatif) en un point positif donc $P$ a une racine positive.\\
-On en deduit $r_1>r_2>0$: \\ 
+On sait déjà que $r_3<0$. Comme $r_1r_2r_3<0$, on remarque que $r_2$ et $r_1$ sont du même signe.\\
+De plus $P'$ a un axe de symétrie $X=-\frac{s}{3K}>0$ car $s<0$ donc $P$ atteint un minimum local (forcement négatif) en un point positif donc $P$ a une racine positive.\\
+On en déduit $r_1>r_2>0$: \\ 
 Sous les conditions \eqref{eq:condition_P'} et \eqref{eq:condition_Delta}, $P$ a deux racines positives et une négative.
 \subsection{Au voisinage de $(0,\rho_\infty,0)$} 
 Autour de $(0,\rho_\infty,0)$:
@@ -70,5 +70,5 @@ Sur $\mu$ on a: \begin{equation}
 \end{equation}
 Dans le cas $f(C)=C$:\\
 $\mu$ a pour polynôme caractéristique homogène $M(X)=X^2 +\frac{1}{K}X - \frac{\rho_\infty}{Ks}$ de racines:\\$r_{1,2}= - \frac{1}{2K}(1 \pm \sqrt{1+4 \frac{\rho_\infty K}{s}})$ \\ donc $\mu_H = Ae^{r_1y}+ Be^{r_2y}$ (On choisit $r_1>r_2$).\\
-En cherchant une solution particulière de la forme $\mu_p =M\exp(\frac{b\rho_\infty}{s}y )$ on obtient $M = - \frac{\Lambda}{b^2\rho_\infty K + b - 1}$ et donc $\mu=Ae^{r_1y}+ Be^{r_2y}+M e^(\frac{b\rho_\infty}{s}y )$
+En cherchant une solution particulière de la forme $\mu_p =M\exp(\frac{b\rho_\infty}{s}y )$ on obtient $M = - \frac{\Lambda}{b^2\rho_\infty K + b - 1}$ et donc $\mu=Ae^{r_1y}+ Be^{r_2y}+M e^{\frac{b\rho_\infty}{s}y }$
 et donc $\rho = \rho_\infty + \alpha e^{r_1y} + \beta e^{r_2y} + \Gamma \exp(\frac{b\rho_\infty}{s}y)$ pour $\Gamma = \frac{Ms}{b\rho_\infty} $

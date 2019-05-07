@@ -10,41 +10,41 @@
 \section{L'équation de Fisher ou KPP}
 \subsection{Préliminaire}
 Notre point de départ est l'équation de diffusion:\begin{equation}\dt u = \Delta u  \end{equation}
-En plus de la diffusion, considérons des modèles où le taux d'accroissement de $u$ depend aussi de la densité $u$.\\
+En plus de la diffusion, considérons des modèles où le taux d'accroissement de $u$ dépend aussi de la densité $u$.\\
 Ceci donne les équations de reaction-diffusion:
 \begin{equation}\dt u = \Delta u + F(u) \label{eq:ReaDi} \end{equation} 
 où F est assez lisse.\\
-Il est souvent naturel dans les modêles de considérer $F(u)$ proportionel à  $u$ pour $u$ petit (``croissance"), et quand $u$ devient proche de 1, l'accroissement $F(u)$ s'arrête: $F(1)=0$ (``saturation").\\
+Il est souvent naturel dans les modèles de considérer $F(u)$ proportionnel à  $u$ pour $u$ petit (``croissance"), et quand $u$ devient proche de 1, l'accroissement $F(u)$ s'arrête: $F(1)=0$ (``saturation").\\
 Ces types de modèles ont étés introduits et examinés par les travaux de Fisher[1] et Kolmogorov, Petrovsky et Piscounuv[2] (abrégés KPP).\\
 Un exemple d'une telle équation est:
 
 \begin{equation}
 	\dt u = \Delta u +u(1-u) \label{eq:KPP}
 \end{equation}
-qui sera dans la suite étudiée dans le cas 1-dimensionel en $x$ : $u=u(x,t)$.
+qui sera dans la suite étudiée dans le cas 1-dimensionnel en $x$ : $u=u(x,t)$.
 
 \subsection{Réaction}
 En observant les solutions constantes en $x$: $u(x,t)=v(t)$ dans \eqref{eq:KPP}, l'équation différentielle ordinaire (EDO ou ODE): \begin{equation}
 	\dt v = v - v^2 = F(v)
 \end{equation}
 est obtenue. \\
-Il y a deux équilibres ($F(v)=0)$) pour $v=0$ et $v=1$.Par le théorême de stabilité de Lyapunov, $F'(0)>0$ montre que $v=0$ est instable et $F'(1)<0$ montre $v=1$ is asymptotiquement stable.
+Il y a deux équilibres ($F(v)=0)$) pour $v=0$ et $v=1$.Par le théorème de stabilité de Lyapunov, $F'(0)>0$ montre que $v=0$ est instable et $F'(1)<0$ montre $v=1$ est asymptotiquement stable.
 
 \subsection{Réaction-Diffusion}
-Dans l'éspace $X=C^0_{b,unif}(\mathbb{R},\mathbb{R})$ des fonctions bornées et uniformément continues, il y a existence locale et unicité des solutions de l'éqaution de Fisher-KPP \eqref{eq:ReaDi}. Grâce à un principe du maximum, il y a aussi existence globale et unicité des solutions.
+Dans l’espace $X=C^0_{b,unif}(\mathbb{R},\mathbb{R})$ des fonctions bornées et uniformément continues, il y a existence locale et unicité des solutions de l’équation de Fisher-KPP \eqref{eq:ReaDi}. Grâce à un principe du maximum, il y a aussi existence globale et unicité des solutions.
 \newtheorem{theorem}{Théorème}
 \begin{theorem}:\\ Existence et Unicité de la solution dans $X$: Soit $U_0 \in X$. Il existe une unique solution de l'équation de Fisher-KPP \eqref{eq:ReaDi}  $U \in C([0,\infty[,X)$ avec condition initiale $U_0$. \end{theorem}
 \begin{theorem}:\\ Principe du Maximum: Soit $u_1$ et $u_2$ deux solutions de \eqref{eq:ReaDi}. Si il éxiste $t_0$ tel que $u_1(x,t_0)<u_2(x,t_0) $ $\forall x$ alors $u_1(x,t)<u_2(x,t)$  $ \forall x$ et $\forall t>t_0$ \end{theorem}
 
-\subsection{Solutions en onde plane stationaire / onde progressive}
-Rappellons la définition d'une solution en onde plane stationaire / onde progressive:
-\begin{definition}{Solutions en onde plane stationaire}\\Une solution en onde plane stationnaire est une solution de la forme $u(x,t)=h(x-st)$ où $c \in \mathbb{R} $.\\ On fera parfois l'abus de notation $u(x,t)=u(x-st)$
+\subsection{Solutions en onde plane stationnaire / onde progressive}
+Rappellons la définition d'une solution en onde plane stationnaire / onde progressive:
+\begin{definition}{Solutions en onde plane stationnaire}\\Une solution en onde plane stationnaire est une solution de la forme $u(x,t)=h(x-st)$ où $c \in \mathbb{R} $.\\ On fera parfois l'abus de notation $u(x,t)=u(x-st)$
 \end{definition}
-Sous des hypotheses ``faibles" sur $F$, l'équation \eqref{eq:ReaDi}: $\dt u = \Delta u + F(u)$ a alors la propriété surprenante et importante de posséder des solutions en ondes planes stationaires liant les états d'équilibre $u=1$ (à $-\infty$) et $u=0$ (à $+\infty$).\\
+Sous des hypothèses ``faibles" sur $F$, l'équation \eqref{eq:ReaDi}: $\dt u = \Delta u + F(u)$ a alors la propriété surprenante et importante de posséder des solutions en ondes planes stationnaires liant les états d'équilibre $u=1$ (à $-\infty$) et $u=0$ (à $+\infty$).\\
 Les hypothèses sur $F$ portent en partie sur le fait que \eqref{eq:ReaDi} doit posséder:\\
 - Deux états d'équilibre $u=1$ et $u=0$: $F(0)=F(1)=0$:\\
-- Un phénomêne de ``croissance" : $F'(0)>0$\\
-- Un phénomêne de ``saturation" : $F'(1)<0$ \\
+- Un phénomène de ``croissance" : $F'(0)>0$\\
+- Un phénomène de ``saturation" : $F'(1)<0$ \\
 \paragraph{Étude des solutions en ondes progressive de \eqref{eq:ReaDi}}:\\
 En substituant $u(x,t) = h(x-st) = h(y)$ pour $y=x-st$ dans \eqref{eq:ReaDi}, les équations obtenues sur $h$ sont: \begin{equation} \label{eq:FWS} \left\{
                 \begin{array}{ll}
@@ -53,7 +53,7 @@ En substituant $u(x,t) = h(x-st) = h(y)$ pour $y=x-st$ dans \eqref{eq:ReaDi}, le
                    \end{array}
               \right.
 \end{equation} 
-qui est une équation élliptique non linéaire. Le problème est donc de trouver $s$ et $h \in C^2$ tels que le systême \eqref{eq:FWS} soit vérifié. Le théorème obtenu est le suivant:
+qui est une équation elliptique non linéaire. Le problème est donc de trouver $s$ et $h \in C^2$ tels que le système \eqref{eq:FWS} soit vérifié. Le théorème obtenu est le suivant:
 
 
 
@@ -67,7 +67,7 @@ Remarque : Dans le second cas il existe des solutions mais elles ne sont pas con
 
 \newpage
 \section{Dyamique de Réseaux en Croissance}
-Dans cette séction et la suite nous étudions le modèle sur la croissance de réseaux dynamiques branchants, par éxemple un champignon, proposé par Rémi Catellier, Yves D'Angelo et Cristiano Ricci, avec rescaling adéquat:
+Dans cette section et par la suite nous étudions le modèle sur la croissance de réseaux dynamiques branchant, par exemple un champignon, proposé par Rémi Catellier, Yves D'Angelo et Cristiano Ricci, avec rescaling adéquat:
 \begin{equation}\label{eq:BDNG}  \left\{
                 \begin{array}{ll}
                 \dt\mu + \nabla(\mu v) = f(C)(\mu + \rho) -\mu\rho \\
@@ -77,21 +77,37 @@ Dans cette séction et la suite nous étudions le modèle sur la croissance de r
                 \end{array}
               \right.
 \end{equation} 
-The unknown $\mu$ represents the density of the apices of the fungus.\\ The unknown $\rho$ represents the density of the network.\\
-The unknown $v$ represents the speed of the apices.\\
-The unknown $C$ represents the concentration of nutrient.\\
-The parameters $T$, $\lambda$ and $b$ are scalar constants that represent temperature, fluid damping on the speed of the apexes, and the rate of consumption of the nutrients by the network.\\
-The function $f$ indicates the influence of the concentration of nutrient on the growth of the fungus. Usualy, to have a stationary state on the growth of the fungus, we need $f(0)=0$ and $f(x)/x$ in $L^1$ near 0.\\
-The function $F$ represents the inverse of the average time spent by apexes in a given point, and is given by the expression:
+L'inconnue $\mu$ représente la densité des apex du champignon.\\
+L'inconnue $\rho$ représente la densité des hyphes/ du réseau.\\
+L'inconnue $v$ représente la vitesse des apex.\\
+L'inconnue $C$ représente la concentration des nutriments.\\
+Les paramètres $T$, $\lambda$ et $b$ sont des scalaires représentants la température, l'amortissement fluide sur la vitesse des apex, et le taux de consommation des nutriments par le réseau.\\
+La fonction $f$ indique l'influence de la concentration de nutriments sur la croissance du champignon. Pour avoir un état stationnaire sur la croissance du champignon,$f(0)=0$ et $f(x)/x$ dans $L^1$ proche de 0 sont imposés.\\
+La fonction $F$ représente l'inverse du temps moyen passé par les apex dans un point donné, et est donné par l'expression:
 \begin{equation}
 	F(V)=(\frac{1}{2\pi T})^\frac{d}{2}\int_{\mathbb{R}^d} |v|\exp(-\frac{|v-V|^2}{2T})dv\end{equation}
-where d is the dimension of the problem. This model is often simplified by substituting $F(V)$ with a constant: $F(V)= F_0$ .\\
+où d est la dimension du problème. Ceci est souvent simplifié en substituant $F(V)$ par une constante: $F(V)= F_0$ .\\
 
-\subsection{Explanation of the terms in equation \eqref{eq:BDNG}}
-The fungus is a branching dynamical network that can be studied in two parts: the apexes (tips of the newtwork) and the hyphen (branches of the network).\\
-Looking at each line of equation \eqref{eq:BDNG} seperately, the model has:\\
-i) The first line is the mass balance equation on the apexes with classical left term $ \dt\mu + \nabla(\mu v)  $. The right term is composed of $f(C)(\mu + \rho)$ corresponding to a growth of the number of apexes depending on the concentration of nutrient and the existing mass of apexes and hyphen, and a term $-\mu\rho$ which corresponds to anastomosis : a tip that encounters a branch will merge with it and be destroyed. There is a growth term and a saturation term like the KPP model.
-\\ ii)  The second line is the momentum balance equation of the apexes with classical left term $ \dt(\mu v)+\nabla(\mu v\times v) $. The term $T\nabla\mu$ represents a brownian motion followed by the apexes. The term $-\lambda\mu v$ represents a fluid damping in the physics of the problem. The term $+\mu\nabla C$ represents of proponency of the apexes to go where the nutrient concentation is dense. The term $-\mu v \rho $ represents the loss of momentum due to anastomosis.\\
-iii) The third line describes the relationship between apexes and hyphen: the trail of the apexes are the branches.\\
-iv) The fourth line describes the evolution of the nutrient concentration: it is eaten by the hyphen with rate $bC$. 
+\subsection{Explication des équations du système \eqref{eq:BDNG}}
+Le champignon est un réseau branchant dynamique qui peut être étudié en deux parties: les apex (pointes du réseau) représentés par leur densité $\mu$ et les hyphes (branches du réseau) représentés par leur densité $\rho$\\
+Les lignes du système \eqref{eq:BDNG} représentent:\\
+i) La première ligne du système est le bilan de masse sur les apex avec le terme gauche classique $ \dt\mu + \nabla(\mu v) $. Le terme de droite est composé de : - $f(C)(\mu + \rho)$ correspondant a une croissance proportionnelle à la concentration de nutriments du réseau et la masse existante d'apex et d'hyphes, - et un terme $-\mu\rho$ qui correspond à l'anastomose: une pointe qui rencontre une branche va fusionner avec elle et être détruite. Il y a un terme de croissance et un terme de saturation comme pour le modèle KPP.
+\\ ii)  La deuxième ligne est le bilan de vitesse avec le terme de gauche classique $ \dt(\mu v)+\nabla(\mu v\times v) $. Le terme $T\nabla\mu$ représente le mouvement brownien suivi par les apex. Le terme $-\lambda\mu v$ représente un amortissement fluide dans la physique du problème. Le terme  $+\mu\nabla C$ représente la tendance des apex à aller vers les milieux de forte concentration. Le terme $-\mu v \rho $ représente la perte de vitesse du à l'anastomose.\\
+iii) La troisième ligne correspond à la relation entre les branches et les pointes: la trace laissée par les apex sont les branches.\\
+iv) La quatrième ligne décrit l'évolution de la concentration de nutriments: ils sont consommés par les hyphe avec un taux $bC$ où b est une constante positive.
+\subsection{Dérivation de l'équation "KPP avec mémoire"}
+En faisant tendre $T$ et $\lambda$ vers $+\infty$, avec $\frac{T}{\lambda}=K$ constant, la deuxième ligne de \eqref{eq:BDNG} donne: 
+\begin{equation}
+	+K\nabla\mu=-\mu v
+\end{equation}
+En injectant ceci dans la ligne 1 du système, on obtient le système de 3 inconnues suivant:
+ \begin{equation} \left\{
+                \begin{array}{ll}
+                   \dt\mu = K\Delta\mu + f(C)(\mu + \rho) -\mu\rho\\
+                 \dt\rho=  F_0 \mu \\
+                  \dt C = -b\rho C
+                \end{array}
+              \right.
+\end{equation}
+dit "KPP avec mémoire".
 %\end{document}

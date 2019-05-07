@@ -1,0 +1,24 @@
+\newtheorem{lemma}{Lemme}
+Soit $(\mu,\rho,C)$ vérifiant le système d’équations suivant:
+\begin{equation} \left\{
+                \begin{array}{ll}
+                   \dt\mu  = f(C)(\mu + \rho) -\mu\rho\\
+                 \dt\rho=  F_0 \mu \\
+                  \dt C = -b\rho C
+                \end{array}
+              \right.
+\end{equation} 
+
+\begin{lemma}C est de signe constant.\\
+En effet on a $C(t)= C(0)\exp(-b\int_{0}^{t}\rho(s)ds)$.
+\end{lemma}
+
+\begin{lemma}Soit $(\mu,\rho,C)$ tel que $\mu(0)\geq 0$, $\rho(0) >0$, $C(0)>0$. Alors $\mu(t)>0$ $\forall t$
+\end{lemma}
+\begin{proof}
+Supposons par l'absurde que $\mu$ devient négatif alors soit $t^*= \min{t>0/ \mu(t)<0}$. Alors: \\
+-$\mu(t)\geq 0$ $\forall t<t^*$\\
+-$\dt\mu(t^*) \leq 0$ par définition de $t^*$. (Sinon $\mu(t^*+\epsilon)>0 \forall \epsilon <<1$)\\
+-$\rho(t)>0$ $\forall t<t^*$ car $\dt\rho=  F_0 \mu$ et $F_0>0$\\
+-$\dt\mu(t^*) = f(C(t^*))\rho(t^*) > 0$ ce qui est en contradiction avec la deuxième affirmation.
+\end{proof}

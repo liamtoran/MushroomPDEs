@@ -1,6 +1,5 @@
 \documentclass[11pt]{article}
-
-\usepackage[english]{babel}
+\usepackage[french, english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{framed}
@@ -17,6 +16,7 @@
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{subcaption}
+\usepackage[toc,page]{appendix}
 \floatstyle{boxed} 
 \restylefloat{figure}
 \definecolor{mygreen}{rgb}{0,0.6,0}
@@ -65,13 +65,13 @@
 \author{Liam Toran}
 \date{}
 \begin{document}
-
+\selectlanguage{french}
 \maketitle
 \vspace{-20px}
 \begin{center}
 Stage de fin de M2A 2019 au Laboratoire J.A. Dieudonné de l'Université de Nice\\ sous la supervision de Yves D'Angelo, Rémi Catellier, Laurent Monasse
 \end{center}
-{\footnotesize Thèmes: Mathématiques et leurs Interactions, Modélisation, Analyse, Procéssus Stochastiques, Équations aux dérivées partielles et ordinaires, Stabilité, Réaction-Diffusion, Ondes progressives, Simulation Numérique.}
+{\footnotesize Thèmes: Mathématiques et leurs Interactions, Modélisation, Analyse, Processus Stochastiques, Équations aux dérivées partielles et ordinaires, Stabilité, Réaction-Diffusion, Ondes progressives, Simulation Numérique.}
 \begin{figure}[hb]
 \begin{subfigure}[b]{0.5\textwidth}
 \includegraphics[width=\textwidth]{Images/1.png}
@@ -93,8 +93,12 @@ Stage de fin de M2A 2019 au Laboratoire J.A. Dieudonné de l'Université de Nice
 
 \input{rapport-aux/surKPP.tex} %1 et 2
 \newpage
+\input{rapport-aux/mupositifedo.tex}
+\newpage
 \input{rapport-aux/Linearisation.tex} %3
 \newpage
 \input{rapport-aux/Schema.tex} %4 et 5
+\newpage
+\input{rapport-aux/Appendix.tex}
 
 \end{document}
