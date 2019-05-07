@@ -1,1 +1,15 @@
-This is a repository about Mushroom PDEs
+TODO : 
+Avancer le rapport
+Montrer que la linéarisation marche bien sur la simulation
+Comparer avec un graphe le s observé sur le numérique et le s minimal obtenu sur papier crayon
+Montrer que mu ne devient pas negatif pour l'EDP
+Montrer que mu a un maximum/ tend vers 0 pour l'EDP
+Montrer la positivité du schema pour l'EDP
+Avancer en ajoutant les termes keller segel
+Convergence, Stabilité , Ordre du schema numerique...
+Montrer comment la vitesse se selectionne (donc deja comprendre comment ca marche pour KPP).
+
+DONE 7/5/19:
+Avancement du rapport, migration sur github
+Mu est positive pour l'EDO
+Mu a un maximum/ tend vers 0 pour l'EDO
