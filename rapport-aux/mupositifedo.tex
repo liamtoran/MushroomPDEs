@@ -1,3 +1,4 @@
+\subsection{Propriétés de l'EDO ``KPP avec mémoire"}
 \newtheorem{lemma}{Lemme}
 Soit $(\mu,\rho,C)$ vérifiant le système d’équations suivant:
 \begin{equation} \left\{
@@ -7,18 +8,51 @@ Soit $(\mu,\rho,C)$ vérifiant le système d’équations suivant:
                   \dt C = -b\rho C
                 \end{array}
               \right.
-\end{equation} 
-
+\end{equation} avec $f(0)=0$
+On s'interesse au comportement de $(\mu,\rho,C)$ sur $\mathbb{R}^+$
 \begin{lemma}C est de signe constant.\\
 En effet on a $C(t)= C(0)\exp(-b\int_{0}^{t}\rho(s)ds)$.
 \end{lemma}
 
-\begin{lemma}Soit $(\mu,\rho,C)$ tel que $\mu(0)\geq 0$, $\rho(0) >0$, $C(0)>0$. Alors $\mu(t)>0$ $\forall t$
+\begin{lemma}Soit $(\mu,\rho,C)$ tel que $(\mu(0),\rho(0))> (0,0)$ (les deux positifs, au moins un non nul), $C(0)>0$.\\  Alors $\mu(t)\geq 0$ $\forall t>0$
 \end{lemma}
 \begin{proof}
-Supposons par l'absurde que $\mu$ devient négatif alors soit $t^*= \min{t>0/ \mu(t)<0}$. Alors: \\
--$\mu(t)\geq 0$ $\forall t<t^*$\\
--$\dt\mu(t^*) \leq 0$ par définition de $t^*$. (Sinon $\mu(t^*+\epsilon)>0 \forall \epsilon <<1$)\\
--$\rho(t)>0$ $\forall t<t^*$ car $\dt\rho=  F_0 \mu$ et $F_0>0$\\
--$\dt\mu(t^*) = f(C(t^*))\rho(t^*) > 0$ ce qui est en contradiction avec la deuxième affirmation.
+Supposons par l'absurde que $\mu$ devient négatif alors soit $t^*= \min(t>0/ \mu(t)<0)$. Alors: \\
+$\mu(t)\geq 0$ $\forall t \leq t^*$\\
+$\dt\mu(t^*) \leq 0$ par définition de $t^*$. (Sinon $\mu(t^*+\epsilon)>0$ $\forall \epsilon <<1$)\\
+$\rho(t)>0$ $\forall t\leq t^*$ car $\dt\rho=  F_0 \mu$ et $F_0>0$\\
+$\dt\mu(t^*) = f(C(t^*))\rho(t^*) > 0$ ce qui est en contradiction avec la deuxième affirmation.
 \end{proof}
+Dans la suite on se place dans le cas $(\mu(0),\rho(0))> (0,0)$, $C(0)>0$:
+\begin{lemma} $\rho$ est croissante car $\dt\rho=  F_0 \mu \geq 0$. \end{lemma}
+
+
+
+\newpage
+
+\begin{lemma}$\lim_{+\infty}C(t) = 0$ \end{lemma}
+\begin{proof} $(\mu(0),\rho(0))> (0,0)$ et $\dt\rho=  F_0 \mu$ impliquent qu'il existe un $t_0$ tel que $\mu(t_0)>0$. Comme $\rho$ est croissante $\forall t\geq t_0$, $\rho(t) \geq \rho(t_0)$.\\Donc $\forall t\geq t_0$, $C(t)= C(0)\exp(-b\int_{0}^{t}\rho(s)ds) \leq C_{ste}e^{-b \rho(t_0)t}$.
+\end{proof}
+
+\begin{lemma} Si $f^2$ est intégrable en 0, alors $\mu$ est bornée
+\end{lemma}
+\begin{proof} $\forall t\geq 0$, $C(t)\leq C_{ste}e^{-b \rho(t_0)t} $ Soit $\epsilon(t)=f(C_{ste}e^{-b \rho(t_0)t} )$, On a $\forall t\geq 0$,\\ $\dt\mu  = C(\mu + \rho) -\mu\rho\ \leq \epsilon(\mu + \rho) -\mu\rho$ \\
+Étudions la fonction $F$ : $x,y \mapsto \epsilon(x + y) -xy$ sur $\mathbb{R}^+ \times \mathbb{R}^+$\\
+$\nabla F = (\epsilon-y, \epsilon-x)$ donc il y a un point critique en $\epsilon,\epsilon$.\\
+$H(F) = \begin{pmatrix}
+   0 & -1 \\
+   -1 & 0 
+\end{pmatrix}$ donc $(x,y)H(F)\begin{pmatrix} x \\ y \end{pmatrix} = -2xy < 0$ sur $\mathbb{R}^+ \times \mathbb{R}^+$ donc $\epsilon,\epsilon$ est un maximum local: comme c'est le seul point critique, il est en fait global.\\
+On a donc $F(x,y)\leq F(\epsilon,\epsilon) = \epsilon^2 $ $\forall x,y$ dans $\mathbb{R}^+ \times \mathbb{R}^+$\\
+Conclusion:$\forall t>T$,  $\dt\mu \leq F(\rho,\mu) \leq  \epsilon^2 \leq f(C_{ste}e^{-2b \rho(t_0)t})$. \\En particulier $\dt\mu$ est majoré par une fonction intégrable en $+\infty$ (car $f^2$ est intégrable en 0 et par changement de variable) donc $\mu$ est majoré, et minoré par $0$, donc $\mu$ est bornée.
+\end{proof}
+Dans la suite, on suppose $f^2$ intégrable en 0:
+\begin{lemma} $\lim_{+\infty} \mu(t) = 0$
+\end{lemma}
+\begin{proof}
+$\dt\mu \leq f(C_{ste}e^{-2b \rho(t_0)t})$ montre que $\limsup _{+\infty}\dt\mu \leq 0$.\\
+Par l'absurde, si on a $\limsup _{+\infty}\dt\mu <0$ alors $\mu$ n'est pas bornée.\\
+On a donc $\limsup_{+\infty}f(C)(\mu + \rho) -\mu\rho = 0$.
+Donc $\limsup_{+\infty} f(C)(\mu) + \rho ( f(C)-\mu) = 0$.\\ $\mu$ est bornée et $\lim_{+\infty}f(C)=0$ donc $\limsup_{+\infty} f(C)(\mu) =0$ .\\
+On a donc $0=  \limsup_{+\infty} \rho (f(C)-\mu)$. $\rho$ étant croissante positive,$\rho$ admet une limite dans  $\overline{\mathbb{R^+}}$ mais $0=  \limsup_{+\infty} \rho (f(C)-\mu)$ donc $\lim_{+\infty}\mu =0$.
+\end{proof} 
