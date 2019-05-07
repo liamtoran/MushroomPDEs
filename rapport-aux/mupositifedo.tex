@@ -1,3 +1,36 @@
+\iffalse
+\documentclass[11pt]{article}
+\usepackage[french, english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{framed}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{enumerate}
+\usepackage{import}
+\usepackage[top=1 in,bottom=1in, left=1 in, right=1 in]{geometry}
+\usepackage{listingsutf8}
+\usepackage{color}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[toc,page]{appendix}
+\floatstyle{boxed} 
+\restylefloat{figure}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\newcommand{\dt}{\partial_t}
+\newcommand{\Tl}{\frac{T}{\lambda}}
+\theoremstyle{definition}
+\newtheorem{definition}{Définition}[section]
+\begin{document}
+\fi
+
+
 \subsection{Propriétés de l'EDO ``KPP avec mémoire"}
 \newtheorem{lemma}{Lemme}
 Soit $(\mu,\rho,C)$ vérifiant le système d’équations suivant:
@@ -56,3 +89,14 @@ On a donc $\limsup_{+\infty}f(C)(\mu + \rho) -\mu\rho = 0$.
 Donc $\limsup_{+\infty} f(C)(\mu) + \rho ( f(C)-\mu) = 0$.\\ $\mu$ est bornée et $\lim_{+\infty}f(C)=0$ donc $\limsup_{+\infty} f(C)(\mu) =0$ .\\
 On a donc $0=  \limsup_{+\infty} \rho (f(C)-\mu)$. $\rho$ étant croissante positive, $\rho$ admet une limite dans  $\overline{\mathbb{R^+}}$ mais $0=  \limsup_{+\infty} \rho (f(C)-\mu)$ donc $\lim_{+\infty}\mu =0$.
 \end{proof} 
+
+\begin{lemma}$\lim_{+\infty} \rho(t)= \rho_\infty < +\infty$  \end{lemma}
+\begin{proof}On a:\\
+$\int_0^{+\infty}\mu(t)dt \leq \int_0^{+\infty}\int_t^{+\infty}f^2(C_{ste}e^{-2b \rho(t_0)s})\ dsdt$\\
+Faisons le changement de variable $p = C_{ste}e^{-2b \rho(t_0)s}$, $dp = -2b \rho(t_0)pds$:\\
+$\int_0^{+\infty}\mu(t)dt \leq A\int_0^{+\infty}\int_0^{C_{ste}e^{-2b \rho(t_0)t}}f^2(p)\ dpdt$\\
+Faisons le changement de variable $k = C_{ste}e^{-2b \rho(t_0)t}$, $dk = -2b \rho(t_0)pdt$ dans la deuxième intégrale:\\
+$\int_0^{+\infty}\mu(t)dt \leq B\int_0^{1}\int_0^{k}f^2(p)\ dp dk < +\infty $\\
+$\mu$ est donc intégrable sur $\mathbb{R}^+$. Or $ \dt\rho=  F_0 \mu$. Donc $\lim_{+\infty} \rho(t)= \rho_\infty < +\infty$ 
+\end{proof}
+%\end{document}
