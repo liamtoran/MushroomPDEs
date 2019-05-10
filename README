@@ -9,11 +9,11 @@ Avancer en ajoutant les termes keller segel
 Convergence, Stabilité , Ordre du schema numerique...
 Montrer comment la vitesse se selectionne (donc deja comprendre comment ca marche pour KPP).
 
-DONE 7/5/19:
+Done 7/5/19:
 Avancement du rapport, migration sur github
 Mu est positive pour l'EDO
 Mu a un maximum/ tend vers 0 pour l'EDO
 Rho tend vers 0 
 
 Done 10/5/19:
-demonstrations des lemmes 5 6 7 etait faux ... c'est corrigé
+demonstrations des lemmes 5 6 7 etaient fausses ... c'est corrigé
