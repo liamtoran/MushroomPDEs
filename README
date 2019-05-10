@@ -1,11 +1,9 @@
 TODO : 
 Avancer le rapport
 Montrer que la linéarisation marche bien sur la simulation
-Comparer avec un graphe le s observé sur le numérique et le s minimal obtenu sur papier crayon
-Montrer que mu ne devient pas negatif pour l'EDP
-Montrer que mu a un maximum/ tend vers 0 pour l'EDP
+Analyse des propriétés pour l'EDP
 Montrer la positivité du schema pour l'EDP
-Avancer en ajoutant les termes keller segel
+Avancer en ajoutant les termes keller segel, vitesse,... 
 Convergence, Stabilité , Ordre du schema numerique...
 Montrer comment la vitesse se selectionne (donc deja comprendre comment ca marche pour KPP).
 
@@ -17,3 +15,4 @@ Rho tend vers 0
 
 Done 10/5/19:
 demonstrations des lemmes 5 6 7 etaient fausses ... c'est corrigé
+Comparaison avec un graphe le s observé sur le numérique et le s minimal obtenu sur papier crayon
