@@ -6,12 +6,12 @@ from scipy.sparse.linalg.dsolve import spsolve
 import matplotlib.animation as animation
 
 #Coéfficients physiques
-K=.4 #coefficient diffusion
+K=.5 #coefficient diffusion
 b=.5 # dtC=-b*rho*C
-F0=1 # dtRho = Fo*Mu
+F0=.8 # dtRho = Fo*Mu
 
 #Paramêtres numériques 
-n_t=1001 #nombre de pas de temps
+n_t=2001 #nombre de pas de temps
 tf=25 # temps final de la simulation
 xf = 100 #longeur de la simulation
 n_x =500 #nombres de points de la simulation
@@ -104,25 +104,34 @@ def edp_1d_semi_implicite_II(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x):
         Rho[n+1]=Rho[n]+dt*F0*Mu[n+1]
         C[n+1]=C[n]/(1 + b*dt*Rho[n])
     return X,T,Mu,Rho,C
-    
-X,T,Mu,Rho,C= edp_1d_semi_implicite_I(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x)
-
-#Valeur de rho a l'infini
-rho_inf = Rho[n_t-1,(n_x//2)]
-print(rho_inf)
+ #X,T,Mu,Rho,C= edp_1d_semi_implicite_I(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x)
 
 
-def speed(X,Rho):
+
+def speed(X,Rho,rho_inf):
     #Position du front
     argmed=np.zeros(n_t)
     for i in range(n_t):
         argmed[i]= X[(n_x//2)+np.min(np.where(np.append(Rho[i,(n_x//2):],[0])<rho_inf/2))]
     #Vitesse du front
-    s = ((n_t-1)/tf)*(argmed[-1]-argmed[(n_t//2)])/(n_t//2)
+    s = ((n_t-1)/tf)*(argmed[(n_t//2)+150]-argmed[(n_t//2)])/(150)
     return s
-s=0
-s = speed(X,Rho)
-print('La vitesse de propagation de la simulation est s=',s)
+
+memory =[] 
+for i in range(5):
+    for j in range(5):
+        K = .2 + .2*i
+        b = .1 + .1*j
+        X,T,Mu,Rho,C= edp_1d_semi_implicite_I(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x)
+         #Valeur de rho a l'infini
+        rho_inf = Rho[n_t-1,(n_x//2)]
+        s = speed(X,Rho,rho_inf)
+        s_theorique = np.sqrt(K*((18*F0+4)+np.sqrt(((18*F0+4)**2)+108*(1+4*F0)*(F0**2)))/(2*(1+4*F0)))
+        memory += [K,b,s,s_theorique]
+
+np.savetxt('memory_data3.dat', memory)
+
+#print('La vitesse de propagation de la simulation est s=',s)
 s_theorique = np.sqrt(K*((18*F0+4)+np.sqrt(((18*F0+4)**2)+108*(1+4*F0)*(F0**2)))/(2*(1+4*F0)))
 #Attention, ceci est pour C0=1
 print('La vitesse théorique de propagation est s_theorique=', s_theorique)
