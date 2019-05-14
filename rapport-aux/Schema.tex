@@ -1,4 +1,4 @@
-\section{Schémas et Positivité}
+\section{Schémas Numériques}
 On a le modèle suivant (``KPP avec mémoire"): 
 \begin{equation} \left\{
                 \begin{array}{ll}
@@ -37,6 +37,7 @@ Ce schéma donne:
                 \end{array}
               \right.
 \end{equation*}
+\paragraph{Positivité}
 Pour conserver la positivité il suffit que le terme $(1-\Dt(C^{n}(1+\Dt F_0)) + \rho^{n}) $ reste positif:\\
 Par exemple: 
 \begin{equation}
@@ -62,6 +63,7 @@ Ce schéma donne:
                 \end{array}
               \right.
 \end{equation*}
+\paragraph{Positivité}
 Pour conserver la positivité il suffit que les terme $(1-\Dt(C^{n}(1+\Dt F_0)))$ et $\mu^{n}+  \Dt \rho^{n}(C^{n}-\mu^{n})$ restent positif:\\
 Par exemple: 
 \begin{equation}
@@ -94,7 +96,8 @@ Ce schéma donne:
 \end{equation*}
 où $A$ est la matrice de $-\Delta$
 :\begin{equation}  \label{myeq}A= \left[ \begin{matrix}2 & -1 & & 0\\-1 & \ddots & \ddots &  \\& \ddots & \ddots &  -1 \\0 &  & -1 & 2  \end{matrix}  \right]\end{equation}
-$A$ étant symétrique définie positive, afin de préserver la positivité, on obtient la même condition (suffisante) que pour l'EDO:
+\paragraph{Positivité}
+Afin de préserver la positivité, on obtient la même condition (suffisante) que pour l'EDO:
 \begin{equation}
 	\boxed{C^0< \frac{1}{\Dt(1+F_0\Dt)}}
 \end{equation}
@@ -140,7 +143,7 @@ On a donc $\mu^{n+1}_j > 0$ mais   $\mu^{n+1}_j = \min(\mu^{n+1}_i) < 0$ par dé
 \end{subfigure}
 \caption{Résolution du schéma semi implicite I pour l'EDP en 1D} 
 \end{figure}
-On voit sur les simulations que la solution tend vers une solution de type onde plane stationnaire. Il est possible de calculer cette vitesse: 
+On voit sur les simulations que la solution tend vers une solution de type onde plane stationnaire. Il est possible de calculer cette vitesse et de la comparer avec la vitesse théorique minimale obtenue dans la partie 3: 
 
 \newpage
  
@@ -149,5 +152,7 @@ On voit sur les simulations que la solution tend vers une solution de type onde 
 \includegraphics[width=.7\textwidth]{Images/stheoriquevssimulations.png}
 \caption{Vitesse du front observée numériquement en fonction de la vitesse minimale théorique}
 \end{figure}
-Le dernier graphe représente par les points bleus la vitesse du front observée numériquement pour différentes simulations en fonction de la vitesse minimale théorique associée à cette simulation. La droite rouge est la droite $s_{simu} = s^*_{theorique}$.\\
-On remarque que la vitesse du front observée numériquement est très proche de la vitesse minimale théorique: on voit un phénomène similaire à celui de l'équation de Fisher-KPP: pour une donnée initiale a support compact, \textbf{le front se propage asymptotiquement à la vitesse minimale de l'équation d'onde associée à l'EDP}.
+Soit \begin{equation*}
+s^*_{theorique} =K\frac{f_0(18F_0+4)+\sqrt{f_0(f_0(18F_0+4)^2+108(f_0+4F_0)F_0^2)}}{2(f_0+4F_0)}\end{equation*} la vitesse minimale théorique obtenue dans la partie 3.\\
+Ce graphe représente par les points bleus la vitesse du front observée numériquement pour différentes simulations en fonction de la vitesse minimale théorique associée à cette simulation. La droite rouge est la droite $s_{simu} = s^*_{theorique}$.\\
+On remarque que la vitesse du front observée numériquement est très proche de la vitesse minimale théorique: ce phénomène est similaire à celui de l'équation de Fisher-KPP: pour une donnée initiale à support compact, \textbf{le front se propage asymptotiquement à la vitesse minimale de l'équation d'onde associée à l'EDP}.
