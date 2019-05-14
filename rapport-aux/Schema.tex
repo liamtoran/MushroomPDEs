@@ -117,7 +117,10 @@ On a donc $\mu^{n+1}_j > 0$ mais   $\mu^{n+1}_j = \min(\mu^{n+1}_i) < 0$ par dé
 \includegraphics[width=.9\textwidth]{Images/edo_euler_implicite.png}
 \caption{Résolution du schéma implicite pour l'EDO}
 \end{figure}
-
+ On observe les phénomènes attendus sur l'EDO:\\
+ -i) $\mu$ est bornée et tend vers 0.\\
+ -ii) $\rho$ est croissante et bornée.\\
+ -iii) $C$ décroît vers 0.
 \newpage
 \subsection{Résolution de l'EDP en 1D}
 \subsubsection{Résultat de la simulation de l'EDP en 1D}
@@ -135,10 +138,16 @@ On a donc $\mu^{n+1}_j > 0$ mais   $\mu^{n+1}_j = \min(\mu^{n+1}_i) < 0$ par dé
 \begin{subfigure}[b]{0.45\textwidth}
 \includegraphics[width=\textwidth]{Images/edp_1d_3.png}
 \end{subfigure}
-\caption{Résolution du schéma semi implicite I pour l'EDP en 1D}
+\caption{Résolution du schéma semi implicite I pour l'EDP en 1D} 
 \end{figure}
+On voit sur les simulations que la solution tend vers une solution de type onde plane stationnaire. Il est possible de calculer cette vitesse: 
+
+\newpage
+ 
 \begin{figure}[hbt!]
 \centering
 \includegraphics[width=.7\textwidth]{Images/stheoriquevssimulations.png}
-\caption{Vitesse d'onde théorique en fonction de la vitesse observée sur la simulation}
+\caption{Vitesse du front observée numériquement en fonction de la vitesse minimale théorique}
 \end{figure}
+Le dernier graphe représente par les points bleus la vitesse du front observée numériquement pour différentes simulations en fonction de la vitesse minimale théorique associée à cette simulation. La droite rouge est la droite $s_{simu} = s^*_{theorique}$.\\
+On remarque que la vitesse du front observée numériquement est très proche de la vitesse minimale théorique: on voit un phénomène similaire à celui de l'équation de Fisher-KPP: pour une donnée initiale a support compact, \textbf{le front se propage asymptotiquement à la vitesse minimale de l'équation d'onde associée à l'EDP}.

@@ -1,10 +1,3 @@
-%\documentclass[11pt]{extarticle}
-%Some packages I commonly use.
-
-%A bunch of definitions that make my life easier\
-
-%\setlength{\columnseprule}{1 pt}
-%\begin{document}
 
 
 \section{L'équation de Fisher ou KPP}
@@ -15,17 +8,18 @@ Ceci donne les équations de reaction-diffusion:
 \begin{equation}\dt u = \Delta u + F(u) \label{eq:ReaDi} \end{equation} 
 où F est assez lisse.\\
 Il est souvent naturel dans les modèles de considérer $F(u)$ proportionnel à  $u$ pour $u$ petit (``croissance"), et quand $u$ devient proche de 1, l'accroissement $F(u)$ s'arrête: $F(1)=0$ (``saturation").\\
-Ces types de modèles ont étés introduits et examinés par les travaux de Fisher[1] et Kolmogorov, Petrovsky et Piscounuv[2] (abrégés KPP).\\
+Ces types de modèles ont étés introduits et examinés par les travaux de Fisher[1] %CITER FISHER
+et Kolmogorov, Petrovsky et Piscounuv (abrégés KPP).\\ %CITER KPP
 Un exemple d'une telle équation est:
 
 \begin{equation}
-	\dt u = \Delta u +u(1-u) \label{eq:KPP}
+	\dt u = \Delta u + ru(1-u) \label{eq:KPP}
 \end{equation}
-qui sera dans la suite étudiée dans le cas 1-dimensionnel en $x$ : $u=u(x,t)$.
+où $r>0$, qui sera dans la suite étudiée dans le cas 1-dimensionnel en $x$ : $u=u(x,t)$.
 
 \subsection{Réaction}
 En observant les solutions constantes en $x$: $u(x,t)=v(t)$ dans \eqref{eq:KPP}, l'équation différentielle ordinaire (EDO ou ODE): \begin{equation}
-	\dt v = v - v^2 = F(v)
+	\dt v = r(v - v^2) = F(v)
 \end{equation}
 est obtenue. \\
 Il y a deux équilibres ($F(v)=0)$) pour $v=0$ et $v=1$.Par le théorème de stabilité de Lyapunov, $F'(0)>0$ montre que $v=0$ est instable et $F'(1)<0$ montre $v=1$ est asymptotiquement stable.
@@ -57,13 +51,45 @@ qui est une équation elliptique non linéaire. Le problème est donc de trouver
 
 
 
-\begin{theorem}:\\
+\begin{theorem}{\textbf{Existence de solutions en onde progressive pour les équations de reaction-diffusion}}:\\
 Soit $F \in C^1([0,1])$ tel $F(0)=F(1)=0$ et $F\geq 0$. \\
 Il existe une vitesse critique $s_*$ telle que $s_*^2 \geq 4F'(0)$ et: \\ \\
 - i) $\forall s \geq s_*$, l'équation \eqref{eq:FWS} a une solution $h_s:\mathbb{R} \rightarrow ]0,1[$ de classe $C^3$.\\ Cette solution est unique à translation près. \\
-- ii)  $\forall c<c_*$ l'équation \eqref{eq:FWS} n'a pas de solution $h:\mathbb{R} \rightarrow [0,1]$
+- ii)  $\forall s<s_*$ l'équation \eqref{eq:FWS} n'a pas de solution $h:\mathbb{R} \rightarrow [0,1]$
 \end{theorem}
-Remarque : Dans le second cas il existe des solutions mais elles ne sont pas confinées dans [0,1] ni dans $\mathbb{R}^+$, ce qui ne fait pas de sens dans une étude de densité de population.
+\textbf{Remarques}:\\
+ Dans le cas ii) il existe des solutions en ondes planes mais elles ne sont pas confinées dans [0,1] ni dans $\mathbb{R}^+$, ce qui ne fait pas de sens dans une étude de densité de population.\\
+ Dans le cas de l'équation de Fisher-KPP, c'est à dire pour $F(u)=r(u - u^2)$, on a $s_*^2 = 4F'(0) = 4r $: la vitesse minimale de propagation est $s^* =2\sqrt r $.
+
+
+\subsection{Théorèmes de sélection de la vitesse pour KPP}
+Le théorème important suivant est du aux travaux de Kolmogorov, Petrovsky et Piscounuv de 1937. C'est l'article et le résultat fondateur de la théorie des ondes planes dans les systèmes de réaction-diffusion. %CITER KPP\\
+
+\begin{theorem}{\textbf{Convergence vers une solution d'onde à vitesse minimale pour les solutions de l'équation de Fisher-KPP avec une donnée initiale à support compact }}\\
+Soit $u_0 \to ]0,1[$ une donnée initiale à support compact. 
+Soit $u$ la solution de l'équation de Fisher-KPP \eqref{eq:KPP} avec $r=1$ et de donnée initiale $u_0$.
+Alors quand $t \to \infty$, $u$ converge uniformément en $x$ vers une solution d'onde $h_{s^*}$ de \eqref{eq:FWS} qui se de déplace à vitesse minimale $s^* =2$ :
+\begin{equation*}
+\sup_{y \in \mathbb{R}}  |u(y+m(t),t)-h_{s^*}(y)| \to_{t\to \infty} 0
+\end{equation*}
+où $m(t)= 2t - (3/2)\log (t) + y_0 $.
+\end{theorem}
+Remarque: La vitesse du front est alors $s(t) = \dt m(t) = 2 - \frac{3}{2t} \to_{t\to \infty} 2 $.
+\paragraph{}
+Ce résultat à été raffiné par la suite par Uchiyama, Bramson et Lau. Leurs travaux apportent plus d'informations sur comment la vitesse du front se sélectionne en fonction de la donnée initiale, et comment il est possible d'obtenir d'autres vitesses de fronts que la vitesse minimale en fonction de la donnée initiale.
+\begin{theorem}{\textbf{Sélection de la vitesse pour les solutions de l'équation de Fisher-KPP en fonction de la donnée initiale}}\\
+Si $u_0 \to ]0,1[$ vérifie $\lim\inf_{x\to -\infty} u_0(x) > 0$ et $\int_0^{+\infty} xe^xu_0(x) / dx < \infty$\\
+alors il existe $y_0 \in \mathbb{R}$ tel que la solution de \eqref{eq:KPP} avec données initiales $u_0$ vérifie
+\begin{equation*}
+\sup_{y \in \mathbb{R}}  |u(y+m(t),t)-h_{s^*}(y)| \to_{t\to \infty} 0
+\end{equation*}
+où $m(t)= 2t - (3/2)\log (t) + y_0 $. 
+\end{theorem}
+D'autres vitesses peuvent être sélectionnées: Si la donnée initiale vérifie $u_0(x) \approx  e^{-\lambda_-(s)x}$ quand $x \to +\infty$ alors la solution converge vers une onde progressive de vitesse $s$.
+
+
+
+
 
 \newpage
 \section{Dyamique de Réseaux en Croissance}
@@ -110,4 +136,3 @@ En injectant ceci dans la ligne 1 du système, on obtient le système de 3 incon
               \right.
 \end{equation}
 dit "KPP avec mémoire".
-%\end{document}
