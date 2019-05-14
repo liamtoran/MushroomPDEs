@@ -98,6 +98,16 @@ $A$ étant symétrique définie positive, afin de préserver la positivité, on 
 \begin{equation}
 	\boxed{C^0< \frac{1}{\Dt(1+F_0\Dt)}}
 \end{equation}
+\begin{proof} Supposons $\mu^0 >0$.\\ Raisonnons par l'absurde et supposons que $n=\min{n \mid \exists j \mid \mu^{n+1}_j < 0}$ existe. Soit $j = \argmin{\mu^{n+1}_i}$.\\
+On a $(1-\Dt(C^{n}_j(1+\Dt F_0)) + \rho^{n}_j)\mu^{n+1}_j = \mu^{n}+  \Dt C^{n} +\frac{K\Dt}{\Dx^2}(\mu^{n+1}_{j+1} - 2\mu^{n+1}_j + \mu^{n+1}_{j-1}) $. \\
+Or par définition de $n$ et comme $C^0< \frac{1}{\Dt(1+F_0\Dt)}$ et $C^n < C^0$:\\
+ $ \mu^{n}+  \Dt C^{n} > 0$ \\
+ $ 1-\Dt(C^{n}_j(1+\Dt F_0)) + \rho^{n}_j > 0$ \\
+Et par définition de $j$: \\
+$\mu^{n+1}_{j+1} - 2\mu^{n+1}_j + \mu^{n+1}_{j-1} \geq 0$\\
+On a donc $\mu^{n+1}_j > 0$ mais   $\mu^{n+1}_j = \min(\mu^{n+1}_i) < 0$ par définition de $j$ et $n$ : C'est absurde.
+\end{proof}
+
 \newpage
 \section{Résolution numérique}
 \subsection{Résolution de l'EDO}
