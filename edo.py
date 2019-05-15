@@ -100,6 +100,7 @@ def newton(f,gradf,newton_steps,x0):
 	for k in range(newton_steps):
 		x=x-f(x)/gradf(x)
 	return x
+
 #Résolution du schéma implicite
 def euler_implicite_edo(b, F0, tf, rho0, mu0, c0, n):
 	#t0<t1 , temps etudiés,
@@ -145,7 +146,7 @@ def black_box_edo(b, F0, tf, rho0, mu0, c0, n):
         mu=y[0]
         rho=y[1]
         c=y[2]
-        return [c*(mu+rho)-mu*rho, F0*mu, -b*rho*c]
+        return [c*(rho+mu)-mu*rho, F0*mu, -b*rho*c]
 
     r = ode(f).set_integrator('zvode', method='adams')
     r.set_initial_value([mu0,rho0,c0],0).set_f_params(F0,b)
@@ -163,15 +164,16 @@ def black_box_edo(b, F0, tf, rho0, mu0, c0, n):
         T.append(r.t)
     return T,Mu,Rho,C
 
-	
+#Résolution	
 T,Mu,Rho,C = black_box_edo(b, F0, tf, rho0, mu0, c0, n)
-rho_inf_theorique = .5*(rho0+np.sqrt(rho0**2 + 4*F0*(mu0+(c0/b))))
-print(rho_inf_theorique)
+
 rho_inf= Rho[n-1]
-print(rho_inf)
+
+#Étude Asymptotique
 A=[np.log(rho_inf-x) for x in Rho]
 B=[-b*y*rho_inf+np.log((F0)/(b*rho_inf)) for y in T]
-#Tracé des solutions
+
+#Tracé des solutions et de l'étude asymptotique
 plt.subplot(221)
 plt.plot(T,Mu)
 plt.ylabel('mu')
