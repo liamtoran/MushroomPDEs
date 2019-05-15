@@ -20,3 +20,9 @@ Done 14/5/19:
 Preuve positivité du schema pour l'EDP
 Ajout de commentaires sur les simulation
 Ajout de la partie sur la selection de la vitesse pour KPP
+
+
+Done 15/5/19:
+Lecture de Perthame et al...
+ - Kpp avec saturation non locale en Espace: Resultats interessants
+En enlevant le terme C\mu, on obtient un KPP avec croissance non locale en temps
