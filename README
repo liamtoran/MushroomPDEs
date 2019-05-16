@@ -1,10 +1,14 @@
 TODO : 
-Avancer le rapport
-Montrer que la linéarisation marche bien sur la simulation
-Analyse des propriétés pour l'EDP
-Avancer en ajoutant les termes keller segel, vitesse,... 
-Convergence, Stabilité , Ordre du schema numerique...
-Montrer comment la vitesse se selectionne (donc deja comprendre comment ca marche pour KPP).
+=Pour le rapport:
+=== Ordre de convergence pour l'EDO
+=== Linéarisation?
+=== Montrer que la linéarisation marche bien sur la simulation
+=== Besoin d'idées
+=Sur le papier d'abord:
+===Analyse des propriétés pour l'EDP
+===Avancer en ajoutant les termes keller segel, vitesse,... 
+===Convergence, Stabilité , Ordre du schema numerique sur le papier...
+===Montrer comment la vitesse se selectionne (donc deja comprendre comment ca marche pour KPP).
 
 Done 7/5/19:
 Avancement du rapport, migration sur github
@@ -25,4 +29,9 @@ Ajout de la partie sur la selection de la vitesse pour KPP
 Done 15/5/19:
 Lecture de Perthame et al...
  - Kpp avec saturation non locale en Espace: Resultats interessants
-En enlevant le terme C\mu, on obtient un KPP avec croissance non locale en temps
+En enlevant le terme C\mu, on obtient un KPP avec croissance non locale en temps. 
+
+Done 16/5/19:
+Entretien avec Yves et Laurent
+En enlevant le termre C\mu, on obtient exactement \rho_\infty
+Notebook pour montrer que la convergence du schema semi implicite 1 pour l'EDO est d'ordre 2 pour la norme infinie.
