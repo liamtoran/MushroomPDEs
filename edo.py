@@ -4,11 +4,11 @@ import numpy as np
 
 b=.5 # dtC=-b*rho*C
 F0=1 # dtRho = Fo*Mu
-tf=50 # temps final de la simulation
+tf=20 # temps final de la simulation
 rho0=0 #rho initial	
 mu0=.1 #mu initial
 c0=1 #concentration initiale
-n=1000 #nombre de pas de temps
+n=20000 #nombre de pas de temps
 
 #Résolution du schéma éxplicite
 def euler_explicite_edo(b, F0, tf, rho0, mu0, c0, n):
@@ -166,12 +166,21 @@ def black_box_edo(b, F0, tf, rho0, mu0, c0, n):
 
 #Résolution	
 T,Mu,Rho,C = black_box_edo(b, F0, tf, rho0, mu0, c0, n)
-
 rho_inf= Rho[n-1]
+#rho_theorique = np.sqrt(2*(c0/b + F0*mu0))
+#print(1-rho_theorique/rho_inf)
+TT, MMu,RRho,CC = [],[],[],[]
+
+for i in range(1,101):
+    t, m, r, c =  euler_semi_I_edo(b, F0, tf, rho0, mu0, c0, i*100)
+    TT.append(t)
+    MMu.append(m)
+    RRho.append(r)
+    CC.append(c)
 
 #Étude Asymptotique
-A=[np.log(rho_inf-x) for x in Rho]
-B=[-b*y*rho_inf+np.log((F0)/(b*rho_inf)) for y in T]
+A=[np.log(mu) for mu in Mu]
+B=[-min(1,b)*y*rho_inf for y in T]
 
 #Tracé des solutions et de l'étude asymptotique
 plt.subplot(221)
@@ -187,7 +196,7 @@ plt.ylabel('C')
 plt.subplot(224)
 plt.plot(T,A)
 plt.plot(T,B)
-plt.ylabel('log(rho_inf-rho), -b*rho_inf*t')
+plt.ylabel('log(mu), -b*rho_inf*t')
 plt.show()
 
 
