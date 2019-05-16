@@ -5,6 +5,7 @@ TODO :
 === Montrer que la linéarisation marche bien sur la simulation
 === Besoin d'idées
 =Sur le papier d'abord:
+===Raffiner la condition sur f pour avoir les bonnes propriétés sur l'EDO: f(x)/x integrable?
 ===Analyse des propriétés pour l'EDP
 ===Avancer en ajoutant les termes keller segel, vitesse,... 
 ===Convergence, Stabilité , Ordre du schema numerique sur le papier...
