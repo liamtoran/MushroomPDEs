@@ -31,6 +31,7 @@
 \fi
 
 
+
 \subsection{Propriétés de l'EDO ``KPP avec mémoire"}
 \newtheorem{lemma}{Lemme}
 Soit $(\mu,\rho,C)$ vérifiant le système d’équations suivant:
@@ -42,7 +43,7 @@ Soit $(\mu,\rho,C)$ vérifiant le système d’équations suivant:
                 \end{array}
               \right.
 \end{equation} avec $f(0)=0$
-On s'interesse au comportement de $(\mu,\rho,C)$ sur $\mathbb{R}^+$
+On s’intéresse au comportement de $(\mu,\rho,C)$ sur $\mathbb{R}^+$ : 
 \begin{lemma}C est de signe constant.\\
 En effet on a $C(t)= C(0)\exp(-b\int_{0}^{t}\rho(s)ds)$.
 \end{lemma}
@@ -70,13 +71,23 @@ Donc $\underset{t\to+\infty} \lim C(t) = 0$.
 \newpage 
 
 
-\begin{lemma} Si $f$ est croissante et  $f(C)=\mathcal{O}_{C\to 0}(C)$ alors $\mu$ est bornée. \end{lemma}
-\begin{proof} On a $\dt\mu  = f(C)(\mu + \rho) -\mu\rho \leq f(C)\mu + f(C)\rho$.\\
-Soit $\phi(t)= f(C(t))\rho(t)$.\\
-Comme $f(C)=\mathcal{O}_{C\to 0} (C)$, $C$ décroît vers 0, $f$ est croissante et $C(t)\leq C_{ste}e^{-b \rho(t_0)t}$: $f(C)$ est intégrable \\
- Comme $f(C)=\mathcal{O}_{C\to 0} (C)$ et $C$ décroît vers 0, $\exists A,T$ \ $\forall t > T, $  $ \phi(t) < AC(t)\rho(t)$.\\
-On a donc $\int_T^{+\infty}\phi(t)\ dt< \int_T^{+\infty}AC\rho \ dt  =  -\frac{A}{b}\int_T^{+\infty}\dt C = \frac{A}{b}C(T)$.\\
-$\phi$ est donc intégrable et $\dt\mu  \leq f(C)\mu + \phi$.\\
+\begin{lemma} Si $f$ est croissante et  $\int_0^1 \frac{f(x)}{x} dx < \infty $ alors $\mu$ est bornée. \end{lemma}
+\begin{proof} On a $\dt\mu  = f(C)(\mu + \rho) -\mu\rho \leq f(C)\mu + f(C)\rho$.
+\\
+Montrons que $f(C)$ est intégrable:
+\\
+$C(t)\leq C_{ste}e^{-b \rho(t_0)t}$ et $f$ est croissante donc $\int_0^\infty f(C)dt \leq \int_0^\infty f(C_{ste}e^{-b \rho(t_0)t})dt$.
+\\
+Soit le changement de variable $u= C_{ste}e^{-b \rho(t_0)t}$, $du = -b\rho(t_0)u\ dt$:
+\\
+$\int_0^\infty f(C_{ste}e^{-b \rho(t_0)t})dt = \frac{1}{b\rho(t_0)} \int_0^1 \frac{f(u)}{u} du < \infty$ car $\int_0^{C_{ste}} \frac{f(x)}{x} dx < \infty $ donc $f(C)$ est intégrable.
+\\
+Montrons que $\phi=f(C)\rho$ est intégrable:\\
+Effectuons le changement de variable $u = C$, $du = -b\rho u \ dt$ dans $\int_0^\infty f(C) \rho \ dt$:
+\\
+$\int_0^\infty f(C) \rho \ dt = \frac{1}{b\rho(t_0)} \int_0^{C_{ste}} \frac{f(u)}{u} du  < \infty$ car $\int_0^{C_{ste}} \frac{f(x)}{x} dx < \infty $ donc $\phi = f(C)\rho$ est intégrable.
+\\
+On a $\dt\mu  \leq f(C)\mu + \phi$.\\
 Par le lemme de Gronwall:\\
 $\mu(t) \leq \mu(0) + \int_0^t \phi(s) \ ds+\int_0^t \phi(s)f(C)(s)\exp(\int_s^t f(C)(u)du)\ ds \\
  \leq \mu(0) + \int_0^{+\infty} \phi(s) \ ds+ \int_0^t \phi(s)f(C)(s)\exp(\int_0^{+\infty} f(C)(u)du)\ ds \\
@@ -86,22 +97,21 @@ On a donc:
 $\mu(t) \leq  \mu(0) + \int_0^{+\infty} \phi(s) \ ds+ \exp(\int_0^{+\infty} f(C)(u)du)  \int_0^{+\infty} \phi(s)f(C)(s) \ ds$ $\forall t$
 \end{proof}
 
-Dans la suite on se place dans le cas où $f$ est croissante et  $f(C)=\mathcal{O}_{C\to 0}(C)$
-\begin{lemma} $\mu$ décroît à partir d'un certain temps et $\underset{t\to+\infty} \lim \mu(t) = 0$ \end{lemma}
-\begin{proof} 
-On a $\dt \mu = f(C)(\mu + \rho) -\mu\rho \leq \mu (f(C)-\rho(t_0)) + f(C)\rho $.\\
-Donc $\forall t>t_0$ $\frac{\dt \mu}{\mu}  \leq f(C)-\rho(t_0) +\frac{f(C)\rho}{\mu}$. \\
-On a $\underset{t\to+\infty} \lim f(C) =0$. De plus $C$ décroît vers 0 donc $\underset{t\to+\infty} \lim \dt C = 0$ donc $\underset{t\to+\infty} \lim f(C)\rho =0$. \\
-Ainsi $\exists T$ / $\forall t>T$ : $ \dt \log\mu < 0$ et donc, $\mu $ décroît à partir de $T$.\\
-$\mu$ décroit à partir de $T$ et $\mu$ est bornée donc $\mu$ a une limite $\ell$ et $\underset{t\to+\infty} \lim \dt \mu = 0$.\\
-On a donc $0 = \underset{t\to+\infty} \lim f(C)(\mu+\rho)-\mu\rho = \underset{t\to+\infty} \lim -\mu\rho  \leq -l\rho(t_0)$ donc $\ell =0$.
-\end{proof}
-\begin{lemma} $\underset{t\to+\infty} \lim \rho(t) =\rho_\infty < +\infty $ \end{lemma}
+Dans la suite on se place dans le cas où $f$ est croissante et   $\int_0^1 \frac{f(x)}{x} dx < \infty $
+\begin{lemma} $\underset{t\to+\infty} \lim \mu = 0$ \  et $\underset{t\to+\infty} \lim \rho =\rho_\infty < +\infty $ \end{lemma}
 \begin{proof}
-On a $ \mu(t) = - \int_t^{+\infty}\dt \mu \ ds = - \int_t^{+\infty} f(C)(\mu+\rho)-\mu\rho \ ds$.\\
-Or $f(C)$ est intégrable (c.f. preuve du lemme 5)et $\mu$ est bornée donc $f(C)\mu$ est intégrable.\\
+$\mu$ est bornée, soit $\mu_n$ une suite extraite de la fonction $\mu$ qui tend vers $\ell$.\\
+On a $ \ell- \mu(t) = \underset{n\to+\infty} \lim \int_t^{t_n}\dt \mu \ ds = \underset{n\to+\infty} \lim \int_t^{t_n} f(C)(\mu+\rho)-\mu\rho \ ds$.\\
+Or $f(C)$ est intégrable (c.f. preuve du lemme 5) et $\mu$ est bornée donc $f(C)\mu$ est intégrable.\\
 De même $ f(C)\rho$ est intégrable (c.f. preuve du lemme 5).\\
-On peut donc en conclure que $\mu\rho$ est intégrable.\\
-Or $\mu\rho= F_0\rho\dt\rho = \frac{F_0}{2}\dt \rho ^2$. $t \mapsto \dt\rho ^2$ est donc intégrable. \\Ainsi $\rho^2$ possède une limite finie et donc $\rho$ aussi.
+On a donc $\underset{n\to+\infty} \lim \int_t^{t_n} \mu\rho =  \int_t^{+\infty}f(C)\mu + f(C)\rho \ dt \ + \ell -\mu(t) $\\
+Or $\mu\rho= F_0\rho\dt\rho = \frac{F_0}{2}\dt \rho ^2$ donc $\int_t^{t_n} \mu\rho \ dt= \frac{F_0}{2}( \rho(t_n) ^2 -\rho(t)^2)$. \\
+Or $\rho$ est croissante donc a une limite dans $[0,+\infty]. \\
+$Ainsi $\ell$ est déterminée entièrement par la limite de $\rho$ et ne dépend pas de la suite extraite.\\
+Par critère séquentiel $\mu$ a une limite $\ell$ qui est finie car $\mu$ est bornée.\\
+Mais alors  $\underset{t\to+\infty} \lim \frac{F_0}{2}( \rho(t) ^2 -\rho(T)^2) = \int_T^{\infty}(f(C)\mu + f(C)\rho) \ dt \ + \ell -\mu(T) < \infty$.\\
+Donc $\rho^2$ a une limite finie et donc $\rho$ aussi.\\
+Comme $\mu = \frac{\dt \rho}{F_0}$ et $\rho$ a une limite finie et $\mu$ aussi, $\mu$ tend nécessairement vers 0. 	 
 \end{proof}
+\end{document}
 %\end{document}
