@@ -113,5 +113,4 @@ Mais alors  $\underset{t\to+\infty} \lim \frac{F_0}{2}( \rho(t) ^2 -\rho(T)^2) =
 Donc $\rho^2$ a une limite finie et donc $\rho$ aussi.\\
 Comme $\mu = \frac{\dt \rho}{F_0}$ et $\rho$ a une limite finie et $\mu$ aussi, $\mu$ tend nécessairement vers 0. 	 
 \end{proof}
-\end{document}
 %\end{document}
