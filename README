@@ -34,7 +34,7 @@ En enlevant le terme C\mu, on obtient un KPP avec croissance non locale en temps
 Done 16/5/19:
 Entretien avec Yves et Laurent
 En enlevant le termre C\mu, on obtient exactement \rho_\infty
-Notebook pour montrer que la convergence du schema semi implicite 1 pour l'EDO est d'ordre 2 pour la norme infinie.
+Notebook pour montrer que la convergence du schema semi implicite 1 pour l'EDO est d'ordre 1 pour la norme infinie.
 
 Done 20/5/19:
 Raffiné la condition sur f pour avoir les bonnes propriétés sur l'EDO: f(x)/x integrable!
