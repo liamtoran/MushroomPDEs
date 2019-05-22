@@ -11,10 +11,10 @@ b=.2 # dtC=-b*rho*C
 F0= 1 # dtRho = Fo*Mu
 
 #Paramêtres numériques 
-n_t=2001 #nombre de pas de temps
-tf=100 # temps final de la simulation
-xf = 400 #longeur de la simulation
-n_x =500 #nombres de points de la simulation
+n_t=3001 #nombre de pas de temps
+tf=20 # temps final de la simulation
+xf = 150 #longeur de la simulation
+n_x =601 #nombres de points de la simulation
 
 #Données initiales 
 rho0=np.zeros(n_x) #rho initial	
@@ -106,37 +106,8 @@ def edp_1d_semi_implicite_II(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x):
     return X,T,Mu,Rho,C
  #X,T,Mu,Rho,C= edp_1d_semi_implicite_I(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x)
 
-def notKPP(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x):
-    #Détermination des paramêtres numeriques deltat et deltax
-    dt=tf/(n_t-1)
-    dx=xf/(n_x-1)
-    #Représentation de l'éspace et du temps
-    X=np.linspace(0,xf,n_x)
-    T=np.linspace(0,tf,n_t)
-    #Initialisation
-    Mu=np.zeros((n_t,n_x))
-    Rho=np.zeros((n_t,n_x))
-    C=np.zeros((n_t,n_x))
-    Mu[0]=mu0
-    Rho[0]=rho0
-    C[0]=c0
-    #Résolution	du schéma implicite-explicite I
-    for n in range(0,n_t-1):
-        #Matrice du Laplacien
-        A=np.diag(-np.ones(n_x-1),-1)+np.diag(2*np.ones(n_x),0)+np.diag(-np.ones(n_x-1),1)
-        #Laplacien Numerique
-        A=A*K*dt/(dx**2)
-        #Ajout des termes implicites
-        alpha= -np.exp(-.01*T[n+1])*dt*(1+dt*F0)+dt*Rho[n]+1
-        A+=np.diag(alpha,0)
-        A=sp.csc_matrix(A)
-        #Résolution du systême implicite
-        Mu[n+1]= spsolve(A, Mu[n]+np.exp(-.01*T[n+1])*dt*Rho[n])
-        Rho[n+1]=Rho[n]+dt*F0*Mu[n+1]
-        C[n+1]=C[n]/(1 + b*dt*Rho[n])
-    return X,T,Mu,Rho,C
-    
-X,T,Mu,Rho,C= notKPP(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x)
+X,T,Mu,Rho,C= edp_1d_semi_implicite_I(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x)
+
 
 def speed(X,Rho,rho_inf):
     #Position du front
@@ -151,6 +122,8 @@ def speed(X,Rho,rho_inf):
 rho_inf = Rho[n_t-1,(n_x//2)]
 s = speed(X,Rho,rho_inf)
 print('La vitesse de propagation de la simulation est s=',s)
+
+
 # Comparaison de s theorique et numerique pour plusieurs données initiales
 # ~ memory =[] 
 # ~ for i in range(5):
@@ -195,7 +168,7 @@ def animate(i):
     line.set_data(X, C[i])
     line2.set_data(X, Rho[i])
     line3.set_data(X, Mu[i])
-    line4.set_data(xf/2+((i*s)*tf/(n_t-1)),np.linspace(0,rho_inf+1,10))
+    #line4.set_data(xf/2+((i*s)*tf/(n_t-1)),np.linspace(0,rho_inf+1,10))
     time_text.set_text('time = {0:.1f}\n K={1}, b={2}, F0={3} '.format(T[i],K,b,F0))
     legend_text.set_text('Rho=Orange \nMu=Green \nC=Blue\ns={0:.3f}'.format(s))
     return line,line2, line3,line4, time_text, legend_text
