@@ -40,5 +40,11 @@ Done 20/5/19:
 Raffiné la condition sur f pour avoir les bonnes propriétés sur l'EDO: f(x)/x integrable!
 
 Done 21/5/19:
+Entretien Yves
 Modification du rapport pour montrer que f(x)/x intégrable suffit pour avoir les bonnes propriétés de l'EDO.
 Montré que la linéarisation autour des etats stationnaires de l'EDO marche bien sur la simulation sur le rapport.
+
+Done 22/5/19:
+Entretien Laurent
+Sur le papier : Il semble que l'ajout du terme keller segel ne change pas la vitesse d'one
+Simulation : Ca peut changer... du point de vue numerique ou c'est modifié aussi du point de vue reel?
