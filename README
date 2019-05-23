@@ -1,12 +1,11 @@
 TODO : 
-=Pour le rapport:
-=== Ordre de convergence pour l'EDO
-=== Linéarisation?
 
+=Pour le rapport:
+=== Linéarisation?
 === Besoin d'idées
+
 =Sur le papier d'abord:
 ===Analyse des propriétés pour l'EDP
-===Avancer en ajoutant les termes keller segel, vitesse,... 
 ===Convergence, Stabilité , Ordre du schema numerique sur le papier...
 ===Montrer comment la vitesse se selectionne (donc deja comprendre comment ca marche pour KPP).
 
@@ -46,5 +45,9 @@ Montré que la linéarisation autour des etats stationnaires de l'EDO marche bie
 
 Done 22/5/19:
 Entretien Laurent
-Sur le papier : Il semble que l'ajout du terme keller segel ne change pas la vitesse d'one
+Sur le papier : Il semble que l'ajout du terme keller segel ne change pas la vitesse d'onde
 Simulation : Ca peut changer... du point de vue numerique ou c'est modifié aussi du point de vue reel?
+
+Done 23/5/19:
+Ajout partie ordre numerique convergence edo pour le rapport.
+Code pour la simulation 2D fait et marche.
