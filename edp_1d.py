@@ -42,7 +42,7 @@ def edp_1d_explicite(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x):
         RHS[-1]=dt*((K/(dx**2))*(-2*Mu[n,-1]+Mu[n,-2])+C[n,-1]*Rho[n,-1])
         Mu[n+1]=(1/alpha)*(Mu[n]+RHS)
         Rho[n+1]=Rho[n]+dt*F0*Mu[n+1]
-        C[n+1]=C[n]/(1 + b*dt*Rho[n])
+        C[n+1]=C[n]/(1 + b*dt*Rho[n+1])
     return X,T,Mu,Rho,C
 
 def edp_1d_semi_implicite_I(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x):
@@ -72,7 +72,7 @@ def edp_1d_semi_implicite_I(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x):
         #Résolution du systême implicite
         Mu[n+1]= spsolve(A, Mu[n]+dt*C[n]*Rho[n])
         Rho[n+1]=Rho[n]+dt*F0*Mu[n+1]
-        C[n+1]=C[n]/(1 + b*dt*Rho[n])
+        C[n+1]=C[n]/(1 + b*dt*Rho[n+1])
     return X,T,Mu,Rho,C
     
     
@@ -102,7 +102,7 @@ def edp_1d_semi_implicite_II(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x):
         #Résolution du systême implicite
         Mu[n+1]= spsolve(A, Mu[n]+dt*C[n]*Rho[n]-dt*Mu[n]*Rho[n])
         Rho[n+1]=Rho[n]+dt*F0*Mu[n+1]
-        C[n+1]=C[n]/(1 + b*dt*Rho[n])
+        C[n+1]=C[n]/(1 + b*dt*Rho[n+1])
     return X,T,Mu,Rho,C
  #X,T,Mu,Rho,C= edp_1d_semi_implicite_I(K, b, F0, rho0, mu0, c0, n_t , tf, xf, n_x)
 

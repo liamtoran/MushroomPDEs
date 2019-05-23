@@ -117,7 +117,7 @@ On a donc $\mu^{n+1}_j > 0$ mais   $\mu^{n+1}_j = \min(\mu^{n+1}_i) < 0$ par dé
 \subsubsection{Résultat de la simulation de l'EDO}
 \begin{figure}[hbt!]
 \centering
-\includegraphics[width=.7\textwidth]{Images/edo_euler_implicite.png}
+\includegraphics[width=.9\textwidth]{Images/edo_euler_implicite.png}
 \caption{Résolution du schéma implicite pour l'EDO}
 \end{figure}
 
@@ -125,14 +125,20 @@ On a donc $\mu^{n+1}_j > 0$ mais   $\mu^{n+1}_j = \min(\mu^{n+1}_i) < 0$ par dé
  On observe les phénomènes attendus sur l'EDO:\\
  -i) $\mu$ est bornée et tend vers 0.\\
  -ii) $\rho$ est croissante et bornée.\\
- -iii) $C$ décroît vers 0.\\
+ -iii) $C$ décroît vers 0.
+ \newpage
  -iv) Les solutions ont un comportement exponentiel autour des états stationnaires et ce comportement est bien prédit par la linéarisation de l'EDO autour de ces états:
 
-\begin{SCfigure}[][h!]
+\begin{SCfigure}[][h]
 \includegraphics[width=0.4\textwidth]{Images/linearisation.png}
 \caption{Comportement de $\log(\mu)$, en particulier autour de $(\mu,\rho,C) =  (0,\rho_\infty,0)$. $\log(\mu)$ est bien linéaire autour des états stationnaires et sa pente (le facteur dans l'exponentielle) correspond exactement à $-\min(1,b)\rho_\infty$ ce qui est un résultat obtenu dans la partie Linéarisation } 
 \end{SCfigure} 
-
+ 
+ -v) L'ordre de convergence de l'EDO observé est de 1:
+\begin{SCfigure}[][h]
+\includegraphics[width=0.4\textwidth]{Images/ordrecvedo.png}
+\caption{Comportement du $\log(erreur)$ quand $\Delta t   0$. La solution du schéma semi implicite I est comparée à différents pas de temps $\Delta t$ à la solution numérique du schéma de Runge-Kutta avec $\Delta t = 2*10^{-7}$. On observe bien que la convergence est d'ordre 1.}
+\end{SCfigure} 
 
 \newpage
 \subsection{Résolution de l'EDP en 1D}

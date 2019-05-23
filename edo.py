@@ -8,7 +8,7 @@ tf=20 # temps final de la simulation
 rho0=0 #rho initial	
 mu0=.1 #mu initial
 c0=1 #concentration initiale
-n=20000 #nombre de pas de temps
+n=2000 #nombre de pas de temps
 
 #Résolution du schéma éxplicite
 def euler_explicite_edo(b, F0, tf, rho0, mu0, c0, n):
@@ -165,19 +165,10 @@ def black_box_edo(b, F0, tf, rho0, mu0, c0, n):
     return T,Mu,Rho,C
 
 #Résolution	
-T,Mu,Rho,C = black_box_edo(b, F0, tf, rho0, mu0, c0, n)
+T,Mu,Rho,C = euler_semi_I_edo(b, F0, tf, rho0, mu0, c0, n)
+
+
 rho_inf= Rho[n-1]
-#rho_theorique = np.sqrt(2*(c0/b + F0*mu0))
-#print(1-rho_theorique/rho_inf)
-TT, MMu,RRho,CC = [],[],[],[]
-
-for i in range(1,101):
-    t, m, r, c =  euler_semi_I_edo(b, F0, tf, rho0, mu0, c0, i*100)
-    TT.append(t)
-    MMu.append(m)
-    RRho.append(r)
-    CC.append(c)
-
 #Étude Asymptotique
 A=[np.log(mu) for mu in Mu]
 B=[-min(1,b)*y*rho_inf for y in T]
