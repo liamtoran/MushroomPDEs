@@ -51,3 +51,7 @@ Simulation : Ca peut changer... du point de vue numerique ou c'est modifié auss
 Done 23/5/19:
 Ajout partie ordre numerique convergence edo pour le rapport.
 Code pour la simulation 2D fait et marche.
+
+Done 24/5/19:
+Ajout d'obstacle pour 2D
+Resolution Iterative de Ax = B avec guess
