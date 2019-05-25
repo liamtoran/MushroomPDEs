@@ -10,14 +10,14 @@ import time
 start_time = time.time()
 
 #Coéfficients physiques
-K=.5 #coefficient diffusion
+K=.4 #coefficient diffusion
 b=.2# dtC=-b*rho*C
 F0= 1 # dtRho = Fo*Mu
 
 physique = [K,b,F0]
 
 #Paramêtres numériques 
-n_t=1000 #nombre de pas de temps
+n_t=500 #nombre de pas de temps
 tf=140 # temps final de la simulation
 xf = 500 #longueur de la simulation
 n_x = 1000 #nombres de points de la simulation
@@ -59,18 +59,18 @@ class EDP():
         self.dx = self.xf/(self.n_x-1)
         self.dy = self.yf/(self.n_y-1)
         
-        self.X = np.linspace(0,self.xf,self.n_x)
-        self.Y = np.linspace(0,self.yf,self.n_y)
-        self.T = np.linspace(0,self.tf,self.n_t)
+        #self.X = np.linspace(0,self.xf,self.n_x)
+        #self.Y = np.linspace(0,self.yf,self.n_y)
+        #self.T = np.linspace(0,self.tf,self.n_t)
 
         #Matrice du Laplacien
-        Lapl = sp.diags(-4*np.ones(n_xy),0)
+        self.Lapl = sp.diags(-4*np.ones(self.n_xy),0)
         #Lapl += sp.diags(np.ones(n_xy-1),1)+sp.diags(np.ones(n_xy-1),-1)
-        diagmod = np.ones(n_xy-1)
-        diagmod[np.arange(n_y-1,n_xy-1,n_y)] = np.zeros(n_y-1)
-        Lapl += sp.diags(diagmod,1) + sp.diags(diagmod,-1)
-        Lapl += sp.diags(np.ones(n_xy-n_y),n_y)+sp.diags(np.ones(n_xy-n_y),-n_y)
-        self.Lapl = -self.K*self.dt/(self.dx**2)*Lapl
+        diagmod = np.ones(self.n_xy-1)
+        diagmod[np.arange(self.n_y-1,self.n_xy-1,self.n_y)] = np.zeros(self.n_y-1)
+        self.Lapl += sp.diags(diagmod,1) + sp.diags(diagmod,-1)
+        self.Lapl += sp.diags(np.ones(self.n_xy-self.n_y),self.n_y)+sp.diags(np.ones(self.n_xy-self.n_y),-self.n_y)
+        self.Lapl = -self.K*self.dt/(self.dx**2)*self.Lapl
         
     def array_to_2D(n_x,vect):
         return np.array(np.split(vect,n_x))
@@ -105,17 +105,16 @@ Mu=[mu0]
 Rho=[rho0]
 C=[c0]
 n = 0
-step = 15
+step = 5
 while n<n_t:
-    next_mu,next_rho,next_c = Agent.integrate((mu,rho,c)) 
+    mu,rho,c = Agent.integrate((mu,rho,c)) 
     if n % step ==0 :
         Mu.append(mu)
         Rho.append(rho)
         C.append(c)
-    if n % 100 ==0 :
+    if n % 25 ==0 :
         print(n, (time.time() - start_time))
     n+=1
-    mu,rho,c= next_mu,next_rho,next_c
 
 print("--- %s seconds ---" % (time.time() - start_time))
 
