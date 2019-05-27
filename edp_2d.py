@@ -1,16 +1,16 @@
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D 
+import matplotlib.animation as animation
 import numpy as np
 import scipy.sparse as sp
 from scipy.sparse.linalg.dsolve import spsolve
 from scipy.sparse.linalg import bicgstab, bicg, cg, cgs, gmres, lgmres, minres, qmr, gcrotmk
-import matplotlib.animation as animation
 from IPython.display import HTML
-
 import time
 start_time = time.time()
 
 #Coéfficients physiques
-K=.4 #coefficient diffusion
+K=.2 #coefficient diffusion
 b=.2# dtC=-b*rho*C
 F0= 1 # dtRho = Fo*Mu
 
@@ -20,7 +20,7 @@ physique = [K,b,F0]
 n_t=500 #nombre de pas de temps
 tf=140 # temps final de la simulation
 xf = 500 #longueur de la simulation
-n_x = 1000 #nombres de points de la simulation
+n_x = 200 #nombres de points de la simulation
 yf = xf
 n_y = n_x 
 n_xy = n_x * n_y
@@ -71,12 +71,12 @@ class EDP():
         self.Lapl += sp.diags(diagmod,1) + sp.diags(diagmod,-1)
         self.Lapl += sp.diags(np.ones(self.n_xy-self.n_y),self.n_y)+sp.diags(np.ones(self.n_xy-self.n_y),-self.n_y)
         self.Lapl = -self.K*self.dt/(self.dx**2)*self.Lapl
-        
+        self.Cond = sp.identity(self.n_xy)
     def array_to_2D(n_x,vect):
         return np.array(np.split(vect,n_x))
 
     def integrate(self,initial):
-        initial = mu,rho,c
+        mu,rho,c = initial
         alpha=-c*self.dt*(1+self.dt*self.F0)+self.dt*rho+1
         A = self.Lapl + sp.diags(alpha,0)
         Target =  mu+self.dt*c*rho
@@ -88,7 +88,7 @@ class EDP():
         #next_mu,check = cgs(A,Target) #2.36 secondes d'execution
         #next_mu,check = gmres(A,Target) #2.72 secondes d'execution
         #next_mu,check = lgmres(A,Target) #2.62 secondes d'execution
-        next_mu,check = minres(A,Target, x0=mu) #2.15 secondes d'execution
+        next_mu,check = minres(A,Target, x0=mu, M=self.Cond) #2.15 secondes d'execution
         #next_mu,check = qmr(A,Target) #3.70 secondes d'execution
         #next_mu,check = gcrotmk(A,Target) #2.62 secondes d'execution
         next_rho = rho + self.dt*self.F0*next_mu
@@ -120,57 +120,61 @@ print("--- %s seconds ---" % (time.time() - start_time))
 
 tot = len(Mu)
 
-Draw = 'C' 
-f = C
+# ~ Draw = 'C' 
+# ~ f = C
   
-fig = plt.figure()    
-im = plt.imshow(EDP.array_to_2D(n_x,f[2]), animated=True, cmap ='PiYG')
+# ~ fig = plt.figure()    
+# ~ im = plt.imshow(EDP.array_to_2D(n_x,f[2]), animated=True, cmap ='PiYG')
 
-i = 2
-def updatefig(*args):
-    global i
-    i+=1
-    if i< tot -1:
-        im.set_array(EDP.array_to_2D(n_x,f[i]))
-    return im,
+# ~ i = 2
+# ~ def updatefig(*args):
+    # ~ global i
+    # ~ i+=1
+    # ~ if i< tot -1:
+        # ~ im.set_array(EDP.array_to_2D(n_x,f[i]))
+    # ~ return im,
 
-ani = animation.FuncAnimation(fig, updatefig, interval=100, blit=True, repeat=True)
-ani.save('EDP_2D_'+Draw+'.gif',writer='imagemagick', fps=30)
+# ~ ani = animation.FuncAnimation(fig, updatefig, interval=100, blit=True, repeat=True)
+# ~ ani.save('EDP_2D_'+Draw+'.gif',writer='imagemagick', fps=30)
 
-Draw = 'Mu' 
-f = Mu
+# ~ Draw = 'Mu' 
+# ~ f = Mu
   
-fig = plt.figure()    
-im = plt.imshow(EDP.array_to_2D(n_x,f[2]), animated=True, cmap ='PiYG')
+# ~ fig = plt.figure()    
+# ~ im = plt.imshow(EDP.array_to_2D(n_x,f[2]), animated=True, cmap ='PiYG')
 
-i = 2
-def updatefig(*args):
-    global i
-    i+=1
-    if i< tot -1:
-        im.set_array(EDP.array_to_2D(n_x,f[i]))
-    return im,
+# ~ i = 2
+# ~ def updatefig(*args):
+    # ~ global i
+    # ~ i+=1
+    # ~ if i< tot -1:
+        # ~ im.set_array(EDP.array_to_2D(n_x,f[i]))
+    # ~ return im,
 
-ani = animation.FuncAnimation(fig, updatefig, interval=100, blit=True, repeat=True)
-ani.save('EDP_2D_'+Draw+'.gif',writer='imagemagick', fps=30)
+# ~ ani = animation.FuncAnimation(fig, updatefig, interval=100, blit=True, repeat=True)
+# ~ ani.save('EDP_2D_'+Draw+'.gif',writer='imagemagick', fps=30)
 
 
-Draw = 'Rho' 
-f = Rho
+# ~ Draw = 'Rho' 
+# ~ f = Rho
   
-fig = plt.figure()    
-im = plt.imshow(EDP.array_to_2D(n_x,f[2]), animated=True, cmap ='PiYG')
+# ~ fig = plt.figure()    
+# ~ im = plt.imshow(EDP.array_to_2D(n_x,f[2]), animated=True, cmap ='PiYG')
 
-i = 2
-def updatefig(*args):
-    global i
-    i+=1
-    if i< tot -1:
-        im.set_array(EDP.array_to_2D(n_x,f[i]))
-    return im,
+# ~ i = 2
+# ~ def updatefig(*args):
+    # ~ global i
+    # ~ i+=1
+    # ~ if i< tot -1:
+        # ~ im.set_array(EDP.array_to_2D(n_x,f[i]))
+    # ~ return im,
 
-ani = animation.FuncAnimation(fig, updatefig, interval=100, blit=True, repeat=True)
-ani.save('EDP_2D_'+Draw+'.gif',writer='imagemagick', fps=30)
+# ~ ani = animation.FuncAnimation(fig, updatefig, interval=100, blit=True, repeat=True)
+# ~ ani.save('EDP_2D_'+Draw+'.gif',writer='imagemagick', fps=30)
 
 
-plt.show()
+# ~ plt.show()
+X = np.linspace(0,xf,n_x)
+Y = np.linspace(0,yf,n_y)
+X, Y = np.meshgrid(X, Y)
+
