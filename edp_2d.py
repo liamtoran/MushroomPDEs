@@ -174,7 +174,5 @@ tot = len(Mu)
 
 
 # ~ plt.show()
-X = np.linspace(0,xf,n_x)
-Y = np.linspace(0,yf,n_y)
-X, Y = np.meshgrid(X, Y)
+
 
