@@ -1,3 +1,10 @@
+\ifdefined\COMPLETE
+\else
+\documentclass[11pt]{article}
+\input{util} %file containing all the used libraries
+\begin{document}
+\fi
+
 \section{Schémas Numériques}
 On a le modèle suivant (``KPP avec mémoire"): 
 \begin{equation} \left\{
@@ -37,7 +44,7 @@ Ce schéma donne:
                 \end{array}
               \right.
 \end{equation*}
-\paragraph{Positivité}
+\paragraph{Positivité du schéma}
 Pour conserver la positivité il suffit que le terme $(1-\Dt(C^{n}(1+\Dt F_0)) + \rho^{n}) $ reste positif:\\
 Par exemple: 
 \begin{equation}
@@ -63,7 +70,7 @@ Ce schéma donne:
                 \end{array}
               \right.
 \end{equation*}
-\paragraph{Positivité}
+\paragraph{Positivité du schéma}
 Pour conserver la positivité il suffit que les terme $(1-\Dt(C^{n}(1+\Dt F_0)))$ et $\mu^{n}+  \Dt \rho^{n}(C^{n}-\mu^{n})$ restent positif:\\
 Par exemple: 
 \begin{equation}
@@ -75,8 +82,8 @@ et
 \end{equation}
 On obtient une condition de plus que le schéma semi-implicite I.
 \subsection{Pour l'équation aux dérivées partielles}
-\subsubsection{Schéma semi-implicite I pour l'EDP}
-Soit le schéma semi-implicite I pour l'EDP:
+\subsubsection{Schéma semi-implicite I pour l'EDP en 1D}
+Soit le schéma semi-implicite I pour l'EDP en 1D:
 \begin{equation} \boxed{\left\{
                 \begin{array}{ll}
                    \mu^{n+1}_i = \mu^{n}_i+ K\Dt \frac{\mu^{n+1}_{i+1}-2\mu^{n+1}_i+\mu^{n+1}_{i-1}}{\Dx ^2} + \Dt( C^{n}_i(\mu^{n+1}_i + \rho^{n+1}_i) -\mu^{n+1}_i\rho^{n}_i)\\
@@ -85,7 +92,7 @@ Soit le schéma semi-implicite I pour l'EDP:
                 \end{array}
               \right.}
 \end{equation}
-Ce schéma donne:
+Ce schéma a été construit pour donner une équation linéaire en $\mu^{n+1}$:
 \begin{equation*} \left\{
                 \begin{array}{ll}
                    (1+\frac{K\Dt}{\Dx^2}A-\Dt(C^{n}(1+\Dt F_0)) + \rho^{n})\mu^{n+1} = \mu^{n}+  \Dt C^{n}\rho^{n} \\
@@ -94,9 +101,10 @@ Ce schéma donne:
                 \end{array}
               \right.
 \end{equation*}
-où $A$ est la matrice de $-\Delta$
+où $A$ est la matrice de discrétisation par différences finies de $-\Delta$ en 1D
 :\begin{equation}  \label{myeq}A= \left[ \begin{matrix}2 & -1 & & 0\\-1 & \ddots & \ddots &  \\& \ddots & \ddots &  -1 \\0 &  & -1 & 2  \end{matrix}  \right]\end{equation}
-\paragraph{Positivité}
+Remarque: pour le schéma en dimension $n\geq 2$, il suffit de remplacer $A$ par la matrice de discrétisation par différences finies de $-\Delta$ en dimension $n$.
+\paragraph{Positivité du schéma:}
 Afin de préserver la positivité, on obtient la même condition (suffisante) que pour l'EDO:
 \begin{equation}
 	\boxed{C^0< \frac{1}{\Dt(1+F_0\Dt)}}
@@ -104,10 +112,10 @@ Afin de préserver la positivité, on obtient la même condition (suffisante) qu
 \begin{proof} Supposons $\mu^0 >0$.\\ Raisonnons par l'absurde et supposons que $n=\min{n \mid \exists j \mid \mu^{n+1}_j < 0}$ existe. Soit $j = \argmin{\mu^{n+1}_i}$.\\
 On a $(1-\Dt(C^{n}_j(1+\Dt F_0)) + \rho^{n}_j)\mu^{n+1}_j = \mu^{n}+  \Dt C^{n} +\frac{K\Dt}{\Dx^2}(\mu^{n+1}_{j+1} - 2\mu^{n+1}_j + \mu^{n+1}_{j-1}) $. \\
 Or par définition de $n$ et comme $C^0< \frac{1}{\Dt(1+F_0\Dt)}$ et $C^n < C^0$:\\
- $ \mu^{n}+  \Dt C^{n} > 0$ \\
- $ 1-\Dt(C^{n}_j(1+\Dt F_0)) + \rho^{n}_j > 0$ \\
-Et par définition de $j$: \\
-$\mu^{n+1}_{j+1} - 2\mu^{n+1}_j + \mu^{n+1}_{j-1} \geq 0$\\
+ Donc $ \mu^{n}+  \Dt C^{n} > 0$ et
+ $ 1-\Dt(C^{n}_j(1+\Dt F_0)) + \rho^{n}_j > 0$. \\
+Et par définition de $j$: 
+$\mu^{n+1}_{j+1} - 2\mu^{n+1}_j + \mu^{n+1}_{j-1} \geq 0$.\\
 On a donc $\mu^{n+1}_j > 0$ mais   $\mu^{n+1}_j = \min(\mu^{n+1}_i) < 0$ par définition de $j$ et $n$ : C'est absurde.
 \end{proof}
 
@@ -172,3 +180,38 @@ Soit \begin{equation*}
 s^*_{theorique} =K\frac{f_0(18F_0+4)+\sqrt{f_0(f_0(18F_0+4)^2+108(f_0+4F_0)F_0^2)}}{2(f_0+4F_0)}\end{equation*} la vitesse minimale théorique obtenue dans la partie 3.\\
 Ce graphe représente par les points bleus la vitesse du front observée numériquement pour différentes simulations en fonction de la vitesse minimale théorique associée à cette simulation. La droite rouge est la droite $s_{simu} = s^*_{theorique}$.\\
 On remarque que la vitesse du front observée numériquement est très proche de la vitesse minimale théorique: ce phénomène est similaire à celui de l'équation de Fisher-KPP: pour une donnée initiale à support compact, \textbf{le front se propage asymptotiquement à la vitesse minimale de l'équation d'onde associée à l'EDP}.
+
+
+\newpage
+\subsection{Résolution de l'EDP en 2D}
+
+\begin{figure}[hbt!]
+\centering
+\begin{subfigure}[b]{\textwidth}
+\includegraphics[width=.35\textwidth]{Images/CInitial.png}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{Images/Rho2d0.png}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{Images/rho2d1.png}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{Images/rho2d2.png}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=\textwidth]{Images/rho2d3.png}
+\end{subfigure}
+\caption{Évolution de $\rho$ pour la résolution du schéma semi implicite I pour l'EDP en 2D avec un trou de concentration. Ici la grille est de taille 1100x100, avec 1000 pas de temps.} 
+\end{figure}
+\newpage
+Deux challenges numériques ont étés rencontrés:
+\begin{paragraph}
+- 1) Temps d’exécution: le schéma consiste principalement à résoudre à chaque pas de temps une équation matricielle $AX=B$, où $A$ est de taille $n = 1100*1100= 1.21*10^6$. Une idée naive serait alors de calculer $A^{-1}$ par exemple par pivot de gauss, qui a un coup $\mathcal{O}(n^3)$, ou par l'algorithme de Strassen qui est un peu plus efficace $\mathcal{O}(n^{2.8})$. Cependant ces stratégies ne sont pas efficaces car il n'est pas nécessaire de calculer l'inverse de $A$: On cherche seulement l'antécédent d'une image. La stratégie implémentée ici est de trouver $X$ par méthode des minimums résiduels, c'est à dire minimiser la fonction $x\to || Ax-B||^2 $ par méthode des moindres carrées, méthode qui fonctionne pour les matrices symétriques et qui est très rapide pour les matrices creuses (notre cas).\\ On peut encore accélérer la convergence de la méthode des minimums résiduels en précisant pour $\mu^{n+1}$ le guess $\mu^n$ et en conditionnant le système par la matrice Identité. \end{paragraph}
+\begin{paragraph}
+- 2) Coup en mémoire: Une matrice carrée de taille $1.21*10^6$ pèse 10GB de RAM sous Python... Heureusement, dans notre cas la matrice A est creuse et il existe des méthodes et librairies adaptées pour représenter de telles matrices efficacement. De plus chaque $\rho^n,\mu^n$ et $C^n$ est représenté par une matrice carrée de taille $1100$, ce qui pèse 10MB. Ces matrices ne sont pas creuses donc il est plus dur de les compresser. Si l'on veut stocker ces quantités pour ensuite retracer l’évolution de $\rho,\mu,C$ pour 1000 pas de temps, ceci coûterait 30GB de RAM... Il faut donc faire des compromis.
+\end{paragraph}
+\ifdefined\COMPLETE
+\else
+\end{document}
+\fi

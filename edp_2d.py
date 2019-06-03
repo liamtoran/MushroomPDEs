@@ -18,9 +18,9 @@ physique = [K,b,F0]
 
 #Paramêtres numériques 
 n_t=500 #nombre de pas de temps
-tf=140 # temps final de la simulation
+tf=170 # temps final de la simulation
 xf = 500 #longueur de la simulation
-n_x = 200 #nombres de points de la simulation
+n_x = 1100 #nombres de points de la simulation
 yf = xf
 n_y = n_x 
 n_xy = n_x * n_y
@@ -97,6 +97,7 @@ class EDP():
         
         
 Agent = EDP(params)
+dt = Agent.dt
 
 mu= mu0
 rho= rho0
@@ -104,6 +105,7 @@ c= c0
 Mu=[mu0]
 Rho=[rho0]
 C=[c0]
+T=[0]
 n = 0
 step = 5
 while n<n_t:
@@ -112,6 +114,7 @@ while n<n_t:
         Mu.append(mu)
         Rho.append(rho)
         C.append(c)
+        T.append(n*dt)
     if n % 25 ==0 :
         print(n, (time.time() - start_time))
     n+=1
@@ -120,59 +123,63 @@ print("--- %s seconds ---" % (time.time() - start_time))
 
 tot = len(Mu)
 
-# ~ Draw = 'C' 
-# ~ f = C
+Draw = 'C' 
+f = C
   
-# ~ fig = plt.figure()    
-# ~ im = plt.imshow(EDP.array_to_2D(n_x,f[2]), animated=True, cmap ='PiYG')
+fig = plt.figure()    
+im = plt.imshow(EDP.array_to_2D(n_x,f[2]), animated=True, cmap ='PiYG')
+time_text = plt.text(0, 0, '')
 
-# ~ i = 2
-# ~ def updatefig(*args):
-    # ~ global i
-    # ~ i+=1
-    # ~ if i< tot -1:
-        # ~ im.set_array(EDP.array_to_2D(n_x,f[i]))
-    # ~ return im,
+i = 2
+def updatefig(*args):
+    global i
+    i+=1
+    if i< tot -1:
+        im.set_array(EDP.array_to_2D(n_x,f[i]))
+        time_text.set_text('time = {0:.1f}'.format(T[i]))
+    return im, time_text
 
-# ~ ani = animation.FuncAnimation(fig, updatefig, interval=100, blit=True, repeat=True)
-# ~ ani.save('EDP_2D_'+Draw+'.gif',writer='imagemagick', fps=30)
+ani = animation.FuncAnimation(fig, updatefig, interval=100, blit=True, repeat=True)
+ani.save('EDP_2D_'+Draw+'.gif',writer='imagemagick', fps=30)
 
-# ~ Draw = 'Mu' 
-# ~ f = Mu
+Draw = 'Mu' 
+f = Mu
   
-# ~ fig = plt.figure()    
-# ~ im = plt.imshow(EDP.array_to_2D(n_x,f[2]), animated=True, cmap ='PiYG')
+fig = plt.figure()    
+im = plt.imshow(EDP.array_to_2D(n_x,f[2]), animated=True, cmap ='PiYG')
+time_text = plt.text(0, 0, 'test')
+i = 2
+def updatefig(*args):
+    global i
+    i+=1
+    if i< tot -1:
+        im.set_array(EDP.array_to_2D(n_x,f[i]))
+        time_text.set_text('time = {0:.1f}'.format(T[i]))
+    return im, time_text
 
-# ~ i = 2
-# ~ def updatefig(*args):
-    # ~ global i
-    # ~ i+=1
-    # ~ if i< tot -1:
-        # ~ im.set_array(EDP.array_to_2D(n_x,f[i]))
-    # ~ return im,
-
-# ~ ani = animation.FuncAnimation(fig, updatefig, interval=100, blit=True, repeat=True)
-# ~ ani.save('EDP_2D_'+Draw+'.gif',writer='imagemagick', fps=30)
+ani = animation.FuncAnimation(fig, updatefig, interval=100, blit=True, repeat=True)
+ani.save('EDP_2D_'+Draw+'.gif',writer='imagemagick', fps=30)
 
 
-# ~ Draw = 'Rho' 
-# ~ f = Rho
+Draw = 'Rho' 
+f = Rho
   
-# ~ fig = plt.figure()    
-# ~ im = plt.imshow(EDP.array_to_2D(n_x,f[2]), animated=True, cmap ='PiYG')
+fig = plt.figure()    
+im = plt.imshow(EDP.array_to_2D(n_x,f[2]), animated=True, cmap ='PiYG')
+time_text = plt.text(0, 0, '')
+i = 2
+def updatefig(*args):
+    global i
+    i+=1
+    if i< tot -1:
+        im.set_array(EDP.array_to_2D(n_x,f[i]))
+        time_text.set_text('time = {0:.1f}'.format(T[i]))
+    return im, time_text
 
-# ~ i = 2
-# ~ def updatefig(*args):
-    # ~ global i
-    # ~ i+=1
-    # ~ if i< tot -1:
-        # ~ im.set_array(EDP.array_to_2D(n_x,f[i]))
-    # ~ return im,
-
-# ~ ani = animation.FuncAnimation(fig, updatefig, interval=100, blit=True, repeat=True)
-# ~ ani.save('EDP_2D_'+Draw+'.gif',writer='imagemagick', fps=30)
+ani = animation.FuncAnimation(fig, updatefig, interval=100, blit=True, repeat=True)
+ani.save('EDP_2D_'+Draw+'.gif',writer='imagemagick', fps=30)
 
 
-# ~ plt.show()
+plt.show()
 
 

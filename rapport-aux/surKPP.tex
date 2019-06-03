@@ -1,4 +1,10 @@
 
+\ifdefined\COMPLETE
+\else
+\documentclass[11pt]{article}
+\input{util} %file containing all the used libraries
+\begin{document}
+\fi
 
 \section{L'équation de Fisher ou KPP}
 \subsection{Préliminaire}
@@ -18,21 +24,22 @@ Un exemple d'une telle équation est:
 où $r>0$, qui sera dans la suite étudiée dans le cas 1-dimensionnel en $x$ : $u=u(x,t)$.
 
 \subsection{Réaction}
-En observant les solutions constantes en $x$: $u(x,t)=v(t)$ dans \eqref{eq:KPP}, l'équation différentielle ordinaire (EDO ou ODE): \begin{equation}
+En observant les solutions constantes en $x$: $u(x,t)=v(t)$ dans \eqref{eq:KPP}, l'équation différentielle ordinaire (EDO ou ODE) suivante est obtenue: \begin{equation}
 	\dt v = r(v - v^2) = F(v)
 \end{equation}
-est obtenue. \\
-Il y a deux équilibres ($F(v)=0)$) pour $v=0$ et $v=1$.Par le théorème de stabilité de Lyapunov, $F'(0)>0$ montre que $v=0$ est instable et $F'(1)<0$ montre $v=1$ est asymptotiquement stable.
+Il y a deux équilibres ($F(v)=0)$) pour $v=0$ et $v=1$.\\
+Par le théorème de stabilité de Lyapunov, $F'(0)>0$ montre que $v=0$ est instable et $F'(1)<0$ montre $v=1$ est asymptotiquement stable.
 
 \subsection{Réaction-Diffusion}
 Dans l’espace $X=C^0_{b,unif}(\mathbb{R},\mathbb{R})$ des fonctions bornées et uniformément continues, il y a existence locale et unicité des solutions de l’équation de Fisher-KPP \eqref{eq:ReaDi}. Grâce à un principe du maximum, il y a aussi existence globale et unicité des solutions.
 \newtheorem{theorem}{Théorème}
-\begin{theorem}:\\ Existence et Unicité de la solution dans $X$: Soit $U_0 \in X$. Il existe une unique solution de l'équation de Fisher-KPP \eqref{eq:ReaDi}  $U \in C([0,\infty[,X)$ avec condition initiale $U_0$. \end{theorem}
-\begin{theorem}:\\ Principe du Maximum: Soit $u_1$ et $u_2$ deux solutions de \eqref{eq:ReaDi}. Si il éxiste $t_0$ tel que $u_1(x,t_0)<u_2(x,t_0) $ $\forall x$ alors $u_1(x,t)<u_2(x,t)$  $ \forall x$ et $\forall t>t_0$ \end{theorem}
+\begin{theorem} \textbf{Existence et Unicité de la solution de Fisher-KPP dans $X$:}\\ Soit $U_0 \in X$. Il existe une unique solution de l'équation de Fisher-KPP \eqref{eq:ReaDi}  $U \in C([0,\infty[,X)$ avec condition initiale $U_0$. \end{theorem}
+\begin{theorem} \textbf{Principe du Maximum:} \\Soit $u_1$ et $u_2$ deux solutions de \eqref{eq:ReaDi}.\\
+ Si il existe $t_0$ tel que $u_1(x,t_0)<u_2(x,t_0) $ $\forall x$ alors $u_1(x,t)<u_2(x,t)$  $ \forall x$ et $\forall t>t_0$ \end{theorem}
 
-\subsection{Solutions en onde plane stationnaire / onde progressive}
-Rappellons la définition d'une solution en onde plane stationnaire / onde progressive:
-\begin{definition}{Solutions en onde plane stationnaire}\\Une solution en onde plane stationnaire est une solution de la forme $u(x,t)=h(x-st)$ où $c \in \mathbb{R} $.\\ On fera parfois l'abus de notation $u(x,t)=u(x-st)$
+\subsection{Solutions d'ondes plane stationnaire / onde progressive}
+Rappelons la définition d'une solution en onde plane stationnaire / onde progressive:
+\begin{definition}{\textbf{Solutions en onde plane stationnaires.}}\\Une solution en onde plane stationnaire est une solution de la forme $u(x,t)=h(x-st)$ où $c \in \mathbb{R} $.\\ On fera parfois l'abus de notation $u(x,t)=u(x-st)$
 \end{definition}
 Sous des hypothèses ``faibles" sur $F$, l'équation \eqref{eq:ReaDi}: $\dt u = \Delta u + F(u)$ a alors la propriété surprenante et importante de posséder des solutions en ondes planes stationnaires liant les états d'équilibre $u=1$ (à $-\infty$) et $u=0$ (à $+\infty$).\\
 Les hypothèses sur $F$ portent en partie sur le fait que \eqref{eq:ReaDi} doit posséder:\\
@@ -62,6 +69,17 @@ Il existe une vitesse critique $s_*$ telle que $s_*^2 \geq 4F'(0)$ et: \\ \\
  Dans le cas de l'équation de Fisher-KPP, c'est à dire pour $F(u)=r(u - u^2)$, on a $s_*^2 = 4F'(0) = 4r $: la vitesse minimale de propagation est $s^* =2\sqrt r $.
 
 \newpage
+\subsection{Dans l'exemple de Fisher-KPP}
+Considérons l'équation de Fisher-KPP \eqref{eq:KPP}: $\dt u = \Delta u + ru(1-u)$.\\
+Comme $u \equiv 0$ et $u \equiv 1$ sont des solutions particulières de \eqref{eq:KPP}, si $0\leq u_0(x) \leq 1 \ \forall x$, alors par le principe du maximum on a $0\leq u(x,t) \leq 1 \ \forall x,t $.\\
+Soit $h$ une solution en onde plane de \eqref{eq:FWS} avec $0\leq h \leq 1 \ \forall y$, i.e. $h''(y)+ sh'(y)+rh(y)-rh^2(y)=0$. 
+En linéarisant autour de l'etat $h=0$ on obtient: \begin{equation}
+ h''(y)+ sh'(y)+rh(y)=0
+\end{equation}
+de polynôme caracteristique $X^2+sX+r=0$ et de discrimant $\Delta = s^2 - 4r $.\\
+On voit alors que la condition $s^2 \geq 4r$ est nécessaire pour que $0\leq h \leq 1 $: c'est la condition d'amortissement fort de l’oscillateur autour de l’état $h=0$.
+
+
 \subsection{Théorèmes de sélection de la vitesse pour KPP}
 Le théorème important suivant est du aux travaux de Kolmogorov, Petrovsky et Piscounuv de 1937. C'est l'article et le résultat fondateur de la théorie des ondes planes dans les systèmes de réaction-diffusion. %CITER KPP\\
 
@@ -136,3 +154,8 @@ En injectant ceci dans la ligne 1 du système, on obtient le système de 3 incon
               \right.
 \end{equation}
 dit "KPP avec mémoire".
+
+\ifdefined\COMPLETE
+\else
+\end{document}
+\fi

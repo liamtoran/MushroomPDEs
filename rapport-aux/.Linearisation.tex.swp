@@ -1,3 +1,10 @@
+\ifdefined\COMPLETE
+\else
+\documentclass[11pt]{article}
+\input{util} %file containing all the used libraries
+\begin{document}
+\fi
+
 \section{Recherche de la vitesse d'onde des solutions progressives de l’Équation KPP avec Mémoire}
 On a le modèle suivant: 
 \begin{equation} \left\{
@@ -72,3 +79,8 @@ Dans le cas $f(C)=C$:\\
 $\mu$ a pour polynôme caractéristique homogène $M(X)=X^2 +\frac{1}{K}X - \frac{\rho_\infty}{Ks}$ de racines:\\$r_{1,2}= - \frac{1}{2K}(1 \pm \sqrt{1+4 \frac{\rho_\infty K}{s}})$ \\ donc $\mu_H = Ae^{r_1y}+ Be^{r_2y}$ (On choisit $r_1>r_2$).\\
 En cherchant une solution particulière de la forme $\mu_p =M\exp(\frac{b\rho_\infty}{s}y )$ on obtient $M = - \frac{\Lambda}{b^2\rho_\infty K + b - 1}$ et donc $\mu=Ae^{r_1y}+ Be^{r_2y}+M e^{\frac{b\rho_\infty}{s}y }$
 et donc $\rho = \rho_\infty + \alpha e^{r_1y} + \beta e^{r_2y} + \Gamma \exp(\frac{b\rho_\infty}{s}y)$ pour $\Gamma = \frac{Ms}{b\rho_\infty} $
+
+\ifdefined\COMPLETE
+\else
+\end{document}
+\fi
