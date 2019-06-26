@@ -1,38 +1,13 @@
-\iffalse
+\ifdefined\COMPLETE
+\else
 \documentclass[11pt]{article}
-\usepackage[french, english]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage{graphicx}
-\usepackage{framed}
-\usepackage[normalem]{ulem}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amssymb}
-\usepackage{amsfonts}
-\usepackage{enumerate}
-\usepackage{import}
-\usepackage[top=1 in,bottom=1in, left=1 in, right=1 in]{geometry}
-\usepackage{listingsutf8}
-\usepackage{color}
-\usepackage{float}
-\usepackage{graphicx}
-\usepackage{subcaption}
-\usepackage[toc,page]{appendix}
-\floatstyle{boxed} 
-\restylefloat{figure}
-\definecolor{mygreen}{rgb}{0,0.6,0}
-\definecolor{mygray}{rgb}{0.5,0.5,0.5}
-\definecolor{mymauve}{rgb}{0.58,0,0.82}
-\newcommand{\dt}{\partial_t}
-\newcommand{\Tl}{\frac{T}{\lambda}}
-\theoremstyle{definition}
-\newtheorem{definition}{Définition}[section]
+\input{util} %file containing all the used libraries
 \begin{document}
 \fi
 
 
 
-\subsection{Propriétés de l'EDO ``KPP avec mémoire"}
+\subsection{Propriétés de l'équation de réaction associée à ``KPP avec mémoire"}
 \newtheorem{lemma}{Lemme}
 Soit $(\mu,\rho,C)$ vérifiant le système d’équations suivant:
 \begin{equation} \left\{
@@ -42,23 +17,26 @@ Soit $(\mu,\rho,C)$ vérifiant le système d’équations suivant:
                   \dt C = -b\rho C
                 \end{array}
               \right.
-\end{equation} avec $f(0)=0$
+\end{equation} avec $f(0)=0$. \\
+Ce système correspond au systême ``KPP avec mémoire" sans le terme de diffusion.
 On s’intéresse au comportement de $(\mu,\rho,C)$ sur $\mathbb{R}^+$ : 
-\begin{lemma}C est de signe constant.\\
+\begin{lemma}$C$ est de signe constant.\\
 En effet on a $C(t)= C(0)\exp(-b\int_{0}^{t}\rho(s)ds)$.
 \end{lemma}
 
-\begin{lemma}Soit $(\mu,\rho,C)$ tel que $(\mu(0),\rho(0))> (0,0)$ (les deux positifs, au moins un non nul), $C(0)>0$.\\  Alors $\mu(t)\geq 0$ $\forall t>0$
+\begin{lemma}Soit $(\mu,\rho,C)$ tel que $(\mu(0),\rho(0))> (0,0)$ (les deux positifs, au moins un non nul), $C(0)>0$.\\  Alors $\mu(t)\geq 0$ $\forall t>0$.
 \end{lemma}
 \begin{proof}
-Supposons par l'absurde que $\mu$ devient négatif alors soit $t^*= \min(t>0/ \mu(t)<0)$. Alors: \\
+Supposons par l'absurde que $\mu$ devient négatif alors soit $t^*= \inf(t>0/ \mu(t)<0)$. Alors: \\
 $\mu(t)\geq 0$ $\forall t \leq t^*$\\
 $\dt\mu(t^*) \leq 0$ par définition de $t^*$. (Sinon $\mu(t^*+\epsilon)>0$ $\forall \epsilon <<1$)\\
 $\rho(t)>0$ $\forall t\leq t^*$ car $\dt\rho=  F_0 \mu$ et $F_0>0$\\
 $\dt\mu(t^*) = f(C(t^*))\rho(t^*) > 0$ ce qui est en contradiction avec la deuxième affirmation.
 \end{proof}
 Dans la suite on se place dans le cas où $(\mu(0),\rho(0))> (0,0)$, $C(0)>0$:
-\begin{lemma} $\rho$ est croissante car $\dt\rho=  F_0 \mu \geq 0$. En particulier $\rho$ est positive \end{lemma}
+\begin{lemma}
+ $\rho$ est croissante car $\dt\rho=  F_0 \mu \geq 0$. En particulier $\rho$ est positive.
+\end{lemma}
 
 
 
@@ -104,7 +82,7 @@ $\mu$ est bornée, soit $\mu_n$ une suite extraite de la fonction $\mu$ qui tend
 On a $ \ell- \mu(t) = \underset{n\to+\infty} \lim \int_t^{t_n}\dt \mu \ ds = \underset{n\to+\infty} \lim \int_t^{t_n} f(C)(\mu+\rho)-\mu\rho \ ds$.\\
 Or $f(C)$ est intégrable (c.f. preuve du lemme 5) et $\mu$ est bornée donc $f(C)\mu$ est intégrable.\\
 De même $ f(C)\rho$ est intégrable (c.f. preuve du lemme 5).\\
-On a donc $\underset{n\to+\infty} \lim \int_t^{t_n} \mu\rho =  \int_t^{+\infty}f(C)\mu + f(C)\rho \ dt \ + \ell -\mu(t) $\\
+On a donc $\underset{n\to+\infty} \lim \int_t^{t_n} \mu\rho =  \int_t^{+\infty}(f(C)\mu + f(C)\rho) \ dt \ + \ell -\mu(t) $\\
 Or $\mu\rho= F_0\rho\dt\rho = \frac{F_0}{2}\dt \rho ^2$ donc $\int_t^{t_n} \mu\rho \ dt= \frac{F_0}{2}( \rho(t_n) ^2 -\rho(t)^2)$. \\
 Or $\rho$ est croissante donc a une limite dans $[0,+\infty]. \\
 $Ainsi $\ell$ est déterminée entièrement par la limite de $\rho$ et ne dépend pas de la suite extraite.\\
@@ -113,4 +91,9 @@ Mais alors  $\underset{t\to+\infty} \lim \frac{F_0}{2}( \rho(t) ^2 -\rho(T)^2) =
 Donc $\rho^2$ a une limite finie et donc $\rho$ aussi.\\
 Comme $\mu = \frac{\dt \rho}{F_0}$ et $\rho$ a une limite finie et $\mu$ aussi, $\mu$ tend nécessairement vers 0. 	 
 \end{proof}
-%\end{document}
+
+
+\ifdefined\COMPLETE
+\else
+\end{document}
+\fi

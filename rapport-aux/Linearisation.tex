@@ -7,48 +7,53 @@
 
 \section{Recherche de la vitesse d'onde des solutions progressives de l’Équation KPP avec Mémoire}
 On a le modèle suivant: 
-\begin{equation} \left\{
+\begin{equation} \label{eq:FWSMem} \left\{
                 \begin{array}{ll}
-                   \dt\mu -\frac{T}{\lambda}\Delta\mu = f(C)(\mu + \rho) -\mu\rho\\
+                   \dt\mu -K\Delta\mu = f(C)(\mu + \rho) -\mu\rho\\
                  \dt\rho=  F_0 \mu \\
                   \dt C = -b\rho C
                 \end{array}
               \right.
 \end{equation} 
 où $f(0)=0$ et $f$ est positive. Typiquement, $f(C)=C$:\\
-Dans la suite on pose $K= \frac{T}{\lambda}$\\
 On recherche des solutions en onde plane, on pose $s$ la vitesse d'onde et $\xi = x - st$. \\
+Par abus de notation, on pose $\mu(\xi)=\mu(x,t)$, $\rho(\xi)=\rho(x,t)$, etc... \\
+On a alors:
 \begin{equation} \left\{ \begin{array}{ll} -s \mu'-K\mu''=f(C)(\mu+\rho)-\mu\rho \\ -s\rho' = F_0\mu  \\C'=\frac{b\rho C}{s} \end{array}\right.
 \end{equation}
-Nos états stationnaires sont $(\mu,\rho,C) = \left\{ \begin{array}{ll} (0,0,C_0) \\
- (0,\rho_\infty,0) , \rho_\infty > 0 \end{array} \right.$ 
-\subsection{Au voisinage de $(0,0,C_0)$}
-Au voisinage de $(0,0,C_0)$ on a, en posant $f(C_0)=f_0$:
+Nos états stationnaires (i.e. qui correspondent à des derivées nulles) sont: \begin{equation}
+	(\mu,\rho,C) = \left\{ \begin{array}{ll} (0,0,C_0) \\
+ (0,\rho_\infty,0) , \rho_\infty > 0 \end{array} \right.
+\end{equation}
+\subsection{Linéarisation au voisinage de $(0,0,C_0)$}
+Au voisinage de $(0,0,C_0)$ on a, en posant $f(C_0)=f_0$, la linéarisation de \ref{eq:FWSMem} :
 \begin{equation} \left\{ \begin{array}{ll} -s \mu'-K\mu''=f_0(\mu+\rho) \\ -s\rho' = F_0\mu   \end{array}\right.
-\end{equation} ce qui devient  \begin{equation} \rho''' +\frac{s}{K}\rho''+\frac{f_0}{K}\rho'-\frac{F_0f_0}{Ks}\rho =0 \end{equation} de polynôme caractéristique \begin{equation} P(X)= X^3 +\frac{s}{K}X^2+\frac{f_0}{K}X-\frac{F_0f_0}{Ks} \end{equation}
-Pour $s<0$,   $P(0)>0$ donc P a une racine négative $r_1$ .\\
-Pour que P ait deux autres racines réelles $r_3>r_2>r_1$ il faut (condition nécessaire et suffisante) que P' s'annule deux fois et que le discriminant $\Delta$ de P soit positif.
-\subsubsection{Première condition: P' a deux annulations:}
+\end{equation} ce qui devient:  \begin{equation} \rho''' +\frac{s}{K}\rho''+\frac{f_0}{K}\rho'-\frac{F_0f_0}{Ks}\rho =0 \end{equation} de polynôme caractéristique: \begin{equation} P(X)= X^3 +\frac{s}{K}X^2+\frac{f_0}{K}X-\frac{F_0f_0}{Ks}.\end{equation}
+Le signe de $s$ correspondant à la direction de propagation, il y'a symétrie en $s$: on prend içi $s<0$ ce qui correspond a une propagation vers la gauche.\\
+Pour $s<0$, $P$ est de degŕe 3 et $P(0)>0$ donc $P$ a une racine négative $r_1$ .\\
+Pour conserver la positivité autour de l'état $(0,0,C_0)$ il faut que les racines de $P$ soit réelles: sinon on obtient osillations autour de 0.\\ 
+Pour que $P$ ait deux autres racines réelles $r_3>r_2>r_1$ il faut (condition nécessaire et suffisante) que $P'$ s'annule deux fois et que le discriminant $\Delta$ de $P$ soit positif.
+\subsubsection{Première condition: $P'$ a deux annulations:}
 $P'(X)= 3X^2+ 2\frac{s}{K}X+ \frac{f_0}{K}$ a pour discriminant $\Delta'=4\frac{1}{K^2}(s^2-3Kf_0)$ ce qui donne la condition \begin{equation} \label{eq:condition_P'}
-	\boxed{s^2 >3K f_0
+	\boxed{s^2 >3K f_0.
 	}
 \end{equation}
 \subsubsection{Deuxième condition: $\Delta>0$:}
 Pour $P=aX^3 +bX^2 + cX + d$ on a $\Delta= b^2c^2 +18abcd-27a^2d^2 -4ac^3 -4b^3d$ ce qui dans notre cas donne
 \begin{align*}
 	\Delta=\frac{1}{K^4}f_0^2s^2 -18 \frac{f_0^2F_0}{K^3}-27 \frac{F_0^2 f_0^2}{K^2s^2} - 4 \frac{f_0^3}{K^3}+4 \frac{F_0f_0s^2}{K^4} \\ = s^2 \frac{f_0(f_0+4F_0)}{K^4}- \frac{f_0^2(18F_0+4)}{K^3} -\frac{27F_0^2f_0^2}{K^2} \frac{1}{s^2}\\ 
-=	\frac{f_0}{K^4s^2}[(f_0+4F_0)s^4-Kf_0(18F_0+4) s^2 - 27 K^2F_0^2f_0] \end{align*}
-On est revenu à étudier le signe du polynôme en $s^2$ \begin{equation}
+=	\frac{f_0}{K^4s^2}[(f_0+4F_0)s^4-Kf_0(18F_0+4) s^2 - 27 K^2F_0^2f_0]. \end{align*}
+On est revenu à étudier le signe du polynôme en $s^2$: \begin{equation}
 	D(s^2)=(f_0+4F_0)s^4-Kf_0(18F_0+4)s^2 - 27 K^2F_0^2f_0
 \end{equation} 
 de discriminant $d$:
 \begin{align*}
 	d=\Big(Kf_0(18F_0+4) \Big)^2 +108(f_0+4F_0)K^2F_0^2f_0 \\ 
-	= K^2f_0(f_0(18F_0+4)^2+108(f_0+4F_0)F_0^2) >0
+	= K^2f_0(f_0(18F_0+4)^2+108(f_0+4F_0)F_0^2) >0.
 \end{align*}
 On obtient donc la condition sur la positivité de $\Delta$: 
 \begin{equation}\boxed{
-	s^2> K\frac{f_0(18F_0+4)+\sqrt{f_0(f_0(18F_0+4)^2+108(f_0+4F_0)F_0^2)}}{2(f_0+4F_0)}
+	s^2> K\frac{f_0(18F_0+4)+\sqrt{f_0(f_0(18F_0+4)^2+108(f_0+4F_0)F_0^2)}}{2(f_0+4F_0)}.
 	}\label{eq:condition_Delta}
 \end{equation}
 \subsubsection{Signe des racines au voisinage de $(0,0,C_0)$}
@@ -56,30 +61,34 @@ On sait déjà que $r_3<0$. Comme $r_1r_2r_3<0$, on remarque que $r_2$ et $r_1$ 
 De plus $P'$ a un axe de symétrie $X=-\frac{s}{3K}>0$ car $s<0$ donc $P$ atteint un minimum local (forcement négatif) en un point positif donc $P$ a une racine positive.\\
 On en déduit $r_1>r_2>0$: \\ 
 Sous les conditions \eqref{eq:condition_P'} et \eqref{eq:condition_Delta}, $P$ a deux racines positives et une négative.
-\subsection{Au voisinage de $(0,\rho_\infty,0)$} 
+
+\paragraph{Conclusion}
+Comme pour l'équation de KPP, la linéarisation autour de l'étât $(0,0,C_0)$ fait apparaitre une condition sur $s$ nécessaire pour preserver la positivité.
+\subsection{Linéarisation au voisinage de $(0,\rho_\infty,0)$} 
 Autour de $(0,\rho_\infty,0)$:
 Posons $(\mu,\rho,C)=(\mu, \rho_\infty + \epsilon, C)$. On a \\
 \begin{equation} \left\{ \begin{array}{ll} -s \mu'-K\mu''=f(C)\rho_\infty-\mu\rho_\infty\\C'=\frac{b\rho_\infty C}{s} \\
--s\epsilon'= F_0\mu \end{array}\right.
+-s\epsilon'= F_0\mu. \end{array}\right.
 \end{equation}
-la deuxième ligne donne \begin{equation}
+La deuxième ligne donne \begin{equation}
 C(y) = \Lambda\exp(\frac{b\rho_\infty}{s}y )
 \end{equation}
-et la réunion de la première et la deuxième se traduit sur $\epsilon$ par:
+et la réunion de la première et la troisième se traduit sur $\epsilon$ par:
 \begin{equation}
 	s^2 \epsilon''+Ks\epsilon'''=f(C)F_0\rho_\infty+s\epsilon'\rho_\infty
-\end{equation} est une EDO d'ordre trois en $\epsilon$ avec terme source $\frac{F_0f(C)}{Ks} \rho_\infty$ de polynôme caracteristique: \begin{equation}
+\end{equation} qui est une EDO d'ordre trois en $\epsilon$ avec terme source $\frac{F_0f(C)}{Ks} \rho_\infty$ de polynôme caracteristique: \begin{equation}
 	Q(X)=X^3+\frac{s}{K}X^2-\frac{\rho_\infty}{K}X
 \end{equation}
-qui possède toujours trois racines:  $0$, une négative et une positive: $X= - \frac{1}{2K}(s \pm \sqrt{s^2+4\rho_\infty Ks})$
+qui possède toujours trois racines:  $0$, une négative et une positive: $X= - \frac{1}{2K}(s \pm \sqrt{s^2+4\rho_\infty Ks}).$
 Sur $\mu$ on a: \begin{equation}
-	-s \mu'-Ks\mu''=f(C)\rho_\infty-\mu\rho_\infty
+	-s \mu'-Ks\mu''=f(C)\rho_\infty-\mu\rho_\infty.
 \end{equation}
 Dans le cas $f(C)=C$:\\
-$\mu$ a pour polynôme caractéristique homogène $M(X)=X^2 +\frac{1}{K}X - \frac{\rho_\infty}{Ks}$ de racines:\\$r_{1,2}= - \frac{1}{2K}(1 \pm \sqrt{1+4 \frac{\rho_\infty K}{s}})$ \\ donc $\mu_H = Ae^{r_1y}+ Be^{r_2y}$ (On choisit $r_1>r_2$).\\
-En cherchant une solution particulière de la forme $\mu_p =M\exp(\frac{b\rho_\infty}{s}y )$ on obtient $M = - \frac{\Lambda}{b^2\rho_\infty K + b - 1}$ et donc $\mu=Ae^{r_1y}+ Be^{r_2y}+M e^{\frac{b\rho_\infty}{s}y }$
-et donc $\rho = \rho_\infty + \alpha e^{r_1y} + \beta e^{r_2y} + \Gamma \exp(\frac{b\rho_\infty}{s}y)$ pour $\Gamma = \frac{Ms}{b\rho_\infty} $
-
+$\mu$ a pour polynôme caractéristique homogène $M(X)=X^2 +\frac{1}{K}X - \frac{\rho_\infty}{Ks}$ de racines:\\$r_{+,-}= - \frac{1}{2K}(1 \pm \sqrt{1+4 \frac{\rho_\infty K}{s}})$ \\ donc $\mu_H = Ae^{r_+y}+ Be^{r_-y}$ (On choisit $r_+>0, r_-<0$).\\
+En cherchant une solution particulière de la forme $\mu_p =M\exp(\frac{b\rho_\infty}{s}y )$ on obtient $M = - \frac{\Lambda}{b^2\rho_\infty K + b - 1}$ et donc $\mu=Ae^{r_+y}+ Be^{r_-y}+M e^{\frac{b\rho_\infty}{s}y }$
+et donc $\rho = \rho_\infty + \alpha e^{r_+y} + \beta e^{r_-y} + \frac{Ms}{b\rho_\infty}\exp(\frac{b\rho_\infty}{s}y)$.
+\paragraph{Conclusion}
+Comme pour l'équation de KPP, on obtient à priori pas de condition sur $s$ suite à la linéarisation autour de l'étât $(0,\rho_\infty,0)$ mais seulement des informations sur la dynamique autour de ces états.
 \ifdefined\COMPLETE
 \else
 \end{document}

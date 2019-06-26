@@ -10,9 +10,9 @@
 \subsection{Préliminaire}
 Notre point de départ est l'équation de diffusion:\begin{equation}\dt u = \Delta u  \end{equation}
 En plus de la diffusion, considérons des modèles où le taux d'accroissement de $u$ dépend aussi de la densité $u$.\\
-Ceci donne les équations de reaction-diffusion:
+Ceci donne les équations de réaction-diffusion:
 \begin{equation}\dt u = \Delta u + F(u) \label{eq:ReaDi} \end{equation} 
-où F est assez lisse.\\
+où $F$ est assez lisse.\\
 Il est souvent naturel dans les modèles de considérer $F(u)$ proportionnel à  $u$ pour $u$ petit (``croissance"), et quand $u$ devient proche de 1, l'accroissement $F(u)$ s'arrête: $F(1)=0$ (``saturation").\\
 Ces types de modèles ont étés introduits et examinés par les travaux de Fisher[1] %CITER FISHER
 et Kolmogorov, Petrovsky et Piscounuv (abrégés KPP).\\ %CITER KPP
@@ -39,7 +39,7 @@ Dans l’espace $X=C^0_{b,unif}(\mathbb{R},\mathbb{R})$ des fonctions bornées e
 
 \subsection{Solutions d'ondes plane stationnaire / onde progressive}
 Rappelons la définition d'une solution en onde plane stationnaire / onde progressive:
-\begin{definition}{\textbf{Solutions en onde plane stationnaires.}}\\Une solution en onde plane stationnaire est une solution de la forme $u(x,t)=h(x-st)$ où $c \in \mathbb{R} $.\\ On fera parfois l'abus de notation $u(x,t)=u(x-st)$
+\begin{definition}{\textbf{Solutions en onde plane stationnaires.}}\\Une solution en onde plane stationnaire est une solution de la forme $u(x,t)=h(x-st)$ où $c \in \mathbb{R}$.\\ On fera parfois l'abus de notation $u(x,t)=u(x-st)$
 \end{definition}
 Sous des hypothèses ``faibles" sur $F$, l'équation \eqref{eq:ReaDi}: $\dt u = \Delta u + F(u)$ a alors la propriété surprenante et importante de posséder des solutions en ondes planes stationnaires liant les états d'équilibre $u=1$ (à $-\infty$) et $u=0$ (à $+\infty$).\\
 Les hypothèses sur $F$ portent en partie sur le fait que \eqref{eq:ReaDi} doit posséder:\\
@@ -58,7 +58,7 @@ qui est une équation elliptique non linéaire. Le problème est donc de trouver
 
 
 
-\begin{theorem}{\textbf{Existence de solutions en onde progressive pour les équations de reaction-diffusion}}:\\
+\begin{theorem}{\textbf{Existence de solutions en onde progressive pour les équations de réaction-diffusion}}:\\
 Soit $F \in C^1([0,1])$ tel $F(0)=F(1)=0$ et $F\geq 0$. \\
 Il existe une vitesse critique $s_*$ telle que $s_*^2 \geq 4F'(0)$ et: \\ \\
 - i) $\forall s \geq s_*$, l'équation \eqref{eq:FWS} a une solution $h_s:\mathbb{R} \rightarrow ]0,1[$ de classe $C^3$.\\ Cette solution est unique à translation près. \\
@@ -73,10 +73,10 @@ Il existe une vitesse critique $s_*$ telle que $s_*^2 \geq 4F'(0)$ et: \\ \\
 Considérons l'équation de Fisher-KPP \eqref{eq:KPP}: $\dt u = \Delta u + ru(1-u)$.\\
 Comme $u \equiv 0$ et $u \equiv 1$ sont des solutions particulières de \eqref{eq:KPP}, si $0\leq u_0(x) \leq 1 \ \forall x$, alors par le principe du maximum on a $0\leq u(x,t) \leq 1 \ \forall x,t $.\\
 Soit $h$ une solution en onde plane de \eqref{eq:FWS} avec $0\leq h \leq 1 \ \forall y$, i.e. $h''(y)+ sh'(y)+rh(y)-rh^2(y)=0$. 
-En linéarisant autour de l'etat $h=0$ on obtient: \begin{equation}
+En linéarisant autour de l'état $h=0$ on obtient: \begin{equation}
  h''(y)+ sh'(y)+rh(y)=0
 \end{equation}
-de polynôme caracteristique $X^2+sX+r=0$ et de discrimant $\Delta = s^2 - 4r $.\\
+de polynôme caractéristique $X^2+sX+r=0$ et de discriminant $\Delta = s^2 - 4r $.\\
 On voit alors que la condition $s^2 \geq 4r$ est nécessaire pour que $0\leq h \leq 1 $: c'est la condition d'amortissement fort de l’oscillateur autour de l’état $h=0$.
 
 
@@ -94,7 +94,7 @@ où $m(t)= 2t - (3/2)\log (t) + y_0 $.
 \end{theorem}
 Remarque: La vitesse du front est alors $s(t) = \dt m(t) = 2 - \frac{3}{2t} \to_{t\to \infty} 2 $.
 \paragraph{}
-Ce résultat à été raffiné par la suite par Uchiyama, Bramson et Lau. Leurs travaux apportent plus d'informations sur comment la vitesse du front se sélectionne en fonction de la donnée initiale, et comment il est possible d'obtenir d'autres vitesses de fronts que la vitesse minimale en fonction de la donnée initiale.
+Ce résultat a été raffiné par la suite par Uchiyama, Bramson et Lau. Leurs travaux apportent plus d'informations sur comment la vitesse du front se sélectionne en fonction de la donnée initiale, et comment il est possible d'obtenir d'autres vitesses de fronts que la vitesse minimale en fonction de la donnée initiale.
 \begin{theorem}{\textbf{Sélection de la vitesse pour les solutions de l'équation de Fisher-KPP en fonction de la donnée initiale}}\\
 Si $u_0 \to ]0,1[$ vérifie $\lim\inf_{x\to -\infty} u_0(x) > 0$ et $\int_0^{+\infty} xe^xu_0(x) / dx < \infty$\\
 alors il existe $y_0 \in \mathbb{R}$ tel que la solution de \eqref{eq:KPP} avec données initiales $u_0$ vérifie
@@ -103,15 +103,15 @@ alors il existe $y_0 \in \mathbb{R}$ tel que la solution de \eqref{eq:KPP} avec 
 \end{equation*}
 où $m(t)= 2t - (3/2)\log (t) + y_0 $. 
 \end{theorem}
-D'autres vitesses peuvent être sélectionnées: Si la donnée initiale vérifie $u_0(x) \approx  e^{-\lambda_-(s)x}$ quand $x \to +\infty$ alors la solution converge vers une onde progressive de vitesse $s$.
+D'autres vitesses peuvent être sélectionnées: Si la donnée initiale vérifie $u_0(x) \approx  e^{-\lambda_-(s)x}$ quand $x \to +\infty$, où $\lambda_-(s)$ est la plus petite racine du polynôme caractéristique $X^2+sX+r=0$, alors la solution converge vers une onde progressive de vitesse $s$.
 
 
 
 
 
 \newpage
-\section{Dyamique de Réseaux en Croissance}
-Dans cette section et par la suite nous étudions le modèle sur la croissance de réseaux dynamiques branchant, par exemple un champignon, proposé par Rémi Catellier, Yves D'Angelo et Cristiano Ricci, avec rescaling adéquat:
+\section{Dynamique de Réseaux en Croissance}
+Dans cette section et par la suite nous étudions le modèle sur la croissance de réseaux dynamiques branchants, par exemple un champignon, proposé par Rémi Catellier, Yves D'Angelo et Cristiano Ricci, avec rescaling adéquat:
 \begin{equation}\label{eq:BDNG}  \left\{
                 \begin{array}{ll}
                 \dt\mu + \nabla(\mu v) = f(C)(\mu + \rho) -\mu\rho \\
@@ -136,9 +136,9 @@ où d est la dimension du problème. Ceci est souvent simplifié en substituant 
 Le champignon est un réseau branchant dynamique qui peut être étudié en deux parties: les apex (pointes du réseau) représentés par leur densité $\mu$ et les hyphes (branches du réseau) représentés par leur densité $\rho$\\
 Les lignes du système \eqref{eq:BDNG} représentent:\\
 i) La première ligne du système est le bilan de masse sur les apex avec le terme gauche classique $ \dt\mu + \nabla(\mu v) $. Le terme de droite est composé de : - $f(C)(\mu + \rho)$ correspondant a une croissance proportionnelle à la concentration de nutriments du réseau et la masse existante d'apex et d'hyphes, - et un terme $-\mu\rho$ qui correspond à l'anastomose: une pointe qui rencontre une branche va fusionner avec elle et être détruite. Il y a un terme de croissance et un terme de saturation comme pour le modèle KPP.
-\\ ii)  La deuxième ligne est le bilan de vitesse avec le terme de gauche classique $ \dt(\mu v)+\nabla(\mu v\times v) $. Le terme $T\nabla\mu$ représente le mouvement brownien suivi par les apex. Le terme $-\lambda\mu v$ représente un amortissement fluide dans la physique du problème. Le terme  $+\mu\nabla C$ représente la tendance des apex à aller vers les milieux de forte concentration. Le terme $-\mu v \rho $ représente la perte de vitesse du à l'anastomose.\\
+\\ ii)  La deuxième ligne est le bilan de vitesse avec le terme de gauche classique $ \dt(\mu v)+\nabla(\mu v\times v) $. Le terme $T\nabla\mu$ représente le mouvement brownien suivi par les apex. Le terme $-\lambda\mu v$ représente un amortissement fluide dans la physique du problème. Le terme  $+\mu\nabla C$ représente la tendance des apex à aller vers les milieux de forte concentration. Le terme $-\mu v \rho $ représente la perte de vitesse due à l'anastomose.\\
 iii) La troisième ligne correspond à la relation entre les branches et les pointes: la trace laissée par les apex sont les branches.\\
-iv) La quatrième ligne décrit l'évolution de la concentration de nutriments: ils sont consommés par les hyphe avec un taux $bC$ où b est une constante positive.
+iv) La quatrième ligne décrit l'évolution de la concentration de nutriments: ils sont consommés par les hyphes avec un taux $bC$ où b est une constante positive.
 \subsection{Dérivation de l'équation "KPP avec mémoire"}
 En faisant tendre $T$ et $\lambda$ vers $+\infty$, avec $\frac{T}{\lambda}=K$ constant, la deuxième ligne de \eqref{eq:BDNG} donne: 
 \begin{equation}
@@ -153,7 +153,7 @@ En injectant ceci dans la ligne 1 du système, on obtient le système de 3 incon
                 \end{array}
               \right.
 \end{equation}
-dit "KPP avec mémoire".
+dit ``KPP avec mémoire".
 
 \ifdefined\COMPLETE
 \else

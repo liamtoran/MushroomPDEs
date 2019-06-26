@@ -15,13 +15,15 @@ On a le modèle suivant (``KPP avec mémoire"):
                 \end{array}
               \right.
 \end{equation}
+que l'on souhaite simuler par différences finies. \\
+Il y a plusieurs difficultés: capture de fronts raides, exigence de positivité, difficulté calculatoire du schéma entièrement implicite... C'est pour cela que l'on choisira un schéma semi-implicite.
 \subsection{Pour l'équation différentielle ordinaire}
-Sans dépendance spatiale:
+Sans dépendance spatiale (équation de réaction):
 \begin{equation} \left\{
                 \begin{array}{ll}
                    \dt\mu = C(\mu + \rho) -\mu\rho\\
                  \dt\rho=  F_0 \mu \\
-                  \dt C = -b\rho C
+                  \dt C = -b\rho C.
                 \end{array}
               \right.
 \end{equation} 
@@ -35,7 +37,7 @@ Soit le schéma semi-implicite I pour l'EDO:
                 \end{array}
               \right.}
 \end{equation}
-Ce schéma donne:
+Ce schéma peut se résoudre efficacement avec la reformulation suivante:
 \begin{equation*} \left\{
                 \begin{array}{ll}
                    \mu^{n+1}(1-\Dt(C^{n}(1+\Dt F_0)) + \rho^{n}) = \mu^{n}+  \Dt C^{n}\rho^{n} \\
@@ -48,7 +50,7 @@ Ce schéma donne:
 Pour conserver la positivité il suffit que le terme $(1-\Dt(C^{n}(1+\Dt F_0)) + \rho^{n}) $ reste positif:\\
 Par exemple: 
 \begin{equation}
-	\boxed{C^0< \frac{1}{\Dt(1+F_0\Dt)}}
+	\boxed{{\Dt(1+F_0\Dt)} <\frac{1}{C_0}}.
 \end{equation}
 
 \subsubsection{Schéma semi-implicite II pour l'EDO}
@@ -57,16 +59,16 @@ Soit le schéma semi-implicite II pour l'EDO:
                 \begin{array}{ll}
                    \mu^{n+1} = \mu^{n}+  \Dt( C^{n}(\mu^{n+1} + \rho^{n+1}) -\mu^{n}\rho^{n})\\
                 \rho^{n+1}=  \rho^{n}+ \Dt (F_0 \mu^{n+1}) \\
-                 C^{n+1} =C^{n}- \Dt(b\rho^{n+1}C^{n+1})
+                 C^{n+1} =C^{n}- \Dt(b\rho^{n+1}C^{n+1}).
                 \end{array}
               \right.}
 \end{equation}
-Ce schéma donne:
+Ce schéma peut se résoudre efficacement avec la reformulation suivante:
 \begin{equation*} \left\{
                 \begin{array}{ll}
                    \mu^{n+1}(1-\Dt(C^{n}(1+\Dt F_0))) = \mu^{n}+  \Dt \rho^{n}(C^{n}-\mu^{n}) \\
                 \rho^{n+1}=  \rho^{n}+ \Dt (F_0 \mu^{n+1}) \\
-                 C^{n+1} =C^{n}\frac{1}{1+ \Dt b\rho^{n+1}}
+                 C^{n+1} =C^{n}\frac{1}{1+ \Dt b\rho^{n+1}}.
                 \end{array}
               \right.
 \end{equation*}
@@ -78,9 +80,9 @@ Par exemple:
 \end{equation}
 et 
 \begin{equation}
-	\boxed{\rho^n< \frac{1}{\Dt}}
+	\boxed{\rho^n< \frac{1}{\Dt}}.
 \end{equation}
-On obtient une condition de plus que le schéma semi-implicite I.
+En explicitant un terme de plus que le schéma I, on obtient une condition de plus sur la positivité que le schéma semi-implicite I, condition qui dépend en plus du temps! La schéma I étant déjà relativement aussi difficile à inverser, on choisira dans la suite de simuler le schéma I.  
 \subsection{Pour l'équation aux dérivées partielles}
 \subsubsection{Schéma semi-implicite I pour l'EDP en 1D}
 Soit le schéma semi-implicite I pour l'EDP en 1D:
@@ -116,7 +118,7 @@ Or par définition de $n$ et comme $C^0< \frac{1}{\Dt(1+F_0\Dt)}$ et $C^n < C^0$
  $ 1-\Dt(C^{n}_j(1+\Dt F_0)) + \rho^{n}_j > 0$. \\
 Et par définition de $j$: 
 $\mu^{n+1}_{j+1} - 2\mu^{n+1}_j + \mu^{n+1}_{j-1} \geq 0$.\\
-On a donc $\mu^{n+1}_j > 0$ mais   $\mu^{n+1}_j = \min(\mu^{n+1}_i) < 0$ par définition de $j$ et $n$ : C'est absurde.
+On a donc $\mu^{n+1}_j > 0$ mais   $\mu^{n+1}_j = \min(\mu^{n+1}_i) < 0$ par définition de $j$ et $n$ : Contradiction.
 \end{proof}
 
 \newpage
@@ -126,7 +128,7 @@ On a donc $\mu^{n+1}_j > 0$ mais   $\mu^{n+1}_j = \min(\mu^{n+1}_i) < 0$ par dé
 \begin{figure}[hbt!]
 \centering
 \includegraphics[width=.9\textwidth]{Images/edo_euler_implicite.png}
-\caption{Résolution du schéma implicite pour l'EDO}
+\caption{Résolution du schéma semi-implicite I pour l'EDO (équation de réaction)}
 \end{figure}
 
 \subsubsection{Observations de la simulation de l'EDO}
@@ -145,7 +147,7 @@ On a donc $\mu^{n+1}_j > 0$ mais   $\mu^{n+1}_j = \min(\mu^{n+1}_i) < 0$ par dé
  -v) L'ordre de convergence de l'EDO observé est de 1:
 \begin{SCfigure}[][h]
 \includegraphics[width=0.4\textwidth]{Images/ordrecvedo.png}
-\caption{Comportement du $\log(erreur)$ quand $\Delta t   0$. La solution du schéma semi implicite I est comparée à différents pas de temps $\Delta t$ à la solution numérique du schéma de Runge-Kutta avec $\Delta t = 2*10^{-7}$. On observe bien que la convergence est d'ordre 1.}
+\caption{Comportement de l'erreur en norme infinie quand $\Delta t \to  0$. La solution du schéma semi implicite I est comparée à différents pas de temps $\Delta t$ à la solution numérique du schéma de Runge-Kutta à l'ordre 4 (RK4) avec $\Delta t = 2*10^{-7}$. On observe bien que la convergence est d'ordre 1.}
 \end{SCfigure} 
 
 \newpage
@@ -207,9 +209,9 @@ On remarque que la vitesse du front observée numériquement est très proche de
 \newpage
 Deux challenges numériques ont étés rencontrés:
 \begin{paragraph}
-- 1) Temps d’exécution: le schéma consiste principalement à résoudre à chaque pas de temps une équation matricielle $AX=B$, où $A$ est de taille $n = 1100*1100= 1.21*10^6$. Une idée naive serait alors de calculer $A^{-1}$ par exemple par pivot de gauss, qui a un coup $\mathcal{O}(n^3)$, ou par l'algorithme de Strassen qui est un peu plus efficace $\mathcal{O}(n^{2.8})$. Cependant ces stratégies ne sont pas efficaces car il n'est pas nécessaire de calculer l'inverse de $A$: On cherche seulement l'antécédent d'une image. La stratégie implémentée ici est de trouver $X$ par méthode des minimums résiduels, c'est à dire minimiser la fonction $x\to || Ax-B||^2 $ par méthode des moindres carrées, méthode qui fonctionne pour les matrices symétriques et qui est très rapide pour les matrices creuses (notre cas).\\ On peut encore accélérer la convergence de la méthode des minimums résiduels en précisant pour $\mu^{n+1}$ le guess $\mu^n$ et en conditionnant le système par la matrice Identité. \end{paragraph}
+- 1) Temps d’exécution: le schéma consiste principalement à résoudre à chaque pas de temps une équation matricielle $AX=B$, où $A$ est de taille $n = 1100*1100= 1.21*10^6$. Une idée naive serait alors de calculer $A^{-1}$ par exemple par pivot de gauss, qui a un coût $\mathcal{O}(n^3)$, ou par l'algorithme de Strassen qui est un peu plus efficace $\mathcal{O}(n^{2.8})$. Cependant ces stratégies ne sont pas efficaces car il n'est pas nécessaire de calculer l'inverse de $A$: On cherche seulement l'antécédent d'une image. La stratégie implémentée ici est de trouver $X$ par méthode des minimums résiduels, c'est à dire minimiser la fonction $x\to || Ax-B||^2 $ par méthode des moindres carrées, méthode qui fonctionne pour les matrices symétriques et qui est très rapide pour les matrices creuses (notre cas).\\ On peut encore accélérer la convergence de la méthode des minimums résiduels en précisant pour $\mu^{n+1}$ le guess $\mu^n$. \end{paragraph}
 \begin{paragraph}
-- 2) Coup en mémoire: Une matrice carrée de taille $1.21*10^6$ pèse 10GB de RAM sous Python... Heureusement, dans notre cas la matrice A est creuse et il existe des méthodes et librairies adaptées pour représenter de telles matrices efficacement. De plus chaque $\rho^n,\mu^n$ et $C^n$ est représenté par une matrice carrée de taille $1100$, ce qui pèse 10MB. Ces matrices ne sont pas creuses donc il est plus dur de les compresser. Si l'on veut stocker ces quantités pour ensuite retracer l’évolution de $\rho,\mu,C$ pour 1000 pas de temps, ceci coûterait 30GB de RAM... Il faut donc faire des compromis.
+- 2) Coût en mémoire: Une matrice carrée de taille $1.21*10^6$ pèse 10GB de RAM sous Python... Heureusement, dans notre cas la matrice A est creuse et il existe des méthodes et librairies adaptées pour représenter de telles matrices efficacement. De plus chaque $\rho^n,\mu^n$ et $C^n$ est représenté par une matrice carrée de taille $1100$, ce qui pèse 10MB. Ces matrices ne sont pas creuses donc il est plus dur de les compresser. Si l'on veut stocker ces quantités pour ensuite retracer l’évolution de $\rho,\mu,C$ pour 1000 pas de temps, ceci coûterait 30GB de RAM... Il faut donc faire des compromis, ce qui est classique: par exemple, on ne sort pas toutes les solutions mais uniquement à certains pas de temps bien choisis.
 \end{paragraph}
 \ifdefined\COMPLETE
 \else

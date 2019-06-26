@@ -1,3 +1,11 @@
+\ifdefined\COMPLETE
+\else
+\documentclass[11pt]{article}
+\input{util} %file containing all the used libraries
+\begin{document}
+\fi
+
+
 \begin{appendices}
 \chapter{Code de résolution de l'EDO}
 \lstinputlisting[language=Python]{edo.py}
@@ -6,3 +14,9 @@
 \chapter{Code de la résolution de l'EDP en 2D}
 \lstinputlisting[language=Python]{edp_2d.py}
 \end{appendices} 
+
+
+\ifdefined\COMPLETE
+\else
+\end{document}
+\fi
