@@ -20,7 +20,7 @@ Cependant nous avons pu voir que, comme pour l’équation de Fisher KPP, pour u
 Nous allons alors adopter la même stratégie pour l’équation complète.\\
 Ici nous allons linéariser autour de l’état $(\mu,\rho,C,v) = (0,0,C_0,v)$.\\
 Equation d'onde pour le fluide:\\
-Soit $s$ la vitesse d'onde, $y=x-st$, par le même argument de symétrie que pour l’équation de  ``KPP avec mémoire", nous allons se placer dans le cas $s<0$. Avec abus de notation $ :(x,t) = :(y)$, où $y=x-st$, l’équation d'onde pour le fluide est :
+Soit $s$ la vitesse d'onde, $y=x-st$, par le même argument de symétrie que pour l’équation de  ``KPP avec mémoire", nous allons se placer dans le cas $s<0$. Avec abus de notation $ :(x,t) = :(y)$, où $y=x-st$, l’équation d'onde pour le fluide est:
 \begin{equation}\label{eq:FWS_BDNG}  \left\{
                 \begin{array}{ll}
                 -s\mu' + (\mu v)' = f(C)(\mu + \rho) -\mu\rho \\
@@ -35,16 +35,16 @@ On pose $f(C_0) = f_0$, et on cherche des solutions de la forme $\rho = \rho_0 \
 On obtient en intégrant la quatrième ligne $C= C_0 - \frac{b\rho_0 C_0}{X}\exp(Xy).$\\
 La troisième ligne donne: $-sX\rho_0\exp(Xy)=F_0\mu$ donc $\mu = \frac{-sX\rho_0}{F_0}\exp(Xy)$.\\
 Autour de $(\mu,\rho,C,v) = (0,0,C_0,v)$, la premiere ligne donne: $-s\mu' + (\mu v)' = f_0(\mu + \rho)$ car on peut negliger $\mu\rho$ devant $\mu$ et $\rho$ . On a donc \begin{equation}
-	(\mu v)'=(f_0\rho_0-\frac{sXf_0\rho_0}{F_0}-\frac{s^2X\rho_0}{F_0})\exp(Xy)
+	(\mu v)'=(f_0\rho_0-\frac{sXf_0\rho_0}{F_0}-\frac{s^2X^2\rho_0}{F_0})\exp(Xy)
 \end{equation}
 donc \begin{equation}
-	\mu v = (\frac{f_0\rho_0}{X}- \frac{C_0s\rho_0}{F_0}-\frac{s^2X\rho_0}{F_0})\exp(Xy).
+	\mu v = (\frac{f_0\rho_0}{X}- \frac{f_0s\rho_0}{F_0}-\frac{s^2X\rho_0}{F_0})\exp(Xy).
 \end{equation}
 Ainsi \begin{equation}
-	v= \frac{\mu v}{\mu} = v_0 = s + \frac{f_0}{X}-\frac{f_0F_0}{X^2s}  
+	v= \frac{\mu v}{\mu} = v_0 = s + \frac{f_0}{X}-\frac{f_0F_0}{X^2s}  .
 \end{equation}
 La deuxième ligne donne $-s (\mu v)'+(\mu v\times v)' +T\mu'=-\lambda\mu v+\mu C'-\mu v \rho$. \\
-On peut ici négliger $\mu v\rho$ et $\mu C'$ devant $\mu v$. Ainsi, on a \begin{equation}
+On peut ici négliger $\mu v\rho$ et $\mu C'$ devant $\mu v$. On a donc: \begin{equation}
 	(-v_0sX\mu_0 + v_0^2X\mu_0 +T\mu_0X)\exp(Xy) = -\lambda\mu_0v_0\exp(Xy)
 \end{equation}
 donc \begin{equation}
@@ -56,9 +56,9 @@ En multipliant par $X^2$ et en substituant $v_0 =  s + \frac{f_0}{X}-\frac{f_0F_
 \end{equation}
 En posant $Y = sX$ on obtient: \begin{equation}
 	Y^4+s^2P_3(Y)=0 \label{eq:PY}
-\end{equation} où $P_3(Y) \equiv   Y^3(\lambda + f_0)+ Y^2(f_0^2+ \lambda f_0 - f_0F_0)- Y(F_0f_0(\lambda+2f_0)) + f_0^2F_0^2$ est un polynôme de degré 3 dont les coefficients ne dépendent que des données $f_0$, $F_0$, $\lambda$ et $T$. \\
-Soit $Y$ une racine de l'équation \ref{eq:PY}, on a alors \begin{equation}
-	s^2 = -\frac{Y^4}{P_3(Y)}
+\end{equation} où $P_3(Y) \equiv \frac{1}{T}(  Y^3(\lambda + f_0)+ Y^2(f_0^2+ \lambda f_0 - f_0F_0)- Y(F_0f_0(\lambda+2f_0)) + f_0^2F_0^2)$ est un polynôme de degré 3 dont les coefficients ne dépendent que des données $f_0$, $F_0$, $\lambda$ et $T$. \\
+Soit $Y$ une racine de l'équation \ref{eq:PY}, $s$ est déterminé par $Y$ par l'équation: \begin{equation}
+	s^2 = -\frac{Y^4}{P_3(Y)}.
 \end{equation} 
 On cherche le plus grand $s$ négatif tel que les racines de \ref{eq:PY} soit toutes réelles (condition d'amortissement fort), donc nécessairement \begin{equation}
 	\frac{\partial s}{\partial Y}=0
