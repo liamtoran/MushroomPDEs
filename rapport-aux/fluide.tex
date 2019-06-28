@@ -51,14 +51,16 @@ donc \begin{equation}
 	-sXv_0 + v_0^2X+ TX = -\lambda v_0.
 \end{equation}
 En multipliant par $X^2$ et en substituant $v_0 =  s + \frac{f_0}{X}-\frac{f_0F_0}{X^2s}$ on a alors l’équation caracteristique:
-\begin{equation}
+\begin{equation} \label{eq:P}
 	X^4(Ts^2) + X^3(\lambda + f_0)s^3+ X^2(f_0^2s^2+ \lambda f_0 s^2 - f_0F_0s^2)+ X(-sF_0f_0)(\lambda+2f_0) + f_0^2F_0^2=0.
 \end{equation}
 En posant $Y = sX$ on obtient: \begin{equation}
 	Y^4+s^2P_3(Y)=0 \label{eq:PY}
-\end{equation} où $P_3(Y) \equiv \frac{1}{T}(  Y^3(\lambda + f_0)+ Y^2(f_0^2+ \lambda f_0 - f_0F_0)- Y(F_0f_0(\lambda+2f_0)) + f_0^2F_0^2)$ est un polynôme de degré 3 dont les coefficients ne dépendent que des données $f_0$, $F_0$, $\lambda$ et $T$. \\
+\end{equation} où \begin{equation}
+		P_3(Y) \equiv \frac{1}{T}(  Y^3(\lambda + f_0)+ Y^2(f_0^2+ \lambda f_0 - f_0F_0)- Y(F_0f_0(\lambda+2f_0)) + f_0^2F_0^2)
+\end{equation} est un polynôme de degré 3 dont les coefficients ne dépendent que des données $f_0$, $F_0$, $\lambda$ et $T$. \\
 Soit $Y$ une racine de l'équation \ref{eq:PY}, $s$ est déterminé par $Y$ par l'équation: \begin{equation}
-	s^2 = -\frac{Y^4}{P_3(Y)}.
+	s^2 = -\frac{Y^4}{P_3(Y)}. \label{eq:sfromY}
 \end{equation} 
 On cherche le plus grand $s$ négatif tel que les racines de \ref{eq:PY} soit toutes réelles (condition d'amortissement fort), donc nécessairement \begin{equation}
 	\frac{\partial s}{\partial Y}=0
@@ -67,13 +69,27 @@ Ainsi \begin{equation}
 	\Big(\frac{Y^4}{P_3(Y)}\Big)'=0
 \end{equation}
 i.e. \begin{equation}
-	Q(Y)\equiv4P_3(Y)-YP'_3(Y)=0
+\label{eq:Q}	Q(Y)\equiv4P_3(Y)-YP'_3(Y)=0
 \end{equation}
 Le polynome $Q$ ne dépend pas de $s$, on peut donc calculer ses racines réelles (il en a une ou trois). 
 On obtient alors un ou trois candidats négatifs pour $s$ par la formule: \begin{equation*}
 	s^2 = -\frac{Y^4}{P_3(Y)}.
 \end{equation*}
-Le $s$ recherché est alors le plus grand de ces candidats: en effet, ce $s$ est le plus grand $s$ tel que les racines de \ref{eq:PY} soient toutes réelles.
+Le $s$ recherché est alors parmi ces candidats et peut être déterminé par le test suivant: \\
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwResult{Vitesse d'onde minimale $s$ de l’équation d'onde associée au fluide}
+ Entrées: données $\lambda$, $f_0$, $F_0$, $T$ et un $\epsilon$ choisi petit\;
+ Calculer les racines réelles $y_i$ du polynôme $Q$ défini par \ref{eq:Q}\; 
+ Candidats = $[]$\;
+ \For{$y_i$ racine réelle de $Q$}{\If{$P_3(y_i)<0$}{Poser $s_i^2 = -\frac{y_i^4}{P_3(Y_i)}$ avec $s_i<0$\;
+ Candidats $+=$ [$s_i$]}
+ {}}
+ \For{$s_i \in$ Candidats}{\If{le polynôme $Y^4 +(s_i^2-\epsilon)P_3(Y)$ n'a pas 4 racines réelles}{Candidats = Candidats \textbackslash $\{s_i\}$}}
+ $s= \max$(Candidats)
+ \caption{Recherche de la vitesse d'onde pour l’équation fluide}
+\end{algorithm}
  \ifdefined\COMPLETE
 \else
 \end{document}
