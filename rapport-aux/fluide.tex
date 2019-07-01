@@ -67,12 +67,14 @@ On cherche le plus grand $s$ négatif tel que les racines de \ref{eq:PY} soit to
 \end{equation}
 Ainsi \begin{equation}
 	\Big(\frac{Y^4}{P_3(Y)}\Big)'=0
-\end{equation}
+\end{equation} 
 i.e. \begin{equation}
 \label{eq:Q}	Q(Y)\equiv4P_3(Y)-YP'_3(Y)=0
 \end{equation}
-Le polynome $Q$ ne dépend pas de $s$, on peut donc calculer ses racines réelles (il en a une ou trois). 
-On obtient alors un ou trois candidats négatifs pour $s$ par la formule: \begin{equation*}
+Le polynome $Q$ ne dépend pas de $s$, on peut donc calculer ses racines réelles (il en a une ou trois). Un calcul formel montre que son discriminant $\Delta _Q$ est positif: \begin{multline*}
+\Delta _Q = 128F_0^5f_0^5 + 36 F_0^4 \lambda^2 f_0^4 + 192 F_0^4 \lambda f_0^5 + 192 F_0^4 f_0^6 + 108 F_0^3 \lambda^4 f_0^3 /+ 252 F_0^3 \lambda^3 f_0^4 + 240 F_0^3 \lambda^2 f_0^5 \\+ 192 F_0^3 \lambda f_0^6 + 96 F_0^3 f_0^7 + 36 F_0^2 \lambda^4 f_0^4 + 88 F_0^2 \lambda^3 f_0^5 + 84 F_0^2 \lambda^2 f_0^6 + 48 F_0^2 \lambda f_0^7 + 16 F_0^2 f_0^8 > 0
+\end{multline*} donc $Q$ a trois racines.
+On obtient au plus trois candidats négatifs pour $s$ par la formule: \begin{equation*}
 	s^2 = -\frac{Y^4}{P_3(Y)}.
 \end{equation*}
 Le $s$ recherché est alors parmi ces candidats et peut être déterminé par le test suivant: \\
