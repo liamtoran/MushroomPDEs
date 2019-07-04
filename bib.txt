@@ -1,0 +1,13 @@
+@article{10.2307/2972804,
+ ISSN = {00029890, 19300972},
+ URL = {http://www.jstor.org/stable/2972804},
+ author = {E. L. Rees},
+ journal = {The American Mathematical Monthly},
+ number = {2},
+ pages = {51--55},
+ publisher = {Mathematical Association of America},
+ title = {Graphical Discussion of the Roots of a Quartic Equation},
+ volume = {29},
+ year = {1922}
+}
+
