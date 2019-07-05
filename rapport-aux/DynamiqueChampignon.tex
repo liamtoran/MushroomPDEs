@@ -1,0 +1,55 @@
+\ifdefined\COMPLETE
+\else
+\documentclass[11pt]{article}
+\input{util} %file containing all the used libraries
+\begin{document}
+\fi
+
+\section{Dynamique de Réseaux en Croissance}
+Dans cette section et par la suite nous étudions le modèle sur la croissance de réseaux dynamiques branchants, par exemple un champignon, proposé par Rémi Catellier, Yves D'Angelo et Cristiano Ricci, avec rescaling adéquat:
+\begin{equation}\label{eq:BDNG}  \left\{
+                \begin{array}{ll}
+                \dt\mu + \nabla(\mu v) = f(C)(\mu + \rho) -\mu\rho \\
+                   \dt(\mu v)+\nabla(\mu v\times v) +T\nabla\mu=-\lambda\mu v+\mu\nabla C-\mu v \rho \\
+                 \dt\rho=  F(v) \mu \\
+                  \dt C = -b\rho C
+                \end{array}
+              \right.
+\end{equation} 
+L'inconnue $\mu$ représente la densité des apex du champignon.\\
+L'inconnue $\rho$ représente la densité des hyphes/ du réseau.\\
+L'inconnue $v$ représente la vitesse des apex.\\
+L'inconnue $C$ représente la concentration des nutriments.\\
+Les paramètres $T$, $\lambda$ et $b$ sont des scalaires représentants la température, l'amortissement fluide sur la vitesse des apex, et le taux de consommation des nutriments par le réseau.\\
+La fonction $f$ indique l'influence de la concentration de nutriments sur la croissance du champignon. Pour avoir un état stationnaire sur la croissance du champignon,$f(0)=0$ et $f(x)/x$ dans $L^1$ proche de 0 sont imposés.\\
+La fonction $F$ représente l'inverse du temps moyen passé par les apex dans un point donné, et est donné par l'expression:
+\begin{equation}
+	F(V)=(\frac{1}{2\pi T})^\frac{d}{2}\int_{\mathbb{R}^d} |v|\exp(-\frac{|v-V|^2}{2T})dv\end{equation}
+où d est la dimension du problème. Ceci est souvent simplifié en substituant $F(V)$ par une constante: $F(V)= F_0$ .\\
+
+\subsection{Explication des équations du système \eqref{eq:BDNG}}
+Le champignon est un réseau branchant dynamique qui peut être étudié en deux parties: les apex (pointes du réseau) représentés par leur densité $\mu$ et les hyphes (branches du réseau) représentés par leur densité $\rho$\\
+Les lignes du système \eqref{eq:BDNG} représentent:\\
+i) La première ligne du système est le bilan de masse sur les apex avec le terme gauche classique $ \dt\mu + \nabla(\mu v) $. Le terme de droite est composé de : - $f(C)(\mu + \rho)$ correspondant a une croissance proportionnelle à la concentration de nutriments du réseau et la masse existante d'apex et d'hyphes, - et un terme $-\mu\rho$ qui correspond à l'anastomose: une pointe qui rencontre une branche va fusionner avec elle et être détruite. Il y a un terme de croissance et un terme de saturation comme pour le modèle KPP.
+\\ ii)  La deuxième ligne est le bilan de vitesse avec le terme de gauche classique $ \dt(\mu v)+\nabla(\mu v\times v) $. Le terme $T\nabla\mu$ représente le mouvement brownien suivi par les apex. Le terme $-\lambda\mu v$ représente un amortissement fluide dans la physique du problème. Le terme  $+\mu\nabla C$ représente la tendance des apex à aller vers les milieux de forte concentration. Le terme $-\mu v \rho $ représente la perte de vitesse due à l'anastomose.\\
+iii) La troisième ligne correspond à la relation entre les branches et les pointes: la trace laissée par les apex sont les branches.\\
+iv) La quatrième ligne décrit l'évolution de la concentration de nutriments: ils sont consommés par les hyphes avec un taux $bC$ où b est une constante positive.
+\subsection{Dérivation de l'équation "KPP avec mémoire"}
+En faisant tendre $T$ et $\lambda$ vers $+\infty$, avec $\frac{T}{\lambda}=K$ constant, la deuxième ligne de \eqref{eq:BDNG} donne: 
+\begin{equation}
+	+K\nabla\mu=-\mu v
+\end{equation}
+En injectant ceci dans la ligne 1 du système, on obtient le système de 3 inconnues suivant:
+ \begin{equation} \left\{
+                \begin{array}{ll}
+                   \dt\mu = K\Delta\mu + f(C)(\mu + \rho) -\mu\rho\\
+                 \dt\rho=  F_0 \mu \\
+                  \dt C = -b\rho C
+                \end{array}
+              \right.
+\end{equation}
+dit ``KPP avec mémoire".
+\ifdefined\COMPLETE
+\else
+\end{document}
+\fi
