@@ -1,65 +1,20 @@
-TODO : 
-
-=Pour le rapport:
-=== Linéarisation?
-=== Besoin d'idées
-
-=Sur le papier d'abord:
-===Analyse des propriétés pour l'EDP
-===Convergence, Stabilité , Ordre du schema numerique sur le papier...
-===Montrer comment la vitesse se selectionne (donc deja comprendre comment ca marche pour KPP).
-
-Done 7/5/19:
-Avancement du rapport, migration sur github
-Mu est positive pour l'EDO
-Mu a un maximum/ tend vers 0 pour l'EDO
-Rho tend vers 0 
-
-Done 10/5/19:
-demonstrations des lemmes 5 6 7 etaient fausses ... c'est corrigé
-Comparaison avec un graphe le s observé sur le numérique et le s minimal obtenu sur papier crayon
-
-Done 14/5/19:
-Preuve positivité du schema pour l'EDP
-Ajout de commentaires sur les simulation
-Ajout de la partie sur la selection de la vitesse pour KPP
+This repository stores my work during my internship at Université Nice Sophia Antipolis as a Research Assistant in Early 2019.j
+My work was centered on the modeling, analysis and simulations of branching dynamical networks, specifically in the case of fungal growthh.
 
 
-Done 15/5/19:
-Lecture de Perthame et al...
- - Kpp avec saturation non locale en Espace: Resultats interessants
-En enlevant le terme C\mu, on obtient un KPP avec croissance non locale en temps. 
+Directory:
 
-Done 16/5/19:
-Entretien avec Yves et Laurent
-En enlevant le termre C\mu, on obtient exactement \rho_\infty
-Notebook pour montrer que la convergence du schema semi implicite 1 pour l'EDO est d'ordre 1 pour la norme infinie.
+- rapport.pdf is a 30 page booklet about evolution equations and my findings. (in french) written in LaTeX 
+- Images and Videos folders contains simulations
+- The Notebook folder contains many simulations.
+The most important notebook is Julia.ipynb which shows how to simulate the fluid equation for the network and how to determine it's selected wave speed from the physical parameters.
 
-Done 20/5/19:
-Raffiné la condition sur f pour avoir les bonnes propriétés sur l'EDO: f(x)/x integrable!
-
-Done 21/5/19:
-Entretien Yves
-Modification du rapport pour montrer que f(x)/x intégrable suffit pour avoir les bonnes propriétés de l'EDO.
-Montré que la linéarisation autour des etats stationnaires de l'EDO marche bien sur la simulation sur le rapport.
-
-Done 22/5/19:
-Entretien Laurent
-Sur le papier : Il semble que l'ajout du terme keller segel ne change pas la vitesse d'onde
-Simulation : Ca peut changer... du point de vue numerique ou c'est modifié aussi du point de vue reel?
-
-Done 23/5/19:
-Ajout partie ordre numerique convergence edo pour le rapport.
-Code pour la simulation 2D fait et marche.
-
-Done 24/5/19:
-Ajout d'obstacle pour 2D
-Resolution Iterative de Ax = B avec guess
-
-Done 27/5/19:
-Graphe 3D
-Preconditionnement
-
-Done 3/06/19:
-Ajout time graphe
-Rapport : ajout linearisation KPP, partie EDP 2D.
+Depedencies :
+Most of the code is written with Python, librairies you will need to run simulations are :
+- Jupyter
+- Numpy
+- Scipy
+- Matplotlib
+- Seaborn
+- Cartopy (world map notebook)
+- ffmpeg ( to save animations as mp4)
